@@ -87,9 +87,29 @@
             this.textBoxCtr = new System.Windows.Forms.TextBox();
             this.textBoxFam = new System.Windows.Forms.TextBox();
             this.textBoxAdr = new System.Windows.Forms.TextBox();
+            this.labelAddP = new System.Windows.Forms.Label();
+            this.labelStAddP = new System.Windows.Forms.Label();
+            this.textBoxAddP = new System.Windows.Forms.TextBox();
+            this.buttonAddPS = new System.Windows.Forms.Button();
+            this.buttonAddP = new System.Windows.Forms.Button();
+            this.dataGridViewAddP = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.listViewAddP = new System.Windows.Forms.ListView();
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControlMain.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             this.tabPageSec.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -104,9 +124,11 @@
             // 
             // tabPageMain
             // 
+            this.tabPageMain.Controls.Add(this.dataGridViewAddP);
             this.tabPageMain.Controls.Add(this.buttonChgAP);
             this.tabPageMain.Controls.Add(this.textBoxPayCH);
             this.tabPageMain.Controls.Add(this.buttonDt);
+            this.tabPageMain.Controls.Add(this.labelStAddP);
             this.tabPageMain.Controls.Add(this.labelDelSts);
             this.tabPageMain.Controls.Add(this.buttonWrAll);
             this.tabPageMain.Controls.Add(this.buttonCtrInf);
@@ -114,15 +136,20 @@
             this.tabPageMain.Controls.Add(this.buttonIm);
             this.tabPageMain.Controls.Add(this.listViewDets);
             this.tabPageMain.Controls.Add(this.buttonAct);
+            this.tabPageMain.Controls.Add(this.buttonAddP);
             this.tabPageMain.Controls.Add(this.buttonDel);
+            this.tabPageMain.Controls.Add(this.buttonAddPS);
             this.tabPageMain.Controls.Add(this.buttonDelS);
+            this.tabPageMain.Controls.Add(this.textBoxAddP);
             this.tabPageMain.Controls.Add(this.textBoxDel);
+            this.tabPageMain.Controls.Add(this.labelAddP);
             this.tabPageMain.Controls.Add(this.labelDel);
             this.tabPageMain.Controls.Add(this.buttonSA);
             this.tabPageMain.Controls.Add(this.buttonSD);
             this.tabPageMain.Controls.Add(this.textBoxSA);
             this.tabPageMain.Controls.Add(this.textBoxSD);
             this.tabPageMain.Controls.Add(this.listViewDel);
+            this.tabPageMain.Controls.Add(this.listViewAddP);
             this.tabPageMain.Controls.Add(this.listViewS);
             this.tabPageMain.Location = new System.Drawing.Point(4, 22);
             this.tabPageMain.Name = "tabPageMain";
@@ -161,7 +188,7 @@
             // labelDelSts
             // 
             this.labelDelSts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDelSts.Location = new System.Drawing.Point(103, 320);
+            this.labelDelSts.Location = new System.Drawing.Point(103, 360);
             this.labelDelSts.Name = "labelDelSts";
             this.labelDelSts.Size = new System.Drawing.Size(118, 23);
             this.labelDelSts.TabIndex = 13;
@@ -243,7 +270,7 @@
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(740, 320);
+            this.buttonDel.Location = new System.Drawing.Point(740, 360);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(184, 23);
             this.buttonDel.TabIndex = 8;
@@ -252,7 +279,7 @@
             // 
             // buttonDelS
             // 
-            this.buttonDelS.Location = new System.Drawing.Point(524, 320);
+            this.buttonDelS.Location = new System.Drawing.Point(524, 360);
             this.buttonDelS.Name = "buttonDelS";
             this.buttonDelS.Size = new System.Drawing.Size(184, 23);
             this.buttonDelS.TabIndex = 7;
@@ -261,7 +288,7 @@
             // 
             // textBoxDel
             // 
-            this.textBoxDel.Location = new System.Drawing.Point(236, 322);
+            this.textBoxDel.Location = new System.Drawing.Point(236, 362);
             this.textBoxDel.Name = "textBoxDel";
             this.textBoxDel.Size = new System.Drawing.Size(257, 20);
             this.textBoxDel.TabIndex = 6;
@@ -269,7 +296,7 @@
             // labelDel
             // 
             this.labelDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDel.Location = new System.Drawing.Point(19, 320);
+            this.labelDel.Location = new System.Drawing.Point(19, 360);
             this.labelDel.Name = "labelDel";
             this.labelDel.Size = new System.Drawing.Size(78, 23);
             this.labelDel.TabIndex = 5;
@@ -320,7 +347,7 @@
             this.columnHeader15,
             this.columnHeader16});
             this.listViewDel.FullRowSelect = true;
-            this.listViewDel.Location = new System.Drawing.Point(21, 354);
+            this.listViewDel.Location = new System.Drawing.Point(21, 394);
             this.listViewDel.MultiSelect = false;
             this.listViewDel.Name = "listViewDel";
             this.listViewDel.Size = new System.Drawing.Size(914, 56);
@@ -616,6 +643,154 @@
             this.textBoxAdr.Size = new System.Drawing.Size(214, 20);
             this.textBoxAdr.TabIndex = 0;
             // 
+            // labelAddP
+            // 
+            this.labelAddP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAddP.Location = new System.Drawing.Point(18, 170);
+            this.labelAddP.Name = "labelAddP";
+            this.labelAddP.Size = new System.Drawing.Size(157, 23);
+            this.labelAddP.TabIndex = 5;
+            this.labelAddP.Text = "Добавление платежа:";
+            this.labelAddP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelStAddP
+            // 
+            this.labelStAddP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelStAddP.Location = new System.Drawing.Point(171, 170);
+            this.labelStAddP.Name = "labelStAddP";
+            this.labelStAddP.Size = new System.Drawing.Size(118, 23);
+            this.labelStAddP.TabIndex = 13;
+            this.labelStAddP.Text = "Ожидание";
+            this.labelStAddP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxAddP
+            // 
+            this.textBoxAddP.Location = new System.Drawing.Point(295, 172);
+            this.textBoxAddP.Name = "textBoxAddP";
+            this.textBoxAddP.Size = new System.Drawing.Size(257, 20);
+            this.textBoxAddP.TabIndex = 6;
+            // 
+            // buttonAddPS
+            // 
+            this.buttonAddPS.Location = new System.Drawing.Point(561, 170);
+            this.buttonAddPS.Name = "buttonAddPS";
+            this.buttonAddPS.Size = new System.Drawing.Size(184, 23);
+            this.buttonAddPS.TabIndex = 7;
+            this.buttonAddPS.Text = "Поиск";
+            this.buttonAddPS.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddP
+            // 
+            this.buttonAddP.Location = new System.Drawing.Point(751, 170);
+            this.buttonAddP.Name = "buttonAddP";
+            this.buttonAddP.Size = new System.Drawing.Size(184, 23);
+            this.buttonAddP.TabIndex = 8;
+            this.buttonAddP.Text = "Добавить";
+            this.buttonAddP.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewAddP
+            // 
+            this.dataGridViewAddP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAddP.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dataGridViewAddP.Location = new System.Drawing.Point(21, 291);
+            this.dataGridViewAddP.Name = "dataGridViewAddP";
+            this.dataGridViewAddP.RowHeadersVisible = false;
+            this.dataGridViewAddP.Size = new System.Drawing.Size(914, 46);
+            this.dataGridViewAddP.TabIndex = 17;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Дата";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 228;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Сумма";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 227;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Банк";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 228;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Примечание";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 228;
+            // 
+            // listViewAddP
+            // 
+            this.listViewAddP.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21,
+            this.columnHeader22,
+            this.columnHeader23,
+            this.columnHeader24,
+            this.columnHeader25,
+            this.columnHeader26});
+            this.listViewAddP.Location = new System.Drawing.Point(21, 216);
+            this.listViewAddP.Name = "listViewAddP";
+            this.listViewAddP.Size = new System.Drawing.Size(914, 56);
+            this.listViewAddP.TabIndex = 0;
+            this.listViewAddP.UseCompatibleStateImageBehavior = false;
+            this.listViewAddP.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Адрес";
+            this.columnHeader19.Width = 150;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "Пд";
+            this.columnHeader20.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader20.Width = 40;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "Кв";
+            this.columnHeader21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader21.Width = 40;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "Фамилия";
+            this.columnHeader22.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader22.Width = 200;
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "№ договора";
+            this.columnHeader23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader23.Width = 120;
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "Долг";
+            this.columnHeader24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader24.Width = 80;
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "Аб. плата";
+            this.columnHeader25.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader25.Width = 80;
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "Примечание";
+            this.columnHeader26.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader26.Width = 200;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -629,6 +804,7 @@
             this.tabPageMain.PerformLayout();
             this.tabPageSec.ResumeLayout(false);
             this.tabPageSec.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -694,6 +870,25 @@
         private System.Windows.Forms.TextBox textBoxCtr;
         private System.Windows.Forms.TextBox textBoxFam;
         private System.Windows.Forms.TextBox textBoxAdr;
+        private System.Windows.Forms.DataGridView dataGridViewAddP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Label labelStAddP;
+        private System.Windows.Forms.Button buttonAddP;
+        private System.Windows.Forms.Button buttonAddPS;
+        private System.Windows.Forms.TextBox textBoxAddP;
+        private System.Windows.Forms.Label labelAddP;
+        private System.Windows.Forms.ListView listViewAddP;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
+        private System.Windows.Forms.ColumnHeader columnHeader21;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
+        private System.Windows.Forms.ColumnHeader columnHeader26;
     }
 }
 
