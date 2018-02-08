@@ -93,10 +93,6 @@
             this.buttonAddPS = new System.Windows.Forms.Button();
             this.buttonAddP = new System.Windows.Forms.Button();
             this.dataGridViewAddP = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.listViewAddP = new System.Windows.Forms.ListView();
             this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -106,6 +102,23 @@
             this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxRc = new System.Windows.Forms.TextBox();
+            this.labelRcpt = new System.Windows.Forms.Label();
+            this.buttonRc = new System.Windows.Forms.Button();
+            this.comboBoxRc = new System.Windows.Forms.ComboBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader31 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader34 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonRcPrint = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             this.tabPageSec.SuspendLayout();
@@ -469,7 +482,13 @@
             // 
             // tabPageSec
             // 
+            this.tabPageSec.Controls.Add(this.buttonRcPrint);
+            this.tabPageSec.Controls.Add(this.listView1);
+            this.tabPageSec.Controls.Add(this.comboBoxRc);
+            this.tabPageSec.Controls.Add(this.buttonRc);
+            this.tabPageSec.Controls.Add(this.textBoxRc);
             this.tabPageSec.Controls.Add(this.buttonAddAb);
+            this.tabPageSec.Controls.Add(this.labelRcpt);
             this.tabPageSec.Controls.Add(this.labelAddM);
             this.tabPageSec.Controls.Add(this.richTextBoxNote);
             this.tabPageSec.Controls.Add(this.labelText);
@@ -690,6 +709,8 @@
             // 
             // dataGridViewAddP
             // 
+            this.dataGridViewAddP.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewAddP.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridViewAddP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAddP.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -698,33 +719,10 @@
             this.Column4});
             this.dataGridViewAddP.Location = new System.Drawing.Point(21, 291);
             this.dataGridViewAddP.Name = "dataGridViewAddP";
+            this.dataGridViewAddP.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridViewAddP.RowHeadersVisible = false;
-            this.dataGridViewAddP.Size = new System.Drawing.Size(914, 46);
+            this.dataGridViewAddP.Size = new System.Drawing.Size(914, 42);
             this.dataGridViewAddP.TabIndex = 17;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Дата";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 228;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Сумма";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 227;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Банк";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 228;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Примечание";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 228;
             // 
             // listViewAddP
             // 
@@ -790,6 +788,135 @@
             this.columnHeader26.Text = "Примечание";
             this.columnHeader26.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader26.Width = 200;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Дата";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 228;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Сумма";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 228;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Банк";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 228;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Примечание";
+            this.Column4.Name = "Column4";
+            this.Column4.Width = 228;
+            // 
+            // textBoxRc
+            // 
+            this.textBoxRc.Location = new System.Drawing.Point(802, 21);
+            this.textBoxRc.Name = "textBoxRc";
+            this.textBoxRc.Size = new System.Drawing.Size(182, 20);
+            this.textBoxRc.TabIndex = 5;
+            // 
+            // labelRcpt
+            // 
+            this.labelRcpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelRcpt.Location = new System.Drawing.Point(441, 18);
+            this.labelRcpt.Name = "labelRcpt";
+            this.labelRcpt.Size = new System.Drawing.Size(136, 23);
+            this.labelRcpt.TabIndex = 3;
+            this.labelRcpt.Text = "Квитанции";
+            // 
+            // buttonRc
+            // 
+            this.buttonRc.Location = new System.Drawing.Point(1008, 18);
+            this.buttonRc.Name = "buttonRc";
+            this.buttonRc.Size = new System.Drawing.Size(132, 26);
+            this.buttonRc.TabIndex = 6;
+            this.buttonRc.Text = "Найти";
+            this.buttonRc.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxRc
+            // 
+            this.comboBoxRc.FormattingEnabled = true;
+            this.comboBoxRc.Items.AddRange(new object[] {
+            "Долг свыше 200",
+            "Долг свыше 500",
+            "Долг свыше 1000",
+            "Иная сумма"});
+            this.comboBoxRc.Location = new System.Drawing.Point(583, 21);
+            this.comboBoxRc.Name = "comboBoxRc";
+            this.comboBoxRc.Size = new System.Drawing.Size(201, 21);
+            this.comboBoxRc.TabIndex = 7;
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader27,
+            this.columnHeader28,
+            this.columnHeader29,
+            this.columnHeader30,
+            this.columnHeader31,
+            this.columnHeader32,
+            this.columnHeader34});
+            this.listView1.Location = new System.Drawing.Point(445, 62);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(835, 585);
+            this.listView1.TabIndex = 8;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "Адрес";
+            this.columnHeader27.Width = 151;
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.Text = "Пд";
+            this.columnHeader28.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader28.Width = 40;
+            // 
+            // columnHeader29
+            // 
+            this.columnHeader29.Text = "Кв";
+            this.columnHeader29.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader29.Width = 40;
+            // 
+            // columnHeader30
+            // 
+            this.columnHeader30.Text = "Фамилия";
+            this.columnHeader30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader30.Width = 200;
+            // 
+            // columnHeader31
+            // 
+            this.columnHeader31.Text = "№ договора";
+            this.columnHeader31.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader31.Width = 120;
+            // 
+            // columnHeader32
+            // 
+            this.columnHeader32.Text = "Долг";
+            this.columnHeader32.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader32.Width = 80;
+            // 
+            // columnHeader34
+            // 
+            this.columnHeader34.Text = "Примечание";
+            this.columnHeader34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader34.Width = 200;
+            // 
+            // buttonRcPrint
+            // 
+            this.buttonRcPrint.Location = new System.Drawing.Point(1153, 18);
+            this.buttonRcPrint.Name = "buttonRcPrint";
+            this.buttonRcPrint.Size = new System.Drawing.Size(121, 26);
+            this.buttonRcPrint.TabIndex = 9;
+            this.buttonRcPrint.Text = "Печать";
+            this.buttonRcPrint.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -871,10 +998,6 @@
         private System.Windows.Forms.TextBox textBoxFam;
         private System.Windows.Forms.TextBox textBoxAdr;
         private System.Windows.Forms.DataGridView dataGridViewAddP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Label labelStAddP;
         private System.Windows.Forms.Button buttonAddP;
         private System.Windows.Forms.Button buttonAddPS;
@@ -889,6 +1012,23 @@
         private System.Windows.Forms.ColumnHeader columnHeader24;
         private System.Windows.Forms.ColumnHeader columnHeader25;
         private System.Windows.Forms.ColumnHeader columnHeader26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Button buttonRcPrint;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader27;
+        private System.Windows.Forms.ColumnHeader columnHeader28;
+        private System.Windows.Forms.ColumnHeader columnHeader29;
+        private System.Windows.Forms.ColumnHeader columnHeader30;
+        private System.Windows.Forms.ColumnHeader columnHeader31;
+        private System.Windows.Forms.ColumnHeader columnHeader32;
+        private System.Windows.Forms.ColumnHeader columnHeader34;
+        private System.Windows.Forms.ComboBox comboBoxRc;
+        private System.Windows.Forms.Button buttonRc;
+        private System.Windows.Forms.TextBox textBoxRc;
+        private System.Windows.Forms.Label labelRcpt;
     }
 }
 
