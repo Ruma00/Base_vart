@@ -341,6 +341,9 @@ namespace DB_Vart_Main
                     object monthly_fee = reader.GetValue(6);
                     object notice = reader.GetValue(7);
 
+                    foreach (ListViewItem it in listViewS.Items)
+                        listViewS.Items.Remove(it);
+
                     ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), contract_num.ToString(),
                         surname.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
                     listViewS.Items.Add(item);
@@ -357,6 +360,9 @@ namespace DB_Vart_Main
                 {
                     string[] arr = reader.GetValue(0).ToString().Split(',');
 
+                    foreach (ListViewItem it in listViewDets.Items)
+                        listViewDets.Items.Remove(it);
+
                     foreach (string str in arr)
                     {
                         string[] a = str.Split('_');
@@ -366,7 +372,9 @@ namespace DB_Vart_Main
                 }
             }
 
-            textBoxSD.Text = "";
+            reader.Close();
+
+            textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
         }
 
         private void buttonSA_Click(object sender, EventArgs e)
@@ -382,8 +390,8 @@ namespace DB_Vart_Main
                     object adress = reader.GetValue(0);
                     object section = reader.GetValue(1);
                     object apartment = reader.GetValue(2);
-                    object contract_num = reader.GetValue(4);
-                    object surname = reader.GetValue(3);
+                    object contract_num = reader.GetValue(3);
+                    object surname = reader.GetValue(4);
                     //object phone = reader.GetValue(5);
                     object debt = reader.GetValue(5);
                     //object passport = reader.GetValue(7);
@@ -391,6 +399,8 @@ namespace DB_Vart_Main
                     object monthly_fee = reader.GetValue(6);
                     object notice = reader.GetValue(7);
 
+                    foreach(ListViewItem it in listViewS.Items)
+                        listViewS.Items.Remove(it);
                     ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), contract_num.ToString(),
                         surname.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
                     listViewS.Items.Add(item);
@@ -398,7 +408,7 @@ namespace DB_Vart_Main
             }
             reader.Close();
 
-            command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
+            command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewS.Items[0].SubItems[4].Text;
             reader = command.ExecuteReader();
 
             if (reader.HasRows)
@@ -406,6 +416,9 @@ namespace DB_Vart_Main
                 while (reader.Read())
                 {
                     string[] ar = reader.GetValue(0).ToString().Split(',');
+
+                    foreach (ListViewItem it in listViewDets.Items)
+                        listViewS.Items.Remove(it);
 
                     foreach (string str in ar)
                     {
@@ -416,7 +429,8 @@ namespace DB_Vart_Main
                 }
             }
 
-            textBoxSD.Text = "";
+            reader.Close();
+            textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
         }
     }
 }
