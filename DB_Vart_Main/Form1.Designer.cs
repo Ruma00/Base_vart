@@ -415,6 +415,7 @@
             this.buttonSA.TabIndex = 4;
             this.buttonSA.Text = "Поиск";
             this.buttonSA.UseVisualStyleBackColor = true;
+            this.buttonSA.Click += new System.EventHandler(this.buttonSA_Click);
             // 
             // buttonSD
             // 
@@ -424,6 +425,7 @@
             this.buttonSD.TabIndex = 3;
             this.buttonSD.Text = "Поиск";
             this.buttonSD.UseVisualStyleBackColor = true;
+            this.buttonSD.Click += new System.EventHandler(this.buttonSD_Click);
             // 
             // textBoxSA
             // 

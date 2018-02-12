@@ -13,17 +13,17 @@ namespace DB_Vart_Main
 {
     public partial class Main_form : Form
     {
+        SqlConnection sqlConnection = new SqlConnection();
         public Main_form()
         {
             InitializeComponent();
-            SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Base;Integrated Security=true";
             sqlConnection.Open();
 
             comboBoxRc.SelectedIndex = 0;
 
             textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
-            textBoxSA.Text = "Введите адрес"; textBoxSA.ForeColor = Color.Gray;
+            textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
             textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
             textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
             textBoxDel.Text = "Введите адрес или № договора"; textBoxDel.ForeColor = Color.Gray;
@@ -67,7 +67,7 @@ namespace DB_Vart_Main
             //columnHeader1.TextAlign = HorizontalAlignment.Center;
         }
 
-        string[] sqlExpressions = new string[] { "SELECT * FROM Main", "UPDATE Main SET ", "INSERT INTO Main VALUES ", "WHERE Contract_num=" };
+        string[] sqlExpressions = new string[] { "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM Main ", "UPDATE Main SET ", "INSERT INTO Main VALUES ", "WHERE Contract_num=" };
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -95,7 +95,7 @@ namespace DB_Vart_Main
 
         private void textBoxSA_Enter(object sender, EventArgs e)
         {
-            if (textBoxSA.Text == "Введите адрес")
+            if (textBoxSA.Text == "Введите адрес и кв")
             {
                 textBoxSA.Clear();
                 textBoxSA.ForeColor = Color.Black;
@@ -106,7 +106,7 @@ namespace DB_Vart_Main
         {
             if (string.IsNullOrWhiteSpace(textBoxSA.Text))
             {
-                textBoxSA.Text = "Введите адрес";
+                textBoxSA.Text = "Введите адрес и кв";
                 textBoxSA.ForeColor = Color.Gray;
             }
         }
@@ -316,6 +316,65 @@ namespace DB_Vart_Main
                 textBoxRc.Enabled = true;
             else
                 textBoxRc.Enabled = false;
+        }
+
+        //----------------------------Buttons-------------------------------------------------
+        private void buttonSD_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[3] + textBoxSD.Text, sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read()) // построчно считываем данные
+                {
+                    object adress = reader.GetValue(0);
+                    object section = reader.GetValue(1);
+                    object apartment = reader.GetValue(2);
+                    object contract_num = reader.GetValue(3);
+                    object surname = reader.GetValue(4);
+                    //object phone = reader.GetValue(5);
+                    object debt = reader.GetValue(5);
+                    //object passport = reader.GetValue(7);
+                    //object date_of_contract = reader.GetValue(8);
+                    object monthly_fee = reader.GetValue(6);
+                    object notice = reader.GetValue(7);
+
+                    ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), contract_num.ToString(),
+                        surname.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
+                    listViewS.Items.Add(item);
+                }
+            }
+            textBoxSD.Text = "";
+        }
+
+        private void buttonSA_Click(object sender, EventArgs e)
+        {
+            string[] arr = textBoxSA.Text.Split(';');
+            SqlCommand command = new SqlCommand(sqlExpressions[0] + "WHERE Adress=" + arr[0] + "AND Apartment=" + arr[1], sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read()) // построчно считываем данные
+                {
+                    object adress = reader.GetValue(0);
+                    object section = reader.GetValue(1);
+                    object apartment = reader.GetValue(2);
+                    object contract_num = reader.GetValue(4);
+                    object surname = reader.GetValue(3);
+                    //object phone = reader.GetValue(5);
+                    object debt = reader.GetValue(5);
+                    //object passport = reader.GetValue(7);
+                    //object date_of_contract = reader.GetValue(8);
+                    object monthly_fee = reader.GetValue(6);
+                    object notice = reader.GetValue(7);
+
+                    ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), contract_num.ToString(),
+                        surname.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
+                    listViewS.Items.Add(item);
+                }
+            }
         }
     }
 }
