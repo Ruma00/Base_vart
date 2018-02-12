@@ -20,6 +20,11 @@ namespace DB_Vart_Main
             sqlConnection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Base;Integrated Security=true";
             sqlConnection.Open();
 
+            textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
+            textBoxSA.Text = "Введите адрес"; textBoxSA.ForeColor = Color.Gray;
+            textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
+            textBoxAddP.Text = "Введите адрес/№ договора"; textBoxAddP.ForeColor = Color.Gray;
+            textBoxDel.Text = "Введите адрес/№ договора"; textBoxDel.ForeColor = Color.Gray;
             textBoxSD.Enter += new EventHandler(textBoxSD_Enter);
             textBoxSD.Leave += new EventHandler(textBoxSD_Leave);
             textBoxSA.Enter += new EventHandler(textBoxSA_Enter);
@@ -30,6 +35,8 @@ namespace DB_Vart_Main
             textBoxAddP.Leave += new EventHandler(textBoxAddP_Leave);
             textBoxDel.Enter += new EventHandler(textBoxDel_Enter);
             textBoxDel.Leave += new EventHandler(textBoxDel_Leave);
+
+            //columnHeader1.TextAlign = HorizontalAlignment.Center;
         }
 
         string[] sqlExpressions = new string[] { "SELECT * FROM Main", "UPDATE Main SET ", "INSERT INTO Main VALUES ", "WHERE Contract_num=" };
@@ -78,7 +85,7 @@ namespace DB_Vart_Main
 
         private void textBoxPayCH_Enter(object sender, EventArgs e)
         {
-            if (textBoxSD.Text == "Смена аб. платы")
+            if (textBoxPayCH.Text == "Смена аб. платы")
             {
                 textBoxPayCH.Clear();
                 textBoxPayCH.ForeColor = Color.Black;
@@ -87,7 +94,7 @@ namespace DB_Vart_Main
 
         private void textBoxPayCH_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBoxSD.Text))
+            if (string.IsNullOrWhiteSpace(textBoxPayCH.Text))
             {
                 textBoxPayCH.Text = "Смена аб. платы";
                 textBoxPayCH.ForeColor = Color.Gray;
@@ -96,7 +103,7 @@ namespace DB_Vart_Main
 
         private void textBoxAddP_Enter(object sender, EventArgs e)
         {
-            if (textBoxSD.Text == "Введите адрес или № договора")
+            if (textBoxAddP.Text == "Введите адрес/№ договора")
             {
                 textBoxAddP.Clear();
                 textBoxAddP.ForeColor = Color.Black;
@@ -105,16 +112,16 @@ namespace DB_Vart_Main
 
         private void textBoxAddP_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBoxSD.Text))
+            if (string.IsNullOrWhiteSpace(textBoxAddP.Text))
             {
-                textBoxAddP.Text = "Введите адрес или № договора";
+                textBoxAddP.Text = "Введите адрес/№ договора";
                 textBoxAddP.ForeColor = Color.Gray;
             }
         }
 
         private void textBoxDel_Enter(object sender, EventArgs e)
         {
-            if (textBoxDel.Text == "Введите адрес или № договора")
+            if (textBoxDel.Text == "Введите адрес/№ договора")
             {
                 textBoxDel.Clear();
                 textBoxDel.ForeColor = Color.Black;
@@ -123,9 +130,9 @@ namespace DB_Vart_Main
 
         private void textBoxDel_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(textBoxSD.Text))
+            if (string.IsNullOrWhiteSpace(textBoxDel.Text))
             {
-                textBoxDel.Text = "Введите адрес или № договора";
+                textBoxDel.Text = "Введите адрес/№ договора";
                 textBoxDel.ForeColor = Color.Gray;
             }
         }
