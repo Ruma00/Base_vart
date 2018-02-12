@@ -319,12 +319,8 @@ namespace DB_Vart_Main
                 textBoxRc.Enabled = false;
         }
 
-        //----------------------------Buttons-------------------------------------------------
-        private void buttonSD_Click(object sender, EventArgs e)
+        private void SqlReader(SqlDataReader reader)
         {
-            SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxSD.Text, sqlConnection);
-            SqlDataReader reader = command.ExecuteReader();
-
             if (reader.HasRows)
             {
                 while (reader.Read()) // построчно считываем данные
@@ -343,17 +339,16 @@ namespace DB_Vart_Main
 
                     foreach (ListViewItem it in listViewS.Items)
                         listViewS.Items.Remove(it);
-
                     ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), contract_num.ToString(),
                         surname.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
                     listViewS.Items.Add(item);
                 }
             }
             reader.Close();
+        }
 
-            command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
-            reader = command.ExecuteReader();
-
+        private void SqlReadDate(SqlDataReader reader)
+        {
             if (reader.HasRows)
             {
                 while (reader.Read())
@@ -366,13 +361,27 @@ namespace DB_Vart_Main
                     foreach (string str in arr)
                     {
                         string[] a = str.Split('_');
-                        ListViewItem item = new ListViewItem(a);str.Split('_');
+                        ListViewItem item = new ListViewItem(a); str.Split('_');
                         listViewDets.Items.Add(item);
                     }
                 }
             }
 
             reader.Close();
+        }
+
+        //----------------------------Buttons-------------------------------------------------
+        private void buttonSD_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxSD.Text, sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            SqlReader(reader);
+
+            command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
+            reader = command.ExecuteReader();
+
+            SqlReadDate(reader);
 
             textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
         }
@@ -383,54 +392,29 @@ namespace DB_Vart_Main
             SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress=" + '\'' + arr[0] + '\'' + " AND Apartment=" + arr[1], sqlConnection);
             SqlDataReader reader = command.ExecuteReader();
 
-            if (reader.HasRows)
-            {
-                while (reader.Read()) // построчно считываем данные
-                {
-                    object adress = reader.GetValue(0);
-                    object section = reader.GetValue(1);
-                    object apartment = reader.GetValue(2);
-                    object contract_num = reader.GetValue(3);
-                    object surname = reader.GetValue(4);
-                    //object phone = reader.GetValue(5);
-                    object debt = reader.GetValue(5);
-                    //object passport = reader.GetValue(7);
-                    //object date_of_contract = reader.GetValue(8);
-                    object monthly_fee = reader.GetValue(6);
-                    object notice = reader.GetValue(7);
-
-                    foreach(ListViewItem it in listViewS.Items)
-                        listViewS.Items.Remove(it);
-                    ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), contract_num.ToString(),
-                        surname.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
-                    listViewS.Items.Add(item);
-                }
-            }
-            reader.Close();
+            SqlReader(reader);
 
             command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewS.Items[0].SubItems[4].Text;
             reader = command.ExecuteReader();
 
-            if (reader.HasRows)
-            {
-                while (reader.Read())
-                {
-                    string[] ar = reader.GetValue(0).ToString().Split(',');
+            SqlReadDate(reader);
 
-                    foreach (ListViewItem it in listViewDets.Items)
-                        listViewS.Items.Remove(it);
-
-                    foreach (string str in ar)
-                    {
-                        string[] a = str.Split('_');
-                        ListViewItem item = new ListViewItem(a); str.Split('_');
-                        listViewDets.Items.Add(item);
-                    }
-                }
-            }
-
-            reader.Close();
             textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
+        }
+
+        private void buttonChgAP_Click(object sender, EventArgs e)
+        {
+            string contract = listViewS.Items[0].SubItems[4].Text;
+            SqlCommand command = new SqlCommand(sqlExpressions[3] + "Monthly_fee=" + textBoxPayCH.Text + ' ' + sqlExpressions[5] + contract, sqlConnection);
+            command.ExecuteNonQuery();
+
+            command.CommandText = sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + contract;
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            SqlReader(reader);
+
+            textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
         }
     }
 }

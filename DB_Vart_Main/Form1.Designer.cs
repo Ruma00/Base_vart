@@ -88,6 +88,8 @@
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPageSec = new System.Windows.Forms.TabPage();
+            this.labelAdr2 = new System.Windows.Forms.Label();
+            this.textBoxAdr2 = new System.Windows.Forms.TextBox();
             this.buttonRcPrint = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -119,8 +121,6 @@
             this.textBoxCtr = new System.Windows.Forms.TextBox();
             this.textBoxFam = new System.Windows.Forms.TextBox();
             this.textBoxAdr = new System.Windows.Forms.TextBox();
-            this.textBoxAdr2 = new System.Windows.Forms.TextBox();
-            this.labelAdr2 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).BeginInit();
@@ -223,6 +223,7 @@
             this.buttonChgAP.TabIndex = 16;
             this.buttonChgAP.Text = "Сменить";
             this.buttonChgAP.UseVisualStyleBackColor = true;
+            this.buttonChgAP.Click += new System.EventHandler(this.buttonChgAP_Click);
             // 
             // textBoxPayCH
             // 
@@ -676,6 +677,22 @@
             this.tabPageSec.Text = "Печать";
             this.tabPageSec.UseVisualStyleBackColor = true;
             // 
+            // labelAdr2
+            // 
+            this.labelAdr2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAdr2.Location = new System.Drawing.Point(23, 126);
+            this.labelAdr2.Name = "labelAdr2";
+            this.labelAdr2.Size = new System.Drawing.Size(135, 23);
+            this.labelAdr2.TabIndex = 11;
+            this.labelAdr2.Text = "Кв, подъезд:";
+            // 
+            // textBoxAdr2
+            // 
+            this.textBoxAdr2.Location = new System.Drawing.Point(186, 125);
+            this.textBoxAdr2.Name = "textBoxAdr2";
+            this.textBoxAdr2.Size = new System.Drawing.Size(214, 20);
+            this.textBoxAdr2.TabIndex = 10;
+            // 
             // buttonRcPrint
             // 
             this.buttonRcPrint.Location = new System.Drawing.Point(1153, 18);
@@ -931,28 +948,14 @@
             this.textBoxAdr.Size = new System.Drawing.Size(214, 20);
             this.textBoxAdr.TabIndex = 0;
             // 
-            // textBoxAdr2
-            // 
-            this.textBoxAdr2.Location = new System.Drawing.Point(186, 125);
-            this.textBoxAdr2.Name = "textBoxAdr2";
-            this.textBoxAdr2.Size = new System.Drawing.Size(214, 20);
-            this.textBoxAdr2.TabIndex = 10;
-            // 
-            // labelAdr2
-            // 
-            this.labelAdr2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelAdr2.Location = new System.Drawing.Point(23, 126);
-            this.labelAdr2.Name = "labelAdr2";
-            this.labelAdr2.Size = new System.Drawing.Size(135, 23);
-            this.labelAdr2.TabIndex = 11;
-            this.labelAdr2.Text = "Кв, подъезд:";
-            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1297, 681);
             this.Controls.Add(this.tabControlMain);
+            this.MaximumSize = new System.Drawing.Size(1313, 719);
+            this.MinimumSize = new System.Drawing.Size(1313, 719);
             this.Name = "Main_form";
             this.Text = "Not excel!";
             this.tabControlMain.ResumeLayout(false);
