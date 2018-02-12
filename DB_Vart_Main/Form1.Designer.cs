@@ -1,6 +1,6 @@
 ﻿namespace DB_Vart_Main
 {
-    partial class Form1
+    partial class Main_form
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -119,6 +119,8 @@
             this.textBoxCtr = new System.Windows.Forms.TextBox();
             this.textBoxFam = new System.Windows.Forms.TextBox();
             this.textBoxAdr = new System.Windows.Forms.TextBox();
+            this.textBoxAdr2 = new System.Windows.Forms.TextBox();
+            this.labelAdr2 = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).BeginInit();
@@ -638,6 +640,8 @@
             // 
             // tabPageSec
             // 
+            this.tabPageSec.Controls.Add(this.labelAdr2);
+            this.tabPageSec.Controls.Add(this.textBoxAdr2);
             this.tabPageSec.Controls.Add(this.buttonRcPrint);
             this.tabPageSec.Controls.Add(this.listView1);
             this.tabPageSec.Controls.Add(this.comboBoxRc);
@@ -771,7 +775,7 @@
             // buttonAddAb
             // 
             this.buttonAddAb.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddAb.Location = new System.Drawing.Point(186, 492);
+            this.buttonAddAb.Location = new System.Drawing.Point(186, 532);
             this.buttonAddAb.Name = "buttonAddAb";
             this.buttonAddAb.Size = new System.Drawing.Size(214, 54);
             this.buttonAddAb.TabIndex = 4;
@@ -798,7 +802,7 @@
             // 
             // richTextBoxNote
             // 
-            this.richTextBoxNote.Location = new System.Drawing.Point(186, 365);
+            this.richTextBoxNote.Location = new System.Drawing.Point(186, 405);
             this.richTextBoxNote.Name = "richTextBoxNote";
             this.richTextBoxNote.Size = new System.Drawing.Size(214, 96);
             this.richTextBoxNote.TabIndex = 2;
@@ -807,7 +811,7 @@
             // labelText
             // 
             this.labelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelText.Location = new System.Drawing.Point(23, 366);
+            this.labelText.Location = new System.Drawing.Point(23, 406);
             this.labelText.Name = "labelText";
             this.labelText.Size = new System.Drawing.Size(135, 23);
             this.labelText.TabIndex = 1;
@@ -816,7 +820,7 @@
             // labelPay
             // 
             this.labelPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPay.Location = new System.Drawing.Point(23, 326);
+            this.labelPay.Location = new System.Drawing.Point(23, 366);
             this.labelPay.Name = "labelPay";
             this.labelPay.Size = new System.Drawing.Size(135, 23);
             this.labelPay.TabIndex = 1;
@@ -825,7 +829,7 @@
             // labelDtc
             // 
             this.labelDtc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDtc.Location = new System.Drawing.Point(23, 286);
+            this.labelDtc.Location = new System.Drawing.Point(23, 326);
             this.labelDtc.Name = "labelDtc";
             this.labelDtc.Size = new System.Drawing.Size(135, 23);
             this.labelDtc.TabIndex = 1;
@@ -834,7 +838,7 @@
             // labelPst
             // 
             this.labelPst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPst.Location = new System.Drawing.Point(23, 246);
+            this.labelPst.Location = new System.Drawing.Point(23, 286);
             this.labelPst.Name = "labelPst";
             this.labelPst.Size = new System.Drawing.Size(135, 23);
             this.labelPst.TabIndex = 1;
@@ -843,7 +847,7 @@
             // labelPh
             // 
             this.labelPh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPh.Location = new System.Drawing.Point(23, 206);
+            this.labelPh.Location = new System.Drawing.Point(23, 246);
             this.labelPh.Name = "labelPh";
             this.labelPh.Size = new System.Drawing.Size(135, 23);
             this.labelPh.TabIndex = 1;
@@ -852,7 +856,7 @@
             // labelCtr
             // 
             this.labelCtr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCtr.Location = new System.Drawing.Point(23, 166);
+            this.labelCtr.Location = new System.Drawing.Point(23, 206);
             this.labelCtr.Name = "labelCtr";
             this.labelCtr.Size = new System.Drawing.Size(135, 23);
             this.labelCtr.TabIndex = 1;
@@ -861,7 +865,7 @@
             // labelFam
             // 
             this.labelFam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelFam.Location = new System.Drawing.Point(23, 126);
+            this.labelFam.Location = new System.Drawing.Point(23, 166);
             this.labelFam.Name = "labelFam";
             this.labelFam.Size = new System.Drawing.Size(135, 23);
             this.labelFam.TabIndex = 1;
@@ -878,42 +882,42 @@
             // 
             // textBoxPay
             // 
-            this.textBoxPay.Location = new System.Drawing.Point(186, 325);
+            this.textBoxPay.Location = new System.Drawing.Point(186, 365);
             this.textBoxPay.Name = "textBoxPay";
             this.textBoxPay.Size = new System.Drawing.Size(214, 20);
             this.textBoxPay.TabIndex = 0;
             // 
             // textBoxDate
             // 
-            this.textBoxDate.Location = new System.Drawing.Point(186, 285);
+            this.textBoxDate.Location = new System.Drawing.Point(186, 325);
             this.textBoxDate.Name = "textBoxDate";
             this.textBoxDate.Size = new System.Drawing.Size(214, 20);
             this.textBoxDate.TabIndex = 0;
             // 
             // textBoxPt
             // 
-            this.textBoxPt.Location = new System.Drawing.Point(186, 245);
+            this.textBoxPt.Location = new System.Drawing.Point(186, 285);
             this.textBoxPt.Name = "textBoxPt";
             this.textBoxPt.Size = new System.Drawing.Size(214, 20);
             this.textBoxPt.TabIndex = 0;
             // 
             // textBoxPhn
             // 
-            this.textBoxPhn.Location = new System.Drawing.Point(186, 205);
+            this.textBoxPhn.Location = new System.Drawing.Point(186, 245);
             this.textBoxPhn.Name = "textBoxPhn";
             this.textBoxPhn.Size = new System.Drawing.Size(214, 20);
             this.textBoxPhn.TabIndex = 0;
             // 
             // textBoxCtr
             // 
-            this.textBoxCtr.Location = new System.Drawing.Point(186, 165);
+            this.textBoxCtr.Location = new System.Drawing.Point(186, 205);
             this.textBoxCtr.Name = "textBoxCtr";
             this.textBoxCtr.Size = new System.Drawing.Size(214, 20);
             this.textBoxCtr.TabIndex = 0;
             // 
             // textBoxFam
             // 
-            this.textBoxFam.Location = new System.Drawing.Point(186, 125);
+            this.textBoxFam.Location = new System.Drawing.Point(186, 165);
             this.textBoxFam.Name = "textBoxFam";
             this.textBoxFam.Size = new System.Drawing.Size(214, 20);
             this.textBoxFam.TabIndex = 0;
@@ -925,14 +929,30 @@
             this.textBoxAdr.Size = new System.Drawing.Size(214, 20);
             this.textBoxAdr.TabIndex = 0;
             // 
-            // Form1
+            // textBoxAdr2
+            // 
+            this.textBoxAdr2.Location = new System.Drawing.Point(186, 125);
+            this.textBoxAdr2.Name = "textBoxAdr2";
+            this.textBoxAdr2.Size = new System.Drawing.Size(214, 20);
+            this.textBoxAdr2.TabIndex = 10;
+            // 
+            // labelAdr2
+            // 
+            this.labelAdr2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAdr2.Location = new System.Drawing.Point(23, 126);
+            this.labelAdr2.Name = "labelAdr2";
+            this.labelAdr2.Size = new System.Drawing.Size(135, 23);
+            this.labelAdr2.TabIndex = 11;
+            this.labelAdr2.Text = "Кв, подъезд:";
+            // 
+            // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1297, 681);
             this.Controls.Add(this.tabControlMain);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Main_form";
+            this.Text = "Not excel!";
             this.tabControlMain.ResumeLayout(false);
             this.tabPageMain.ResumeLayout(false);
             this.tabPageMain.PerformLayout();
@@ -1036,6 +1056,8 @@
         private System.Windows.Forms.Button buttonRc;
         private System.Windows.Forms.TextBox textBoxRc;
         private System.Windows.Forms.Label labelRcpt;
+        private System.Windows.Forms.Label labelAdr2;
+        private System.Windows.Forms.TextBox textBoxAdr2;
     }
 }
 

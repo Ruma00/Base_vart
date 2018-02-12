@@ -11,14 +11,16 @@ using System.Windows.Forms;
 
 namespace DB_Vart_Main
 {
-    public partial class Form1 : Form
+    public partial class Main_form : Form
     {
-        public Form1()
+        public Main_form()
         {
             InitializeComponent();
             SqlConnection sqlConnection = new SqlConnection();
             sqlConnection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Base;Integrated Security=true";
             sqlConnection.Open();
+
+            comboBoxRc.SelectedIndex = 0;
 
             textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
             textBoxSA.Text = "Введите адрес"; textBoxSA.ForeColor = Color.Gray;
@@ -32,6 +34,7 @@ namespace DB_Vart_Main
             textBoxPt.Text = "Введите данные паспорта"; textBoxPt.ForeColor = Color.Gray;
             textBoxDate.Text = "Введите дату"; textBoxDate.ForeColor = Color.Gray;
             textBoxPay.Text = "Введите аб. плату"; textBoxPay.ForeColor = Color.Gray;
+            textBoxAdr2.Text = "Введите кв, подъезд"; textBoxAdr2.ForeColor = Color.Gray;
 
             textBoxAdr.Enter += new EventHandler(textBoxAdr_Enter);
             textBoxAdr.Leave += new EventHandler(textBoxAdr_Leave);
@@ -47,6 +50,8 @@ namespace DB_Vart_Main
             textBoxDate.Leave += new EventHandler(textBoxDate_Leave);
             textBoxPay.Enter += new EventHandler(textBoxPay_Enter);
             textBoxPay.Leave += new EventHandler(textBoxPay_Leave);
+            textBoxAdr2.Enter += new EventHandler(textBoxAdr2_Enter);
+            textBoxAdr2.Leave += new EventHandler(textBoxAdr2_Leave);
 
             textBoxSD.Enter += new EventHandler(textBoxSD_Enter);
             textBoxSD.Leave += new EventHandler(textBoxSD_Leave);
@@ -286,6 +291,25 @@ namespace DB_Vart_Main
             }
         }
 
+        private void textBoxAdr2_Enter(object sender, EventArgs e)
+        {
+            if (textBoxAdr2.Text == "Введите кв, подъезд")
+            {
+                textBoxAdr2.Clear();
+                textBoxAdr2.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBoxAdr2_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBoxAdr2.Text))
+            {
+                textBoxAdr2.Text = "Введите кв, подъезд";
+                textBoxAdr2.ForeColor = Color.Gray;
+            }
+        }
+
+        //--------------------------comboBoxes------------------------------------------------
         private void comboBoxRc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxRc.SelectedIndex == 3)
