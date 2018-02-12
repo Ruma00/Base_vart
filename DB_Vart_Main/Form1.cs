@@ -67,7 +67,8 @@ namespace DB_Vart_Main
             //columnHeader1.TextAlign = HorizontalAlignment.Center;
         }
 
-        string[] sqlExpressions = new string[] { "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM Main ", "UPDATE Main SET ", "INSERT INTO Main VALUES ", "WHERE Contract_num=" };
+        string[] sqlExpressions = new string[] { "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM ", "Main ", "Debtors ",
+            "UPDATE Main SET ", "INSERT INTO Main VALUES ", "WHERE Contract_num=" };
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -321,7 +322,7 @@ namespace DB_Vart_Main
         //----------------------------Buttons-------------------------------------------------
         private void buttonSD_Click(object sender, EventArgs e)
         {
-            SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[3] + textBoxSD.Text, sqlConnection);
+            SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxSD.Text, sqlConnection);
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader.HasRows)
@@ -345,13 +346,33 @@ namespace DB_Vart_Main
                     listViewS.Items.Add(item);
                 }
             }
+            reader.Close();
+
+            command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
+            reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    string[] arr = reader.GetValue(0).ToString().Split(',');
+
+                    foreach (string str in arr)
+                    {
+                        string[] a = str.Split('_');
+                        ListViewItem item = new ListViewItem(a);str.Split('_');
+                        listViewDets.Items.Add(item);
+                    }
+                }
+            }
+
             textBoxSD.Text = "";
         }
 
         private void buttonSA_Click(object sender, EventArgs e)
         {
             string[] arr = textBoxSA.Text.Split(';');
-            SqlCommand command = new SqlCommand(sqlExpressions[0] + "WHERE Adress=" + arr[0] + "AND Apartment=" + arr[1], sqlConnection);
+            SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress=" + '\'' + arr[0] + '\'' + " AND Apartment=" + arr[1], sqlConnection);
             SqlDataReader reader = command.ExecuteReader();
 
             if (reader.HasRows)
@@ -375,6 +396,27 @@ namespace DB_Vart_Main
                     listViewS.Items.Add(item);
                 }
             }
+            reader.Close();
+
+            command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
+            reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    string[] ar = reader.GetValue(0).ToString().Split(',');
+
+                    foreach (string str in ar)
+                    {
+                        string[] a = str.Split('_');
+                        ListViewItem item = new ListViewItem(a); str.Split('_');
+                        listViewDets.Items.Add(item);
+                    }
+                }
+            }
+
+            textBoxSD.Text = "";
         }
     }
 }
