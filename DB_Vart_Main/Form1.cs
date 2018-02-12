@@ -328,8 +328,8 @@ namespace DB_Vart_Main
                     object adress = reader.GetValue(0);
                     object section = reader.GetValue(1);
                     object apartment = reader.GetValue(2);
-                    object contract_num = reader.GetValue(3);
-                    object surname = reader.GetValue(4);
+                    object surname = reader.GetValue(3);
+                    object contract_num = reader.GetValue(4);
                     //object phone = reader.GetValue(5);
                     object debt = reader.GetValue(5);
                     //object passport = reader.GetValue(7);
@@ -339,8 +339,8 @@ namespace DB_Vart_Main
 
                     foreach (ListViewItem it in listViewS.Items)
                         listViewS.Items.Remove(it);
-                    ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), contract_num.ToString(),
-                        surname.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
+                    ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), surname.ToString(),
+                        contract_num.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
                     listViewS.Items.Add(item);
                 }
             }
@@ -415,6 +415,24 @@ namespace DB_Vart_Main
             SqlReader(reader);
 
             textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
+        }
+
+        private void buttonAddAb_Click(object sender, EventArgs e)
+        {
+            string[] adr = textBoxAdr2.Text.Split(',');
+            SqlCommand command = new SqlCommand(sqlExpressions[4] + "('" + textBoxAdr.Text + "'," + adr[0] + "," + adr[1] + ",'" + textBoxFam.Text + "','" + textBoxCtr.Text +
+                "','" + textBoxPhn.Text + "',0,'" + textBoxPt.Text + "','" + textBoxDate.Text + "'," + textBoxPay.Text + ",'" + richTextBoxNote.Text + "')", sqlConnection);
+            command.ExecuteNonQuery();
+
+            textBoxAdr.Text = "Введите адрес"; textBoxAdr.ForeColor = Color.Gray;
+            textBoxFam.Text = "Введите фамилию"; textBoxFam.ForeColor = Color.Gray;
+            textBoxCtr.Text = "Введите № договора"; textBoxCtr.ForeColor = Color.Gray;
+            textBoxPhn.Text = "Введите телефон"; textBoxPhn.ForeColor = Color.Gray;
+            textBoxPt.Text = "Введите данные паспорта"; textBoxPt.ForeColor = Color.Gray;
+            textBoxDate.Text = "Введите дату"; textBoxDate.ForeColor = Color.Gray;
+            textBoxPay.Text = "Введите аб. плату"; textBoxPay.ForeColor = Color.Gray;
+            textBoxAdr2.Text = "Введите кв, подъезд"; textBoxAdr2.ForeColor = Color.Gray;
+            richTextBoxNote.Text = "";
         }
     }
 }

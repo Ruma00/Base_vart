@@ -800,6 +800,7 @@
             this.buttonAddAb.TabIndex = 4;
             this.buttonAddAb.Text = "Добавить";
             this.buttonAddAb.UseVisualStyleBackColor = true;
+            this.buttonAddAb.Click += new System.EventHandler(this.buttonAddAb_Click);
             // 
             // labelRcpt
             // 
