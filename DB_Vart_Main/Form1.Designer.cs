@@ -749,6 +749,7 @@
             this.comboBoxRc.Name = "comboBoxRc";
             this.comboBoxRc.Size = new System.Drawing.Size(201, 21);
             this.comboBoxRc.TabIndex = 7;
+            this.comboBoxRc.SelectedIndexChanged += new System.EventHandler(this.comboBoxRc_SelectedIndexChanged);
             // 
             // buttonRc
             // 
@@ -761,6 +762,7 @@
             // 
             // textBoxRc
             // 
+            this.textBoxRc.Enabled = false;
             this.textBoxRc.Location = new System.Drawing.Point(802, 21);
             this.textBoxRc.Name = "textBoxRc";
             this.textBoxRc.Size = new System.Drawing.Size(182, 20);
