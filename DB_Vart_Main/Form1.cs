@@ -564,8 +564,25 @@ namespace DB_Vart_Main
 
             command.CommandText = "UPDATE Payments SET List=" + arr + "WHERE Contract_num='" + contract_num + '\'';
             command.ExecuteNonQuery();
+
+            command.CommandText = "SELECT Notice FROM Main WHERE Contract_num='" + contract_num + "'";
+            reader = command.ExecuteReader();
+            reader.Read();
+            string notice;
+            if (reader.GetValue(0).ToString() == "")
+                notice = dataGridViewAddP.Rows[0].Cells[3].Value.ToString() + "(" + dataGridViewAddP.Rows[0].Cells[2].Value.ToString() + ")";
+            else
+                notice = reader.GetValue(0).ToString() + "," + dataGridViewAddP.Rows[0].Cells[3].Value.ToString() + "(" + 
+                                                                        dataGridViewAddP.Rows[0].Cells[2].Value.ToString() + ")";
+            reader.Close();
+            command.CommandText = "UPDATE Main SET Notice='" + notice + "' WHERE Contract_num='" + contract_num + '\'';
+            command.ExecuteNonQuery();
+
             command.CommandText = "SELECT List FROM Payments WHERE Contract_num='" + contract_num + '\'';
             SqlReadDate(command.ExecuteReader());
+
+            command.CommandText = sqlExpressions[0] + "Main WHERE Contract_num='" + contract_num + "'";
+            SqlReader(command.ExecuteReader(), listViewAddP);
 
             dataGridViewAddP.Rows.Clear();
             dataGridViewAddP.Rows.Add();
