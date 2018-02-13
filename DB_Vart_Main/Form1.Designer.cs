@@ -56,7 +56,6 @@
             this.textBoxDel = new System.Windows.Forms.TextBox();
             this.labelAddP = new System.Windows.Forms.Label();
             this.labelDel = new System.Windows.Forms.Label();
-            this.buttonSA = new System.Windows.Forms.Button();
             this.buttonSD = new System.Windows.Forms.Button();
             this.textBoxSA = new System.Windows.Forms.TextBox();
             this.textBoxSD = new System.Windows.Forms.TextBox();
@@ -159,7 +158,6 @@
             this.tabPageMain.Controls.Add(this.textBoxDel);
             this.tabPageMain.Controls.Add(this.labelAddP);
             this.tabPageMain.Controls.Add(this.labelDel);
-            this.tabPageMain.Controls.Add(this.buttonSA);
             this.tabPageMain.Controls.Add(this.buttonSD);
             this.tabPageMain.Controls.Add(this.textBoxSA);
             this.tabPageMain.Controls.Add(this.textBoxSD);
@@ -176,6 +174,7 @@
             // 
             // dataGridViewAddP
             // 
+            this.dataGridViewAddP.AllowUserToAddRows = false;
             this.dataGridViewAddP.AllowUserToResizeColumns = false;
             this.dataGridViewAddP.AllowUserToResizeRows = false;
             this.dataGridViewAddP.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -190,6 +189,9 @@
             this.dataGridViewAddP.Name = "dataGridViewAddP";
             this.dataGridViewAddP.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridViewAddP.RowHeadersVisible = false;
+            this.dataGridViewAddP.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridViewAddP.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewAddP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dataGridViewAddP.Size = new System.Drawing.Size(914, 42);
             this.dataGridViewAddP.TabIndex = 17;
             // 
@@ -412,21 +414,11 @@
             this.labelDel.Text = "Удаление:";
             this.labelDel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // buttonSA
-            // 
-            this.buttonSA.Location = new System.Drawing.Point(1128, 89);
-            this.buttonSA.Name = "buttonSA";
-            this.buttonSA.Size = new System.Drawing.Size(152, 23);
-            this.buttonSA.TabIndex = 4;
-            this.buttonSA.Text = "Поиск";
-            this.buttonSA.UseVisualStyleBackColor = true;
-            this.buttonSA.Click += new System.EventHandler(this.buttonSA_Click);
-            // 
             // buttonSD
             // 
             this.buttonSD.Location = new System.Drawing.Point(1128, 53);
             this.buttonSD.Name = "buttonSD";
-            this.buttonSD.Size = new System.Drawing.Size(152, 23);
+            this.buttonSD.Size = new System.Drawing.Size(152, 58);
             this.buttonSD.TabIndex = 3;
             this.buttonSD.Text = "Поиск";
             this.buttonSD.UseVisualStyleBackColor = true;
@@ -678,7 +670,7 @@
             this.tabPageSec.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageSec.Size = new System.Drawing.Size(1288, 653);
             this.tabPageSec.TabIndex = 1;
-            this.tabPageSec.Text = "Печать";
+            this.tabPageSec.Text = "Квитанции/добавление";
             this.tabPageSec.UseVisualStyleBackColor = true;
             // 
             // labelAdr2
@@ -688,7 +680,7 @@
             this.labelAdr2.Name = "labelAdr2";
             this.labelAdr2.Size = new System.Drawing.Size(135, 23);
             this.labelAdr2.TabIndex = 11;
-            this.labelAdr2.Text = "Кв, подъезд:";
+            this.labelAdr2.Text = "Подъезд, кв:";
             // 
             // textBoxAdr2
             // 
@@ -987,7 +979,6 @@
         private System.Windows.Forms.Button buttonDelS;
         private System.Windows.Forms.TextBox textBoxDel;
         private System.Windows.Forms.Label labelDel;
-        private System.Windows.Forms.Button buttonSA;
         private System.Windows.Forms.Button buttonSD;
         private System.Windows.Forms.TextBox textBoxSA;
         private System.Windows.Forms.TextBox textBoxSD;

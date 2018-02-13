@@ -23,6 +23,10 @@ namespace DB_Vart_Main
 
             comboBoxRc.SelectedIndex = 0;
 
+            dataGridViewAddP.Rows.Add();
+            dataGridViewAddP.ClearSelection();
+            dataGridViewAddP.Rows[0].Cells[0].Selected = false;
+
             textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
             textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
             textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
@@ -68,8 +72,8 @@ namespace DB_Vart_Main
             //columnHeader1.TextAlign = HorizontalAlignment.Center;
         }
 
-        string[] sqlExpressions = new string[] { "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM ", "Main ", "Debtors ",
-            "UPDATE Main SET ", "INSERT INTO Main VALUES ", "WHERE Contract_num=" };
+        string[] sqlExpressions = new string[] { "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM ", "Main ", "Payments ",
+            "UPDATE Main SET ", "INSERT INTO Main VALUES ", "WHERE Contract_num=", "Debtors" };
 
         Regex regex1 = new Regex(@"\d*"); //numeric
         Regex regex2 = new Regex(@"\w*"); //alpha-numeric
@@ -374,20 +378,59 @@ namespace DB_Vart_Main
             reader.Close();
         }
 
+        private bool CheckAdd(string[] adr)
+        {
+            if (adr.Length == 1)
+            {
+                MessageBox.Show("Введите корректные данные: подъезд и кв");
+                return false;
+            }
+            if (textBoxPhn.Text.Length > 11)
+            {
+                MessageBox.Show("Введите корректные данные: телефон");
+                return false;
+            }
+            if (textBoxCtr.Text.Length > 15)
+            {
+                MessageBox.Show("Введите корректные данные: номер договора");
+                return false;
+            }
+            if (textBoxPt.Text.Length > 11)
+            {
+                MessageBox.Show("Введите корректные данные: паспортные данные");
+                return false;
+            }
+            return true;
+        }
+
         //----------------------------Buttons-------------------------------------------------
         private void buttonSD_Click(object sender, EventArgs e)
         {
-            SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxSD.Text, sqlConnection);
-            SqlDataReader reader = command.ExecuteReader();
+            if (textBoxSA.Text != "Введите адрес и кв")
+            {
+                string[] arr = textBoxSA.Text.Split(';');
+                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress=" + '\'' + arr[0] + '\'' + " AND Apartment=" + arr[1], sqlConnection);
 
-            SqlReader(reader, listViewS);
+                SqlReader(command.ExecuteReader(), listViewS);
 
-            command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
-            reader = command.ExecuteReader();
+                command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewS.Items[0].SubItems[4].Text;
 
-            SqlReadDate(reader);
+                SqlReadDate(command.ExecuteReader());
 
-            textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
+                textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
+            }
+            else if (textBoxSD.Text != "Введите № договора")
+            {
+                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxSD.Text, sqlConnection);
+
+                SqlReader(command.ExecuteReader(), listViewS);
+
+                command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
+
+                SqlReadDate(command.ExecuteReader());
+
+                textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
+            }
         }
 
         private void buttonSA_Click(object sender, EventArgs e)
@@ -424,11 +467,13 @@ namespace DB_Vart_Main
         private void buttonAddAb_Click(object sender, EventArgs e)
         {
             string[] adr = textBoxAdr2.Text.Split(',');
+            if (!CheckAdd(adr))
+                return;
             SqlCommand command = new SqlCommand(sqlExpressions[4] + "('" + textBoxAdr.Text + "'," + adr[0] + "," + adr[1] + ",'" + textBoxFam.Text + "','" + textBoxCtr.Text +
                 "','" + textBoxPhn.Text + "',0,'" + textBoxPt.Text + "','" + textBoxDate.Text + "'," + textBoxPay.Text + ",'" + richTextBoxNote.Text + "')", sqlConnection);
             command.ExecuteNonQuery();
 
-            command.CommandText = "INSERT INTO Debtors VALUES ('" + textBoxCtr.Text + "','')";
+            command.CommandText = "INSERT INTO Payments VALUES ('" + textBoxCtr.Text + "','')";
             command.ExecuteNonQuery();
 
             textBoxAdr.Text = "Введите адрес"; textBoxAdr.ForeColor = Color.Gray;
@@ -476,23 +521,31 @@ namespace DB_Vart_Main
 
                 SqlReader(command.ExecuteReader(), listViewAddP);
             }
+
+            textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
+            dataGridViewAddP.ClearSelection();
         }
 
         private void buttonAddP_Click(object sender, EventArgs e)
         {
-            string str = dataGridViewAddP[0, 0].Value.ToString() + "_" + dataGridViewAddP[1, 0].Value.ToString();
+            //string str = dataGridViewAddP[0, 0].Value.ToString() + "_" + dataGridViewAddP[1, 0].Value.ToString();
+            string str = dataGridViewAddP.Rows[0].Cells[0].Value.ToString() + "_" + dataGridViewAddP.Rows[0].Cells[1].Value.ToString();
             string contract_num = listViewAddP.Items[0].SubItems[4].Text;
 
-            SqlCommand command = new SqlCommand("SELECT List FROM Debtors WHERE Contract_num='" + contract_num + '\'', sqlConnection);
+            SqlCommand command = new SqlCommand("SELECT List FROM Payments WHERE Contract_num='" + contract_num + '\'', sqlConnection);
             SqlDataReader reader = command.ExecuteReader();
 
             string arr = "";
             if (reader.HasRows)
             {
-                arr = "'" + reader.GetValue(0).ToString() + "," + str + "'";
                 while (reader.Read())
                 {
-                    string[] ar = reader.GetValue(0).ToString().Split(',');
+                    string temp = reader.GetValue(0).ToString();
+                    if (temp == "")
+                        arr = "'" + str + "'";
+                    else
+                        arr = "'" + temp + "," + str + "'";
+                    string[] ar = temp.Split(',');
 
                     foreach (ListViewItem it in listViewDets.Items)
                         listViewDets.Items.Remove(it);
@@ -507,8 +560,16 @@ namespace DB_Vart_Main
             }
             reader.Close();
 
-            command.CommandText = "UPDATE Debtors SET List=" + arr + "WHERE Contract_num='" + contract_num + '\'';
+            dataGridViewAddP.ClearSelection();
+
+            command.CommandText = "UPDATE Payments SET List=" + arr + "WHERE Contract_num='" + contract_num + '\'';
+            command.ExecuteNonQuery();
+            command.CommandText = "SELECT List FROM Payments WHERE Contract_num='" + contract_num + '\'';
             SqlReadDate(command.ExecuteReader());
+
+            dataGridViewAddP.Rows.Clear();
+            dataGridViewAddP.Rows.Add();
+            dataGridViewAddP.ClearSelection();
         }
     }
 }
