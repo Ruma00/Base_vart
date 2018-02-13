@@ -176,6 +176,8 @@
             // 
             // dataGridViewAddP
             // 
+            this.dataGridViewAddP.AllowUserToResizeColumns = false;
+            this.dataGridViewAddP.AllowUserToResizeRows = false;
             this.dataGridViewAddP.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewAddP.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridViewAddP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -344,6 +346,7 @@
             this.buttonAddP.TabIndex = 8;
             this.buttonAddP.Text = "Добавить";
             this.buttonAddP.UseVisualStyleBackColor = true;
+            this.buttonAddP.Click += new System.EventHandler(this.buttonAddP_Click);
             // 
             // buttonDel
             // 
@@ -362,6 +365,7 @@
             this.buttonAddPS.TabIndex = 7;
             this.buttonAddPS.Text = "Поиск";
             this.buttonAddPS.UseVisualStyleBackColor = true;
+            this.buttonAddPS.Click += new System.EventHandler(this.buttonAddPS_Click);
             // 
             // buttonDelS
             // 

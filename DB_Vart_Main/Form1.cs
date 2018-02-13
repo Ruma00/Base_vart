@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -69,6 +70,9 @@ namespace DB_Vart_Main
 
         string[] sqlExpressions = new string[] { "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM ", "Main ", "Debtors ",
             "UPDATE Main SET ", "INSERT INTO Main VALUES ", "WHERE Contract_num=" };
+
+        Regex regex1 = new Regex(@"\d*"); //numeric
+        Regex regex2 = new Regex(@"\w*"); //alpha-numeric
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -361,7 +365,7 @@ namespace DB_Vart_Main
                     foreach (string str in arr)
                     {
                         string[] a = str.Split('_');
-                        ListViewItem item = new ListViewItem(a); str.Split('_');
+                        ListViewItem item = new ListViewItem(a); //str.Split('_');
                         listViewDets.Items.Add(item);
                     }
                 }
@@ -424,6 +428,9 @@ namespace DB_Vart_Main
                 "','" + textBoxPhn.Text + "',0,'" + textBoxPt.Text + "','" + textBoxDate.Text + "'," + textBoxPay.Text + ",'" + richTextBoxNote.Text + "')", sqlConnection);
             command.ExecuteNonQuery();
 
+            command.CommandText = "INSERT INTO Debtors VALUES ('" + textBoxCtr.Text + "','')";
+            command.ExecuteNonQuery();
+
             textBoxAdr.Text = "Введите адрес"; textBoxAdr.ForeColor = Color.Gray;
             textBoxFam.Text = "Введите фамилию"; textBoxFam.ForeColor = Color.Gray;
             textBoxCtr.Text = "Введите № договора"; textBoxCtr.ForeColor = Color.Gray;
@@ -451,6 +458,57 @@ namespace DB_Vart_Main
             
             SqlReader(command.ExecuteReader(), listViewRc);
             textBoxRc.Text = ""; textBoxRc.Enabled = false;
+        }
+
+        private void buttonAddPS_Click(object sender, EventArgs e)
+        {
+            string[] split = textBoxAddP.Text.Split(';');
+            if (split.Length > 1)
+            {
+                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress='" + split[0] + "' AND Apartment=" + split[1], sqlConnection);
+                SqlReader(command.ExecuteReader(), listViewAddP);
+                command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewAddP.Items[0].SubItems[4].Text;
+                SqlReadDate(command.ExecuteReader());
+            }
+            else
+            {
+                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxAddP.Text, sqlConnection);
+
+                SqlReader(command.ExecuteReader(), listViewAddP);
+            }
+        }
+
+        private void buttonAddP_Click(object sender, EventArgs e)
+        {
+            string str = dataGridViewAddP[0, 0].Value.ToString() + "_" + dataGridViewAddP[1, 0].Value.ToString();
+            string contract_num = listViewAddP.Items[0].SubItems[4].Text;
+
+            SqlCommand command = new SqlCommand("SELECT List FROM Debtors WHERE Contract_num='" + contract_num + '\'', sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            string arr = "";
+            if (reader.HasRows)
+            {
+                arr = "'" + reader.GetValue(0).ToString() + "," + str + "'";
+                while (reader.Read())
+                {
+                    string[] ar = reader.GetValue(0).ToString().Split(',');
+
+                    foreach (ListViewItem it in listViewDets.Items)
+                        listViewDets.Items.Remove(it);
+
+                    foreach (string st in ar)
+                    {
+                        string[] a = st.Split('_');
+                        ListViewItem item = new ListViewItem(a); //st.Split('_');
+                        listViewDets.Items.Add(item);
+                    }
+                }
+            }
+            reader.Close();
+
+            command.CommandText = "UPDATE Debtors SET List=" + arr + "WHERE Contract_num='" + contract_num + '\'';
+            SqlReadDate(command.ExecuteReader());
         }
     }
 }
