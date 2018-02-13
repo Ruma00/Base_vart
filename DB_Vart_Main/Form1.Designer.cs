@@ -239,6 +239,7 @@
             // 
             // buttonDt
             // 
+            this.buttonDt.Enabled = false;
             this.buttonDt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonDt.Location = new System.Drawing.Point(1128, 522);
             this.buttonDt.Name = "buttonDt";
@@ -269,6 +270,7 @@
             // 
             // buttonWrAll
             // 
+            this.buttonWrAll.Enabled = false;
             this.buttonWrAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonWrAll.Location = new System.Drawing.Point(1128, 591);
             this.buttonWrAll.Name = "buttonWrAll";
@@ -279,6 +281,7 @@
             // 
             // buttonCtrInf
             // 
+            this.buttonCtrInf.Enabled = false;
             this.buttonCtrInf.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonCtrInf.Location = new System.Drawing.Point(1128, 405);
             this.buttonCtrInf.Name = "buttonCtrInf";
@@ -289,6 +292,7 @@
             // 
             // buttonExp
             // 
+            this.buttonExp.Enabled = false;
             this.buttonExp.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonExp.Location = new System.Drawing.Point(1128, 337);
             this.buttonExp.Name = "buttonExp";
@@ -299,6 +303,7 @@
             // 
             // buttonIm
             // 
+            this.buttonIm.Enabled = false;
             this.buttonIm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonIm.Location = new System.Drawing.Point(1128, 268);
             this.buttonIm.Name = "buttonIm";
@@ -332,6 +337,7 @@
             // 
             // buttonAct
             // 
+            this.buttonAct.Enabled = false;
             this.buttonAct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonAct.Location = new System.Drawing.Point(1128, 200);
             this.buttonAct.Name = "buttonAct";
