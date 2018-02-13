@@ -91,7 +91,7 @@
             this.labelAdr2 = new System.Windows.Forms.Label();
             this.textBoxAdr2 = new System.Windows.Forms.TextBox();
             this.buttonRcPrint = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listViewRc = new System.Windows.Forms.ListView();
             this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -646,7 +646,7 @@
             this.tabPageSec.Controls.Add(this.labelAdr2);
             this.tabPageSec.Controls.Add(this.textBoxAdr2);
             this.tabPageSec.Controls.Add(this.buttonRcPrint);
-            this.tabPageSec.Controls.Add(this.listView1);
+            this.tabPageSec.Controls.Add(this.listViewRc);
             this.tabPageSec.Controls.Add(this.comboBoxRc);
             this.tabPageSec.Controls.Add(this.buttonRc);
             this.tabPageSec.Controls.Add(this.textBoxRc);
@@ -702,9 +702,9 @@
             this.buttonRcPrint.Text = "Печать";
             this.buttonRcPrint.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // listViewRc
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewRc.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader27,
             this.columnHeader28,
             this.columnHeader29,
@@ -712,12 +712,12 @@
             this.columnHeader31,
             this.columnHeader32,
             this.columnHeader34});
-            this.listView1.Location = new System.Drawing.Point(445, 62);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(835, 585);
-            this.listView1.TabIndex = 8;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listViewRc.Location = new System.Drawing.Point(445, 62);
+            this.listViewRc.Name = "listViewRc";
+            this.listViewRc.Size = new System.Drawing.Size(835, 585);
+            this.listViewRc.TabIndex = 8;
+            this.listViewRc.UseCompatibleStateImageBehavior = false;
+            this.listViewRc.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader27
             // 
@@ -782,6 +782,7 @@
             this.buttonRc.TabIndex = 6;
             this.buttonRc.Text = "Найти";
             this.buttonRc.UseVisualStyleBackColor = true;
+            this.buttonRc.Click += new System.EventHandler(this.buttonRc_Click);
             // 
             // textBoxRc
             // 
@@ -1050,7 +1051,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Button buttonRcPrint;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewRc;
         private System.Windows.Forms.ColumnHeader columnHeader27;
         private System.Windows.Forms.ColumnHeader columnHeader28;
         private System.Windows.Forms.ColumnHeader columnHeader29;

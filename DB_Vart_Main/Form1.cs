@@ -319,8 +319,10 @@ namespace DB_Vart_Main
                 textBoxRc.Enabled = false;
         }
 
-        private void SqlReader(SqlDataReader reader)
+        private void SqlReader(SqlDataReader reader, ListView list)
         {
+            foreach (ListViewItem it in list.Items)
+                list.Items.Remove(it);
             if (reader.HasRows)
             {
                 while (reader.Read()) // построчно считываем данные
@@ -337,11 +339,9 @@ namespace DB_Vart_Main
                     object monthly_fee = reader.GetValue(6);
                     object notice = reader.GetValue(7);
 
-                    foreach (ListViewItem it in listViewS.Items)
-                        listViewS.Items.Remove(it);
                     ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), surname.ToString(),
                         contract_num.ToString(), debt.ToString(), monthly_fee.ToString(), notice.ToString() });
-                    listViewS.Items.Add(item);
+                    list.Items.Add(item);
                 }
             }
             reader.Close();
@@ -376,7 +376,7 @@ namespace DB_Vart_Main
             SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxSD.Text, sqlConnection);
             SqlDataReader reader = command.ExecuteReader();
 
-            SqlReader(reader);
+            SqlReader(reader, listViewS);
 
             command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
             reader = command.ExecuteReader();
@@ -392,7 +392,7 @@ namespace DB_Vart_Main
             SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress=" + '\'' + arr[0] + '\'' + " AND Apartment=" + arr[1], sqlConnection);
             SqlDataReader reader = command.ExecuteReader();
 
-            SqlReader(reader);
+            SqlReader(reader, listViewS);
 
             command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewS.Items[0].SubItems[4].Text;
             reader = command.ExecuteReader();
@@ -412,7 +412,7 @@ namespace DB_Vart_Main
 
             SqlDataReader reader = command.ExecuteReader();
 
-            SqlReader(reader);
+            SqlReader(reader, listViewS);
 
             textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
         }
@@ -433,6 +433,24 @@ namespace DB_Vart_Main
             textBoxPay.Text = "Введите аб. плату"; textBoxPay.ForeColor = Color.Gray;
             textBoxAdr2.Text = "Введите кв, подъезд"; textBoxAdr2.ForeColor = Color.Gray;
             richTextBoxNote.Text = "";
+        }
+
+        private void buttonRc_Click(object sender, EventArgs e)
+        {
+            string count;
+            switch (comboBoxRc.SelectedIndex)
+            {
+                case 0: count = "200"; break;
+                case 1: count = "500"; break;
+                case 2: count = "1000"; break;
+                case 3: count = textBoxRc.Text; break;
+                default: count = "200"; break;
+            }
+
+            SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Debt>=" + count, sqlConnection);
+            
+            SqlReader(command.ExecuteReader(), listViewRc);
+            textBoxRc.Text = ""; textBoxRc.Enabled = false;
         }
     }
 }
