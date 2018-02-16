@@ -31,8 +31,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.listViewDeb = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -48,8 +49,9 @@
             // 
             this.listViewDeb.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
             this.listViewDeb.Location = new System.Drawing.Point(12, 49);
             this.listViewDeb.Name = "listViewDeb";
             this.listViewDeb.Size = new System.Drawing.Size(920, 570);
@@ -62,17 +64,22 @@
             this.columnHeader1.Text = "Адрес";
             this.columnHeader1.Width = 332;
             // 
-            // columnHeader2
+            // columnHeader4
             // 
-            this.columnHeader2.Text = "Номер договора";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 321;
+            this.columnHeader4.Text = "Фамилия";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 279;
             // 
-            // columnHeader3
+            // columnHeader5
             // 
-            this.columnHeader3.Text = "Долг";
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 263;
+            this.columnHeader5.Text = "Номер счета";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader5.Width = 195;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Долг";
+            this.columnHeader6.Width = 110;
             // 
             // Debtors
             // 
@@ -92,7 +99,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView listViewDeb;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }

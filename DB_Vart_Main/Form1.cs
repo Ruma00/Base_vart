@@ -612,7 +612,7 @@ namespace DB_Vart_Main
             if (Convert.ToInt16(listViewDel.Items[0].SubItems[5].Text) > 0)
             {
                 command.CommandText = "INSERT INTO Debtors VALUES ('" + listViewDel.Items[0].SubItems[0].Text + "_" + listViewDel.Items[0].SubItems[2].Text +
-                    "','" + listViewDel.Items[0].SubItems[2].Text + "','" + listViewDel.Items[0].SubItems[4].Text + "'," + listViewDel.Items[0].SubItems[5].Text + ")";
+                    "','" + listViewDel.Items[0].SubItems[3].Text + "','" + listViewDel.Items[0].SubItems[4].Text + "'," + listViewDel.Items[0].SubItems[5].Text + ")";
                 //command.Connection = sqlConnection;
                 command.ExecuteNonQuery();
             }

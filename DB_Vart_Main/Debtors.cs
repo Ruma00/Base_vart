@@ -34,10 +34,11 @@ namespace DB_Vart_Main
                 while (reader.Read()) // построчно считываем данные
                 {
                     object adress = reader.GetValue(0);
-                    object contract_num = reader.GetValue(1);
-                    object debt = reader.GetValue(2);
+                    object surname = reader.GetValue(1);
+                    object contract_num = reader.GetValue(2);
+                    object debt = reader.GetValue(3);
 
-                    ListViewItem item = new ListViewItem(new string[] { adress.ToString(), contract_num.ToString(), debt.ToString() });
+                    ListViewItem item = new ListViewItem(new string[] { adress.ToString(), surname.ToString(), contract_num.ToString(), debt.ToString() });
                     listViewDeb.Items.Add(item);
                 }
             }
