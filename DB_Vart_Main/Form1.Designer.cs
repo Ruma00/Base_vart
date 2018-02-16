@@ -239,7 +239,6 @@
             // 
             // buttonDt
             // 
-            this.buttonDt.Enabled = false;
             this.buttonDt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonDt.Location = new System.Drawing.Point(1128, 522);
             this.buttonDt.Name = "buttonDt";
@@ -247,6 +246,7 @@
             this.buttonDt.TabIndex = 14;
             this.buttonDt.Text = "Должники";
             this.buttonDt.UseVisualStyleBackColor = true;
+            this.buttonDt.Click += new System.EventHandler(this.buttonDt_Click);
             // 
             // labelStAddP
             // 
@@ -364,6 +364,7 @@
             this.buttonDel.TabIndex = 8;
             this.buttonDel.Text = "Удалить";
             this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
             // buttonAddPS
             // 
@@ -383,6 +384,7 @@
             this.buttonDelS.TabIndex = 7;
             this.buttonDelS.Text = "Поиск";
             this.buttonDelS.UseVisualStyleBackColor = true;
+            this.buttonDelS.Click += new System.EventHandler(this.buttonDelS_Click);
             // 
             // textBoxAddP
             // 

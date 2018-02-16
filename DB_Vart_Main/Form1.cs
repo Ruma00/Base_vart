@@ -39,7 +39,7 @@ namespace DB_Vart_Main
             textBoxPt.Text = "Введите данные паспорта"; textBoxPt.ForeColor = Color.Gray;
             textBoxDate.Text = "Введите дату"; textBoxDate.ForeColor = Color.Gray;
             textBoxPay.Text = "Введите аб. плату"; textBoxPay.ForeColor = Color.Gray;
-            textBoxAdr2.Text = "Введите кв, подъезд"; textBoxAdr2.ForeColor = Color.Gray;
+            textBoxAdr2.Text = "Введите подъезд, кв"; textBoxAdr2.ForeColor = Color.Gray;
 
             textBoxAdr.Enter += new EventHandler(textBoxAdr_Enter);
             textBoxAdr.Leave += new EventHandler(textBoxAdr_Leave);
@@ -70,6 +70,10 @@ namespace DB_Vart_Main
             textBoxDel.Leave += new EventHandler(textBoxDel_Leave);
 
             //columnHeader1.TextAlign = HorizontalAlignment.Center;
+            dataGridViewAddP.Rows[0].Cells[0].Value = "";
+            dataGridViewAddP.Rows[0].Cells[1].Value = "";
+            dataGridViewAddP.Rows[0].Cells[2].Value = "";
+            dataGridViewAddP.Rows[0].Cells[3].Value = "";
         }
 
         string[] sqlExpressions = new string[] { "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM ", "Main ", "Payments ",
@@ -302,7 +306,7 @@ namespace DB_Vart_Main
 
         private void textBoxAdr2_Enter(object sender, EventArgs e)
         {
-            if (textBoxAdr2.Text == "Введите кв, подъезд")
+            if (textBoxAdr2.Text == "Введите подъезд, кв")
             {
                 textBoxAdr2.Clear();
                 textBoxAdr2.ForeColor = Color.Black;
@@ -313,7 +317,7 @@ namespace DB_Vart_Main
         {
             if (string.IsNullOrWhiteSpace(textBoxAdr2.Text))
             {
-                textBoxAdr2.Text = "Введите кв, подъезд";
+                textBoxAdr2.Text = "Введите подъезд, кв";
                 textBoxAdr2.ForeColor = Color.Gray;
             }
         }
@@ -401,6 +405,24 @@ namespace DB_Vart_Main
                 return false;
             }
             return true;
+        }
+
+        private void Search(TextBox textBox, ListView list)
+        {
+            string[] split = textBox.Text.Split(';');
+            if (split.Length > 1)
+            {
+                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress='" + split[0] + "' AND Apartment=" + split[1], sqlConnection);
+                SqlReader(command.ExecuteReader(), list);
+                command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + list.Items[0].SubItems[4].Text;
+                SqlReadDate(command.ExecuteReader());
+            }
+            else
+            {
+                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBox.Text, sqlConnection);
+
+                SqlReader(command.ExecuteReader(), list);
+            }
         }
 
         //----------------------------Buttons-------------------------------------------------
@@ -507,20 +529,7 @@ namespace DB_Vart_Main
 
         private void buttonAddPS_Click(object sender, EventArgs e)
         {
-            string[] split = textBoxAddP.Text.Split(';');
-            if (split.Length > 1)
-            {
-                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress='" + split[0] + "' AND Apartment=" + split[1], sqlConnection);
-                SqlReader(command.ExecuteReader(), listViewAddP);
-                command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewAddP.Items[0].SubItems[4].Text;
-                SqlReadDate(command.ExecuteReader());
-            }
-            else
-            {
-                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxAddP.Text, sqlConnection);
-
-                SqlReader(command.ExecuteReader(), listViewAddP);
-            }
+            Search(textBoxAddP, listViewAddP);
 
             textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
             dataGridViewAddP.ClearSelection();
@@ -587,6 +596,38 @@ namespace DB_Vart_Main
             dataGridViewAddP.Rows.Clear();
             dataGridViewAddP.Rows.Add();
             dataGridViewAddP.ClearSelection();
+        }
+
+        private void buttonDelS_Click(object sender, EventArgs e)
+        {
+            Search(textBoxDel, listViewDel);
+
+            textBoxDel.Text = "Введите адрес или № договора"; textBoxDel.ForeColor = Color.Gray;
+        }
+
+        private void buttonDel_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand();
+            command.Connection = sqlConnection;
+            if (Convert.ToInt16(listViewDel.Items[0].SubItems[5].Text) > 0)
+            {
+                command.CommandText = "INSERT INTO Debtors VALUES ('" + listViewDel.Items[0].SubItems[0].Text + "_" + listViewDel.Items[0].SubItems[2].Text +
+                    "','" + listViewDel.Items[0].SubItems[2].Text + "','" + listViewDel.Items[0].SubItems[4].Text + "'," + listViewDel.Items[0].SubItems[5].Text + ")";
+                //command.Connection = sqlConnection;
+                command.ExecuteNonQuery();
+            }
+
+            command.CommandText = "DELETE FROM Main WHERE Contract_num=" + listViewDel.Items[0].SubItems[4].Text;
+            command.ExecuteNonQuery();
+
+            foreach (ListViewItem it in listViewDel.Items)
+                listViewDel.Items.Remove(it);
+        }
+
+        private void buttonDt_Click(object sender, EventArgs e)
+        {
+            Debtors Debtors = new Debtors(sqlConnection);
+            Debtors.Show();
         }
     }
 }
