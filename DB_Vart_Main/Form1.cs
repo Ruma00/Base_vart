@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -628,6 +629,33 @@ namespace DB_Vart_Main
         {
             Debtors Debtors = new Debtors(sqlConnection);
             Debtors.Show();
+        }
+
+        private void buttonExp_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand("SELECT Surname, Adress, Apartment, Contract_num, Debt FROM Main", sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            string expStr;
+            string path;
+            StreamWriter writer = new StreamWriter(@"C:\\Export\export.txt", true, System.Text.Encoding.Default);
+            
+            if (reader.HasRows)
+            {
+                while(reader.Read())
+                {
+                    object surname = reader.GetValue(0);
+                    object adress = reader.GetValue(1);
+                    object apartment = reader.GetValue(2);
+                    object contruct_num = reader.GetValue(3);
+                    object debt = reader.GetValue(4);
+
+                    expStr = surname.ToString().ToUpper() + ";НИЖНЕВАРТОВСК," + adress.ToString().ToUpper() + "," + apartment.ToString().ToUpper() + ";" +
+                                contruct_num.ToString().ToUpper() + ";" + debt.ToString().ToUpper() + ".00;;;;";
+
+                    writer.WriteLine(expStr);
+                }
+            }
         }
     }
 }

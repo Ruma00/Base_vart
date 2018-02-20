@@ -292,7 +292,6 @@
             // 
             // buttonExp
             // 
-            this.buttonExp.Enabled = false;
             this.buttonExp.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonExp.Location = new System.Drawing.Point(1128, 337);
             this.buttonExp.Name = "buttonExp";
@@ -300,6 +299,7 @@
             this.buttonExp.TabIndex = 12;
             this.buttonExp.Text = "Экспорт";
             this.buttonExp.UseVisualStyleBackColor = true;
+            this.buttonExp.Click += new System.EventHandler(this.buttonExp_Click);
             // 
             // buttonIm
             // 
