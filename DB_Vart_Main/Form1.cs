@@ -449,6 +449,8 @@ namespace DB_Vart_Main
 
                 textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
             }
+            if (listViewS.Items.Count == 1)
+                buttonCtrInf.Enabled = true;
         }
 
         private void buttonSA_Click(object sender, EventArgs e)
@@ -690,8 +692,16 @@ namespace DB_Vart_Main
 
                 SqlCommand command = new SqlCommand();
                 command.Connection = sqlConnection;
-                command.CommandText = "SELECT List FROM Payments WHERE Contruct_num = '" + splUse[2];
+                command.CommandText = "SELECT List FROM Payments WHERE Contruct_num = '" + splUse[2] + "'";
+                //TODO
             }
+        }
+
+        private void buttonCtrInf_Click(object sender, EventArgs e)
+        {
+            string contract = listViewS.Items[0].SubItems[4].Text;
+            Information information = new Information(contract, sqlConnection);
+            information.Show();
         }
     }
 }

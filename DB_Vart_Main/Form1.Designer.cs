@@ -289,6 +289,7 @@
             this.buttonCtrInf.TabIndex = 12;
             this.buttonCtrInf.Text = "Информация о договоре";
             this.buttonCtrInf.UseVisualStyleBackColor = true;
+            this.buttonCtrInf.Click += new System.EventHandler(this.buttonCtrInf_Click);
             // 
             // buttonExp
             // 
