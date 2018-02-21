@@ -634,12 +634,19 @@ namespace DB_Vart_Main
         private void buttonExp_Click(object sender, EventArgs e)
         {
             SqlCommand command = new SqlCommand("SELECT Surname, Adress, Apartment, Contract_num, Debt FROM Main", sqlConnection);
+
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.ShowDialog();
+
+            string path = dialog.SelectedPath;
+
+            FileInfo file = new FileInfo(path + "\\export.txt");
+            if (!file.Exists)
+                file.Create();
+
+            StreamWriter writer = new StreamWriter(path + "\\export.txt", false, Encoding.Default);
             SqlDataReader reader = command.ExecuteReader();
 
-            string expStr;
-            string path;
-            StreamWriter writer = new StreamWriter(@"C:\\Export\export.txt", true, System.Text.Encoding.Default);
-            
             if (reader.HasRows)
             {
                 while(reader.Read())
@@ -650,12 +657,14 @@ namespace DB_Vart_Main
                     object contruct_num = reader.GetValue(3);
                     object debt = reader.GetValue(4);
 
-                    expStr = surname.ToString().ToUpper() + ";НИЖНЕВАРТОВСК," + adress.ToString().ToUpper() + "," + apartment.ToString().ToUpper() + ";" +
+                    string expStr = surname.ToString().ToUpper() + ";НИЖНЕВАРТОВСК," + adress.ToString().ToUpper() + "," + apartment.ToString().ToUpper() + ";" +
                                 contruct_num.ToString().ToUpper() + ";" + debt.ToString().ToUpper() + ".00;;;;";
 
                     writer.WriteLine(expStr);
                 }
+                writer.Close();
             }
+            reader.Close();
         }
     }
 }
