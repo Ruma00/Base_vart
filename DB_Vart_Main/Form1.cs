@@ -83,11 +83,6 @@ namespace DB_Vart_Main
         Regex regex1 = new Regex(@"\d*"); //numeric
         Regex regex2 = new Regex(@"\w*"); //alpha-numeric
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         //--------------------------textBoxes-------------------------------------------------
         private void textBoxSD_Enter(object sender, EventArgs e)
         {
@@ -665,6 +660,38 @@ namespace DB_Vart_Main
                 writer.Close();
             }
             reader.Close();
+        }
+
+        private void buttonIm_Click(object sender, EventArgs e)
+        {
+            //TODO
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.ShowDialog();
+
+            string path = dialog.SelectedPath + "\\import.txt";
+
+            FileInfo file = new FileInfo(path);
+            if (!file.Exists)
+                file.Create();
+
+            StreamReader fileReader = new StreamReader(path, Encoding.Default);
+
+            string line;
+            while ((line = fileReader.ReadLine()) != null)
+            {
+                if (line[0] == '~' || line == "")
+                    continue;
+                string[] split = line.Split(';');
+
+                /*string[] splUse = new string[] { split[2], split[4], split[5].Replace("ЛИЦЕВОЙ СЧЕТ: ", ""), split[6].Replace(" ФИО: ", ""),
+                            split[7].Replace(" АДРЕС: НИЖНЕВАРТОВСК,", ""), split[8].Replace(" К_ОПЛАТЕ: ", "") };*/
+
+                string[] splUse = new string[] { split[2].Replace("\\", "-"), split[4], split[5].Replace("ЛИЦЕВОЙ СЧЕТ: ", ""), split[8].Replace(" К_ОПЛАТЕ: ", "") };
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = sqlConnection;
+                command.CommandText = "SELECT List FROM Payments WHERE Contruct_num = '" + splUse[2];
+            }
         }
     }
 }

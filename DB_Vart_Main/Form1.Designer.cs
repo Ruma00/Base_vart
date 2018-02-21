@@ -303,7 +303,6 @@
             // 
             // buttonIm
             // 
-            this.buttonIm.Enabled = false;
             this.buttonIm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonIm.Location = new System.Drawing.Point(1128, 268);
             this.buttonIm.Name = "buttonIm";
@@ -311,7 +310,7 @@
             this.buttonIm.TabIndex = 11;
             this.buttonIm.Text = "Импорт";
             this.buttonIm.UseVisualStyleBackColor = true;
-            this.buttonIm.Click += new System.EventHandler(this.button1_Click);
+            this.buttonIm.Click += new System.EventHandler(this.buttonIm_Click);
             // 
             // listViewDets
             // 
