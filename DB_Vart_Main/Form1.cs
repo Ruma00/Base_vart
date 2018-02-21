@@ -703,5 +703,11 @@ namespace DB_Vart_Main
             Information information = new Information(contract, sqlConnection);
             information.Show();
         }
+
+        private void buttonWrAll_Click(object sender, EventArgs e)
+        {
+            Look_all look_All = new Look_all(sqlConnection);
+            look_All.Show();
+        }
     }
 }

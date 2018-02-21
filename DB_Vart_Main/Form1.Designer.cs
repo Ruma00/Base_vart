@@ -270,7 +270,6 @@
             // 
             // buttonWrAll
             // 
-            this.buttonWrAll.Enabled = false;
             this.buttonWrAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonWrAll.Location = new System.Drawing.Point(1128, 591);
             this.buttonWrAll.Name = "buttonWrAll";
@@ -278,6 +277,7 @@
             this.buttonWrAll.TabIndex = 12;
             this.buttonWrAll.Text = "Просмотр всех";
             this.buttonWrAll.UseVisualStyleBackColor = true;
+            this.buttonWrAll.Click += new System.EventHandler(this.buttonWrAll_Click);
             // 
             // buttonCtrInf
             // 
