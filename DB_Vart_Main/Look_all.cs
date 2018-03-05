@@ -15,7 +15,7 @@ namespace DB_Vart_Main
     {
         public Look_all(SqlConnection connection)
         {
-            SqlCommand command = new SqlCommand("SELECT * FROM Main", connection);
+            SqlCommand command = new SqlCommand("SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM Main", connection);
             SqlDataReader reader = command.ExecuteReader();
 
             InitializeComponent();

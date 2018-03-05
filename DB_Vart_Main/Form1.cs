@@ -543,6 +543,7 @@ namespace DB_Vart_Main
             SqlDataReader reader = command.ExecuteReader();
 
             string arr = "";
+            MessageBox.Show(reader.HasRows.ToString());
             if (reader.HasRows)
             {
                 while (reader.Read())
@@ -569,7 +570,7 @@ namespace DB_Vart_Main
 
             dataGridViewAddP.ClearSelection();
 
-            command.CommandText = "UPDATE Payments SET List=" + arr + "WHERE Contract_num='" + contract_num + '\'';
+            command.CommandText = "UPDATE Payments SET List=" + arr + " WHERE Contract_num='" + contract_num + '\'';
             command.ExecuteNonQuery();
 
             command.CommandText = "SELECT Notice FROM Main WHERE Contract_num='" + contract_num + "'";
@@ -592,6 +593,10 @@ namespace DB_Vart_Main
 
             command.CommandText = "SELECT List FROM Payments WHERE Contract_num='" + contract_num + '\'';
             SqlReadDate(command.ExecuteReader());
+
+            string strCom = "UPDATE Main SET Debt -= " + dataGridViewAddP.Rows[0].Cells[1].Value.ToString() + " WHERE Contract_num = '" + contract_num + "'";
+            command.CommandText = strCom;
+            command.ExecuteNonQuery();
 
             command.CommandText = sqlExpressions[0] + "Main WHERE Contract_num='" + contract_num + "'";
             SqlReader(command.ExecuteReader(), listViewAddP);
@@ -620,7 +625,10 @@ namespace DB_Vart_Main
                 command.ExecuteNonQuery();
             }
 
-            command.CommandText = "DELETE FROM Main WHERE Contract_num=" + listViewDel.Items[0].SubItems[4].Text;
+            command.CommandText = "DELETE FROM Main WHERE Contract_num = " + listViewDel.Items[0].SubItems[4].Text;
+            command.ExecuteNonQuery();
+
+            command.CommandText = "DELETE FROM Payments WHERE Contract_num = " + listViewDel.Items[0].SubItems[4].Text;
             command.ExecuteNonQuery();
 
             foreach (ListViewItem it in listViewDel.Items)
@@ -683,8 +691,9 @@ namespace DB_Vart_Main
 
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Выберите файл импорта";
-            dialog.ShowDialog();
 
+            if (dialog.ShowDialog() == DialogResult.Cancel)
+                return;
             StreamReader fileReader = new StreamReader(dialog.FileName, Encoding.Default);
 
             string line = "";
