@@ -304,7 +304,6 @@
             // 
             // buttonIm
             // 
-            this.buttonIm.Enabled = false;
             this.buttonIm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonIm.Location = new System.Drawing.Point(1128, 268);
             this.buttonIm.Name = "buttonIm";

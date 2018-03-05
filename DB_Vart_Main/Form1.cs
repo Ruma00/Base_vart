@@ -575,12 +575,17 @@ namespace DB_Vart_Main
             command.CommandText = "SELECT Notice FROM Main WHERE Contract_num='" + contract_num + "'";
             reader = command.ExecuteReader();
             reader.Read();
-            string notice;
-            if (reader.GetValue(0).ToString() == "")
-                notice = dataGridViewAddP.Rows[0].Cells[3].Value.ToString() + "(" + dataGridViewAddP.Rows[0].Cells[2].Value.ToString() + ")";
-            else
-                notice = reader.GetValue(0).ToString() + "," + dataGridViewAddP.Rows[0].Cells[3].Value.ToString() + "(" + 
-                                                                        dataGridViewAddP.Rows[0].Cells[2].Value.ToString() + ")";
+            string notice = "";
+            if (reader.GetValue(0) == null)
+                notice = "";
+            else if (dataGridViewAddP.Rows[0].Cells[3].Value.ToString() != "" || dataGridViewAddP.Rows[0].Cells[2].Value.ToString() != "")
+            {
+                if (reader.GetValue(0).ToString() == "")
+                    notice = dataGridViewAddP.Rows[0].Cells[3].Value.ToString() + "(" + dataGridViewAddP.Rows[0].Cells[2].Value.ToString() + ")";
+                else
+                    notice = reader.GetValue(0).ToString() + "," + dataGridViewAddP.Rows[0].Cells[3].Value.ToString() + "(" +
+                                                                            dataGridViewAddP.Rows[0].Cells[2].Value.ToString() + ")";
+            }
             reader.Close();
             command.CommandText = "UPDATE Main SET Notice='" + notice + "' WHERE Contract_num='" + contract_num + '\'';
             command.ExecuteNonQuery();
@@ -667,33 +672,58 @@ namespace DB_Vart_Main
         private void buttonIm_Click(object sender, EventArgs e)
         {
             //TODO
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            /*FolderBrowserDialog dialog = new FolderBrowserDialog();
             dialog.ShowDialog();
 
             string path = dialog.SelectedPath + "\\import.txt";
 
             FileInfo file = new FileInfo(path);
             if (!file.Exists)
-                file.Create();
+                file.Create();*/
 
-            StreamReader fileReader = new StreamReader(path, Encoding.Default);
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Выберите файл импорта";
+            dialog.ShowDialog();
 
-            string line;
+            StreamReader fileReader = new StreamReader(dialog.FileName, Encoding.Default);
+
+            string line = "";
             while ((line = fileReader.ReadLine()) != null)
             {
-                if (line[0] == '~' || line == "")
+                if (line == "" || line[0] == '~')
                     continue;
                 string[] split = line.Split(';');
-
                 /*string[] splUse = new string[] { split[2], split[4], split[5].Replace("ЛИЦЕВОЙ СЧЕТ: ", ""), split[6].Replace(" ФИО: ", ""),
                             split[7].Replace(" АДРЕС: НИЖНЕВАРТОВСК,", ""), split[8].Replace(" К_ОПЛАТЕ: ", "") };*/
 
-                string[] splUse = new string[] { split[2].Replace("\\", "-"), split[4], split[5].Replace("ЛИЦЕВОЙ СЧЕТ: ", ""), split[8].Replace(" К_ОПЛАТЕ: ", "") };
-
+                string[] splUse = new string[] { split[2].Replace("/", "."), split[4].Replace(".00", ""), split[5].Replace("ЛИЦЕВОЙ СЧЕТ: ", "") };
+                
                 SqlCommand command = new SqlCommand();
                 command.Connection = sqlConnection;
-                command.CommandText = "SELECT List FROM Payments WHERE Contruct_num = '" + splUse[2] + "'";
-                //TODO
+                command.CommandText = "SELECT List FROM Payments WHERE Contract_num = '" + splUse[2] + "'";
+                SqlDataReader reader = command.ExecuteReader();
+
+                List<string> list = new List<string>();
+                while (reader.Read())
+                {
+                    object value = reader.GetValue(0);
+                    if (value.ToString() != "")
+                        line = value.ToString() + "," + splUse[0] + "_" + splUse[1];
+                    else
+                        line = splUse[0] + "_" + splUse[1];
+                    list.Add("UPDATE Payments SET List = '" + line + "' WHERE Contract_num = '" + splUse[2] + "'");
+                    list.Add("UPDATE Main SET Debt -= " + splUse[1]);
+                    /*SqlCommand update = new SqlCommand("UPDATE Payments SET List = '" + line + "' WHERE Contract_num = '" + splUse[2] + "'", sqlConnection);
+                    update.ExecuteNonQueryAsync();*/
+                    line = "";
+                }
+                reader.Close();
+
+                foreach (string str in list)
+                {
+                    command.CommandText = str;
+                    command.ExecuteNonQuery();
+                }
             }
         }
 
