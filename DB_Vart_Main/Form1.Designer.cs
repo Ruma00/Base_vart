@@ -699,6 +699,7 @@
             // 
             // buttonRcPrint
             // 
+            this.buttonRcPrint.Enabled = false;
             this.buttonRcPrint.Location = new System.Drawing.Point(1153, 18);
             this.buttonRcPrint.Name = "buttonRcPrint";
             this.buttonRcPrint.Size = new System.Drawing.Size(121, 26);
