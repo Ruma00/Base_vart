@@ -37,6 +37,12 @@
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxSort = new System.Windows.Forms.ComboBox();
+            this.buttonSort = new System.Windows.Forms.Button();
+            this.labelSort = new System.Windows.Forms.Label();
+            this.buttonPrev = new System.Windows.Forms.Button();
+            this.buttonNext = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listViewLook
@@ -104,11 +110,76 @@
             this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader10.Width = 200;
             // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(72, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(152, 37);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Сортировка:";
+            // 
+            // comboBoxSort
+            // 
+            this.comboBoxSort.FormattingEnabled = true;
+            this.comboBoxSort.Items.AddRange(new object[] {
+            "По адресу",
+            "По фамилии",
+            "По номеру договора"});
+            this.comboBoxSort.Location = new System.Drawing.Point(191, 25);
+            this.comboBoxSort.Name = "comboBoxSort";
+            this.comboBoxSort.Size = new System.Drawing.Size(212, 21);
+            this.comboBoxSort.TabIndex = 3;
+            // 
+            // buttonSort
+            // 
+            this.buttonSort.Location = new System.Drawing.Point(421, 23);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(137, 23);
+            this.buttonSort.TabIndex = 4;
+            this.buttonSort.Text = "Сортировать";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            // 
+            // labelSort
+            // 
+            this.labelSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSort.Location = new System.Drawing.Point(572, 23);
+            this.labelSort.Name = "labelSort";
+            this.labelSort.Size = new System.Drawing.Size(100, 23);
+            this.labelSort.TabIndex = 9;
+            this.labelSort.Text = "0 - 0";
+            this.labelSort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonPrev
+            // 
+            this.buttonPrev.Enabled = false;
+            this.buttonPrev.Location = new System.Drawing.Point(831, 23);
+            this.buttonPrev.Name = "buttonPrev";
+            this.buttonPrev.Size = new System.Drawing.Size(122, 23);
+            this.buttonPrev.TabIndex = 8;
+            this.buttonPrev.Text = "Пред. стр.";
+            this.buttonPrev.UseVisualStyleBackColor = true;
+            // 
+            // buttonNext
+            // 
+            this.buttonNext.Location = new System.Drawing.Point(685, 23);
+            this.buttonNext.Name = "buttonNext";
+            this.buttonNext.Size = new System.Drawing.Size(122, 23);
+            this.buttonNext.TabIndex = 7;
+            this.buttonNext.Text = "След. стр.";
+            this.buttonNext.UseVisualStyleBackColor = true;
+            // 
             // Look_all
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 662);
+            this.Controls.Add(this.labelSort);
+            this.Controls.Add(this.buttonPrev);
+            this.Controls.Add(this.buttonNext);
+            this.Controls.Add(this.buttonSort);
+            this.Controls.Add(this.comboBoxSort);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.listViewLook);
             this.Name = "Look_all";
             this.Text = "Look_all";
@@ -127,5 +198,11 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxSort;
+        private System.Windows.Forms.Button buttonSort;
+        private System.Windows.Forms.Label labelSort;
+        private System.Windows.Forms.Button buttonPrev;
+        private System.Windows.Forms.Button buttonNext;
     }
 }
