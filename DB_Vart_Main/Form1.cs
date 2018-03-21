@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Xps.Packaging;
 
 namespace DB_Vart_Main
 {
@@ -747,6 +748,17 @@ namespace DB_Vart_Main
         {
             Look_all look_All = new Look_all(sqlConnection);
             look_All.Show();
+        }
+
+        private void listViewRc_ItemClick(object sender, EventArgs e)
+        {
+            //TODO
+        }
+
+        private void buttonRcPrint_Click(object sender, EventArgs e)
+        {
+            ViewReceipts receipts = new ViewReceipts();
+            receipts.Show();
         }
     }
 }
