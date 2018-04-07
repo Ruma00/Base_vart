@@ -345,6 +345,7 @@
             this.buttonAct.TabIndex = 9;
             this.buttonAct.Text = "Акт сверки";
             this.buttonAct.UseVisualStyleBackColor = true;
+            this.buttonAct.Click += new System.EventHandler(this.buttonAct_Click);
             // 
             // buttonAddP
             // 

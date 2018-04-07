@@ -19,6 +19,30 @@ namespace DB_Vart_Main
         SqlConnection sqlConnection = new SqlConnection();
         public Main_form()
         {
+            try
+            {
+                StreamReader reader = new StreamReader("dat.txt");
+                string line = reader.ReadLine();
+                reader.Close();
+                int month = Convert.ToInt32(line);
+                if (month != DateTime.Today.Month)
+                {
+                    StreamWriter writer = new StreamWriter("dat.txt", false);
+                    writer.WriteLine(DateTime.Today.Month);
+                    for (int i = 0; i < DateTime.Today.Month - month; i++)
+                    {
+                        SqlCommand command = new SqlCommand("UPDATE Main SET Debt -= 80");
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch
+            {
+                FileStream file = new FileStream("dat.txt", FileMode.OpenOrCreate);
+                byte[] array = Encoding.Default.GetBytes(DateTime.Today.Month.ToString());
+                file.Write(array, 0, array.Length);
+            }
+
             InitializeComponent();
             sqlConnection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Base;Integrated Security=true";
             sqlConnection.Open();
@@ -759,6 +783,11 @@ namespace DB_Vart_Main
         {
             ViewReceipts receipts = new ViewReceipts();
             receipts.Show();
+        }
+
+        private void buttonAct_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
