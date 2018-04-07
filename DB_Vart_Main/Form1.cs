@@ -787,7 +787,10 @@ namespace DB_Vart_Main
 
         private void buttonAct_Click(object sender, EventArgs e)
         {
-
+            string contract = listViewS.Items[0].SubItems[4].Text;
+            string name = listViewS.Items[0].SubItems[3].Text;
+            Act act = new Act(contract, name, sqlConnection);
+            act.Show();
         }
     }
 }

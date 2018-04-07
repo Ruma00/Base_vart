@@ -53,6 +53,12 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Act.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Act.Designer.cs">
+      <DependentUpon>Act.cs</DependentUpon>
+    </Compile>
     <Compile Include="BaseElement.cs" />
     <Compile Include="Debtors.cs">
       <SubType>Form</SubType>
@@ -86,6 +92,9 @@
     <Compile Include="ViewReceipts.Designer.cs">
       <DependentUpon>ViewReceipts.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Act.resx">
+      <DependentUpon>Act.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Debtors.resx">
       <DependentUpon>Debtors.cs</DependentUpon>
     </EmbeddedResource>

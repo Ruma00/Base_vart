@@ -337,7 +337,6 @@
             // 
             // buttonAct
             // 
-            this.buttonAct.Enabled = false;
             this.buttonAct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonAct.Location = new System.Drawing.Point(1128, 200);
             this.buttonAct.Name = "buttonAct";
