@@ -41,6 +41,7 @@ namespace DB_Vart_Main
                 FileStream file = new FileStream("dat.txt", FileMode.OpenOrCreate);
                 byte[] array = Encoding.Default.GetBytes(DateTime.Today.Month.ToString());
                 file.Write(array, 0, array.Length);
+                file.Close();
             }
 
             InitializeComponent();
