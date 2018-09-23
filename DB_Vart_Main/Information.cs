@@ -17,23 +17,42 @@ namespace DB_Vart_Main
         {
             InitializeComponent();
 
-            string comText = "SELECT Contract_num, Surname, Date_of_contract, Phone, Passport FROM Main WHERE Contract_num = '" + contract + "'";
-            SqlCommand command = new SqlCommand(comText, connection);
+            dataGridViewInf.RowTemplate.Height = 43;
+            dataGridViewInf.AllowUserToAddRows = false;
 
+            Program.form.setButtonCtrInf(false);
+
+            SqlCommand command = new SqlCommand();
+            command.Connection = connection;
+            command.CommandText = "SELECT * FROM ContractInf WHERE Contract_num = " + contract;
             SqlDataReader reader = command.ExecuteReader();
 
-            if (reader.HasRows)
+            while (reader.Read())
             {
-                while (reader.Read())
-                {
-                    labelCtrN.Text = reader.GetValue(0).ToString();
-                    labelSurN.Text = reader.GetValue(1).ToString();
-                    labelDate.Text = reader.GetValue(2).ToString().Split(' ')[0];
-                    labelPhn.Text = reader.GetValue(3).ToString();
-                    labelPt.Text = reader.GetValue(4).ToString();
-                }
+                dataGridViewInf.Rows.Add("№ договора:", reader.GetValue(0).ToString());
+                dataGridViewInf.Rows.Add("Дата заключения:", reader.GetValue(1).ToString());
+                dataGridViewInf.Rows.Add("ФИО:", reader.GetValue(2).ToString());
+                dataGridViewInf.Rows.Add("Паспорт:", reader.GetValue(3).ToString());
+                dataGridViewInf.Rows.Add("Дата выдачи:", reader.GetValue(4).ToString());
+                dataGridViewInf.Rows.Add("Выдан:", reader.GetValue(5).ToString());
+                dataGridViewInf.Rows.Add("Телефон:", reader.GetValue(6).ToString());
+                dataGridViewInf.Rows.Add("Дата рождения:", reader.GetValue(7).ToString());
+                dataGridViewInf.Rows.Add("Место рождения:", reader.GetValue(8).ToString());
+                DateTime temp = reader.GetDateTime(9);
+                if (temp.Year == 1)
+                    dataGridViewInf.Rows.Add("Дата расторжения:", "---------------");
+                else
+                    dataGridViewInf.Rows.Add("Дата расторжения:", temp.ToString());
             }
             reader.Close();
+            dataGridViewInf.ClearSelection();
+
+            this.FormClosing += new FormClosingEventHandler(Information_FormClosing);
+        }
+
+        public void Information_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.form.setButtonCtrInf(true);
         }
     }
 }

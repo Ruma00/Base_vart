@@ -56,6 +56,7 @@
             this.columnHeader6,
             this.columnHeader9,
             this.columnHeader10});
+            this.listViewLook.FullRowSelect = true;
             this.listViewLook.Location = new System.Drawing.Point(72, 76);
             this.listViewLook.Name = "listViewLook";
             this.listViewLook.Size = new System.Drawing.Size(914, 535);
@@ -181,6 +182,8 @@
             this.Controls.Add(this.comboBoxSort);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listViewLook);
+            this.MaximumSize = new System.Drawing.Size(1075, 701);
+            this.MinimumSize = new System.Drawing.Size(1075, 701);
             this.Name = "Look_all";
             this.Text = "Look_all";
             this.ResumeLayout(false);

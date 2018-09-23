@@ -35,12 +35,13 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.labelAdress = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelTitle
             // 
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelTitle.Location = new System.Drawing.Point(50, 22);
+            this.labelTitle.Location = new System.Drawing.Point(50, 14);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(447, 23);
             this.labelTitle.TabIndex = 0;
@@ -64,37 +65,55 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Период";
-            this.columnHeader1.Width = 120;
+            this.columnHeader1.Width = 150;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader2.Width = 155;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Начислено";
-            this.columnHeader3.Width = 120;
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 110;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Оплачено";
-            this.columnHeader4.Width = 120;
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 100;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Дата оплаты";
-            this.columnHeader5.Width = 120;
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader5.Width = 100;
+            // 
+            // labelAdress
+            // 
+            this.labelAdress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAdress.Location = new System.Drawing.Point(53, 41);
+            this.labelAdress.MaximumSize = new System.Drawing.Size(444, 23);
+            this.labelAdress.MinimumSize = new System.Drawing.Size(444, 23);
+            this.labelAdress.Name = "labelAdress";
+            this.labelAdress.Size = new System.Drawing.Size(444, 23);
+            this.labelAdress.TabIndex = 2;
+            this.labelAdress.Text = "Адрес: ";
+            this.labelAdress.Click += new System.EventHandler(this.labelAdress_Click);
             // 
             // Act
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(663, 676);
+            this.Controls.Add(this.labelAdress);
             this.Controls.Add(this.listViewAct);
             this.Controls.Add(this.labelTitle);
             this.Name = "Act";
             this.Text = "Act";
+            this.Load += new System.EventHandler(this.Act_Load);
             this.ResumeLayout(false);
 
         }
@@ -108,5 +127,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.Label labelAdress;
     }
 }

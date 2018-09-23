@@ -39,6 +39,8 @@
             this.buttonNext = new System.Windows.Forms.Button();
             this.buttonPrev = new System.Windows.Forms.Button();
             this.labelSort = new System.Windows.Forms.Label();
+            this.buttonDel = new System.Windows.Forms.Button();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +58,9 @@
             this.columnHeader1,
             this.columnHeader4,
             this.columnHeader5,
-            this.columnHeader6});
+            this.columnHeader6,
+            this.columnHeader2});
+            this.listViewDeb.FullRowSelect = true;
             this.listViewDeb.Location = new System.Drawing.Point(12, 49);
             this.listViewDeb.Name = "listViewDeb";
             this.listViewDeb.Size = new System.Drawing.Size(920, 570);
@@ -67,23 +71,24 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Адрес";
-            this.columnHeader1.Width = 332;
+            this.columnHeader1.Width = 250;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Фамилия";
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 279;
+            this.columnHeader4.Width = 210;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Номер счета";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 195;
+            this.columnHeader5.Width = 160;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Долг";
+            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader6.Width = 110;
             // 
             // comboBoxSort
@@ -93,14 +98,14 @@
             "По адресу",
             "По фамилии",
             "По номеру счёта"});
-            this.comboBoxSort.Location = new System.Drawing.Point(118, 12);
+            this.comboBoxSort.Location = new System.Drawing.Point(98, 11);
             this.comboBoxSort.Name = "comboBoxSort";
             this.comboBoxSort.Size = new System.Drawing.Size(221, 21);
             this.comboBoxSort.TabIndex = 2;
             // 
             // buttonSort
             // 
-            this.buttonSort.Location = new System.Drawing.Point(368, 10);
+            this.buttonSort.Location = new System.Drawing.Point(334, 10);
             this.buttonSort.Name = "buttonSort";
             this.buttonSort.Size = new System.Drawing.Size(141, 23);
             this.buttonSort.TabIndex = 3;
@@ -110,7 +115,7 @@
             // 
             // buttonNext
             // 
-            this.buttonNext.Location = new System.Drawing.Point(637, 10);
+            this.buttonNext.Location = new System.Drawing.Point(561, 10);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(122, 23);
             this.buttonNext.TabIndex = 4;
@@ -121,7 +126,7 @@
             // buttonPrev
             // 
             this.buttonPrev.Enabled = false;
-            this.buttonPrev.Location = new System.Drawing.Point(784, 10);
+            this.buttonPrev.Location = new System.Drawing.Point(688, 10);
             this.buttonPrev.Name = "buttonPrev";
             this.buttonPrev.Size = new System.Drawing.Size(122, 23);
             this.buttonPrev.TabIndex = 5;
@@ -132,18 +137,35 @@
             // labelSort
             // 
             this.labelSort.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSort.Location = new System.Drawing.Point(524, 11);
+            this.labelSort.Location = new System.Drawing.Point(481, 10);
             this.labelSort.Name = "labelSort";
-            this.labelSort.Size = new System.Drawing.Size(100, 23);
+            this.labelSort.Size = new System.Drawing.Size(74, 23);
             this.labelSort.TabIndex = 6;
             this.labelSort.Text = "0 - 0";
             this.labelSort.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonDel
+            // 
+            this.buttonDel.Location = new System.Drawing.Point(816, 10);
+            this.buttonDel.Name = "buttonDel";
+            this.buttonDel.Size = new System.Drawing.Size(122, 23);
+            this.buttonDel.TabIndex = 7;
+            this.buttonDel.Text = "Восстановить";
+            this.buttonDel.UseVisualStyleBackColor = true;
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Примечание";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 186;
             // 
             // Debtors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 631);
+            this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.labelSort);
             this.Controls.Add(this.buttonPrev);
             this.Controls.Add(this.buttonNext);
@@ -151,6 +173,8 @@
             this.Controls.Add(this.comboBoxSort);
             this.Controls.Add(this.listViewDeb);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(960, 670);
+            this.MinimumSize = new System.Drawing.Size(960, 670);
             this.Name = "Debtors";
             this.Text = "Debtors";
             this.ResumeLayout(false);
@@ -170,5 +194,7 @@
         private System.Windows.Forms.Button buttonNext;
         private System.Windows.Forms.Button buttonPrev;
         private System.Windows.Forms.Label labelSort;
+        private System.Windows.Forms.Button buttonDel;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

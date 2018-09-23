@@ -20,8 +20,12 @@ namespace DB_Vart_Main
             this.connection = connection;
             InitializeComponent();
             comboBoxSort.SelectedIndex = 0;
+            Program.form.setButtonWrAll(false);
+            this.FormClosing += new FormClosingEventHandler(LookAll_FormClosing);
+            listViewLook.DoubleClick += new EventHandler(listViewLook_DoubleClick);
             Output("");
         }
+
         private List<BaseElement> list = new List<BaseElement>();
 
         private void Output(string str)
@@ -45,7 +49,10 @@ namespace DB_Vart_Main
                     element.Surname = reader.GetValue(3).ToString();
                     element.Contract = reader.GetValue(4).ToString();
                     element.Debt = reader.GetValue(5).ToString();
-                    element.Monthly_fee = reader.GetValue(6).ToString();
+                    //element.Monthly_fee = reader.GetValue(6).ToString();
+                    string fee = reader.GetString(6);
+                    string[] temp = fee.Split(',');
+                    element.Monthly_fee = temp[temp.Length - 1].Split('_')[0];
                     element.Notice = reader.GetValue(7).ToString();
 
                     list.Add(element);
@@ -111,6 +118,17 @@ namespace DB_Vart_Main
                 case 2: Output("SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM Main ORDER BY Contract_num ASC"); break;
                 default: Output("SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM Main ORDER BY Adress, Apartment ASC"); break;
             }
+        }
+
+        public void LookAll_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.form.setButtonWrAll(true);
+        }
+
+        private void listViewLook_DoubleClick(object sender, EventArgs e)
+        {
+            if (listViewLook.SelectedItems.Count > 0)
+                Clipboard.SetText(listViewLook.SelectedItems[0].SubItems[4].Text);
         }
     }
 }
