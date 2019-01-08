@@ -18,7 +18,15 @@ namespace DB_Vart_Main
             InitializeComponent();
             this.connection = connection;
             comboBoxSort.SelectedIndex = 0;
+            Program.form.setButtonDt(false);
+            this.FormClosing += new FormClosingEventHandler(Debtors_FormClosing);
+            listViewDeb.DoubleClick += new EventHandler(listViewDeb_DoubleClick);
             Output();
+        }
+
+        ~Debtors()
+        {
+            Program.form.setButtonDt(true);
         }
 
         private SqlConnection connection;
@@ -26,7 +34,7 @@ namespace DB_Vart_Main
 
         private List<BaseElement> list = new List<BaseElement>();
 
-        private void Output(string str = "SELECT * FROM Debtors")
+        private void Output(string str = "SELECT Adress, Apartment, Surname, Contract_num, Debt, Notice FROM Main WHERE Is_Deleted = 1")
         {
 
             SqlCommand command = new SqlCommand(str, connection);
@@ -40,10 +48,11 @@ namespace DB_Vart_Main
                 while (reader.Read()) // построчно считываем данные
                 {
                     BaseElement element = new BaseElement();
-                    element.Adress = reader.GetValue(0).ToString();
-                    element.Surname = reader.GetValue(1).ToString();
-                    element.Contract = reader.GetValue(2).ToString();
-                    element.Debt = reader.GetValue(3).ToString();
+                    element.Adress = reader.GetValue(0).ToString() + " кв " + reader.GetValue(1).ToString();
+                    element.Surname = reader.GetValue(2).ToString();
+                    element.Contract = reader.GetValue(3).ToString();
+                    element.Debt = reader.GetValue(4).ToString();
+                    element.Notice = reader.GetString(5);
 
                     list.Add(element);
                 }
@@ -58,7 +67,7 @@ namespace DB_Vart_Main
                     buttonNext.Enabled = false;
                     break;
                 }
-                ListViewItem item = new ListViewItem(new string[] { list[i].Adress, list[i].Surname, list[i].Contract, list[i].Debt });
+                ListViewItem item = new ListViewItem(new string[] { list[i].Adress, list[i].Surname, list[i].Contract, list[i].Debt, list[i].Notice });
                 listViewDeb.Items.Add(item);
             }
             count = 20;
@@ -74,7 +83,7 @@ namespace DB_Vart_Main
                     buttonNext.Enabled = false;
                     break;
                 }
-                ListViewItem item = new ListViewItem(new string[] { list[count].Adress, list[count].Surname, list[count].Contract, list[count].Debt });
+                ListViewItem item = new ListViewItem(new string[] { list[count].Adress, list[count].Surname, list[count].Contract, list[count].Debt, list[i].Notice });
                 count++;
                 listViewDeb.Items[i] = item;
             }
@@ -95,15 +104,43 @@ namespace DB_Vart_Main
             Write();
         }
 
-        private void buttonSort_Click(object sender, EventArgs e)
+        private void buttonSort_Click(object sender, EventArgs e) 
         {
             buttonPrev.Enabled = false;
             switch (comboBoxSort.SelectedIndex)
             {
-                case 0: Output(str : "SELECT * FROM Debtors ORDER BY Adress ASC"); break;
-                case 1: Output(str : "SELECT * FROM Debtors ORDER BY Surname ASC"); break;
-                case 2: Output(str : "SELECT * FROM Debtors ORDER BY Contract_num ASC"); break;
+                case 0: Output(str : "SELECT Adress, Apartment, Surname, Contract_num, Debt, Notice FROM Main ORDER BY Adress ASC"); break;
+                case 1: Output(str : "SELECT Adress, Apartment, Surname, Contract_num, Debt, Notice FROM Main ORDER BY Surname ASC"); break;
+                case 2: Output(str : "SELECT Adress, Apartment, Surname, Contract_num, Debt, Notice FROM Main ORDER BY Contract_num ASC"); break;
             }
+        }
+
+        private void Debtors_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Program.form.setButtonDt(true);
+        }
+
+        private void buttonDel_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand();
+            command.Connection = connection;
+
+            for (int i = 0; i < listViewDeb.SelectedItems.Count; i++)
+            {
+                ListViewItem item = listViewDeb.SelectedItems[i];
+                //command.CommandText += item.SubItems[2].Text;
+
+                command.CommandText = "UPDATE Main SET Is_Deleted = 0 WHERE Contract_num = " + item.SubItems[2].Text;
+                command.ExecuteNonQuery();
+            }
+
+            Output();
+        }
+
+        private void listViewDeb_DoubleClick(object sender, EventArgs e)
+        {
+            if (listViewDeb.SelectedItems.Count > 0)
+                Clipboard.SetText(listViewDeb.SelectedItems[0].SubItems[4].Text);
         }
     }
 }

@@ -28,17 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Information));
             this.labelMain = new System.Windows.Forms.Label();
-            this.labelCtrNum = new System.Windows.Forms.Label();
-            this.labelSrn = new System.Windows.Forms.Label();
-            this.labelDt = new System.Windows.Forms.Label();
-            this.labelPn = new System.Windows.Forms.Label();
-            this.labelPst = new System.Windows.Forms.Label();
-            this.labelSurN = new System.Windows.Forms.Label();
-            this.labelDate = new System.Windows.Forms.Label();
-            this.labelPhn = new System.Windows.Forms.Label();
-            this.labelPt = new System.Windows.Forms.Label();
-            this.labelCtrN = new System.Windows.Forms.Label();
+            this.dataGridViewInf = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInf)).BeginInit();
             this.SuspendLayout();
             // 
             // labelMain
@@ -50,124 +49,84 @@
             this.labelMain.TabIndex = 0;
             this.labelMain.Text = "Информация о договоре:";
             // 
-            // labelCtrNum
+            // dataGridViewInf
             // 
-            this.labelCtrNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCtrNum.Location = new System.Drawing.Point(58, 97);
-            this.labelCtrNum.Name = "labelCtrNum";
-            this.labelCtrNum.Size = new System.Drawing.Size(141, 23);
-            this.labelCtrNum.TabIndex = 1;
-            this.labelCtrNum.Text = "Номер договора:";
-            this.labelCtrNum.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dataGridViewInf.AllowUserToAddRows = false;
+            this.dataGridViewInf.AllowUserToResizeColumns = false;
+            this.dataGridViewInf.AllowUserToResizeRows = false;
+            this.dataGridViewInf.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewInf.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewInf.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewInf.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewInf.ColumnHeadersVisible = false;
+            this.dataGridViewInf.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewInf.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridViewInf.Location = new System.Drawing.Point(41, 57);
+            this.dataGridViewInf.Name = "dataGridViewInf";
+            this.dataGridViewInf.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dataGridViewInf.RowHeadersVisible = false;
+            this.dataGridViewInf.RowHeadersWidth = 43;
+            this.dataGridViewInf.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dataGridViewInf.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridViewInf.RowTemplate.Height = 43;
+            this.dataGridViewInf.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewInf.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dataGridViewInf.Size = new System.Drawing.Size(394, 431);
+            this.dataGridViewInf.TabIndex = 18;
             // 
-            // labelSrn
+            // Column1
             // 
-            this.labelSrn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSrn.Location = new System.Drawing.Point(58, 136);
-            this.labelSrn.Name = "labelSrn";
-            this.labelSrn.Size = new System.Drawing.Size(141, 23);
-            this.labelSrn.TabIndex = 1;
-            this.labelSrn.Text = "Фамилия:";
-            this.labelSrn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "Дата";
+            this.Column1.Name = "Column1";
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // labelDt
+            // Column2
             // 
-            this.labelDt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDt.Location = new System.Drawing.Point(58, 179);
-            this.labelDt.Name = "labelDt";
-            this.labelDt.Size = new System.Drawing.Size(141, 23);
-            this.labelDt.TabIndex = 1;
-            this.labelDt.Text = "Дата заключения:";
-            this.labelDt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "Сумма";
+            this.Column2.Name = "Column2";
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
-            // labelPn
+            // richTextBox1
             // 
-            this.labelPn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPn.Location = new System.Drawing.Point(55, 226);
-            this.labelPn.Name = "labelPn";
-            this.labelPn.Size = new System.Drawing.Size(144, 23);
-            this.labelPn.TabIndex = 1;
-            this.labelPn.Text = "Телефон:";
-            this.labelPn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelPst
-            // 
-            this.labelPst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPst.Location = new System.Drawing.Point(55, 273);
-            this.labelPst.Name = "labelPst";
-            this.labelPst.Size = new System.Drawing.Size(144, 23);
-            this.labelPst.TabIndex = 1;
-            this.labelPst.Text = "Паспорт:";
-            this.labelPst.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelSurN
-            // 
-            this.labelSurN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSurN.Location = new System.Drawing.Point(244, 136);
-            this.labelSurN.Name = "labelSurN";
-            this.labelSurN.Size = new System.Drawing.Size(186, 23);
-            this.labelSurN.TabIndex = 2;
-            this.labelSurN.Text = "_";
-            this.labelSurN.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelDate
-            // 
-            this.labelDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDate.Location = new System.Drawing.Point(244, 179);
-            this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(186, 23);
-            this.labelDate.TabIndex = 2;
-            this.labelDate.Text = "_";
-            this.labelDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelPhn
-            // 
-            this.labelPhn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPhn.Location = new System.Drawing.Point(244, 226);
-            this.labelPhn.Name = "labelPhn";
-            this.labelPhn.Size = new System.Drawing.Size(186, 23);
-            this.labelPhn.TabIndex = 2;
-            this.labelPhn.Text = "_";
-            this.labelPhn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelPt
-            // 
-            this.labelPt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPt.Location = new System.Drawing.Point(244, 273);
-            this.labelPt.Name = "labelPt";
-            this.labelPt.Size = new System.Drawing.Size(186, 23);
-            this.labelPt.TabIndex = 2;
-            this.labelPt.Text = "_";
-            this.labelPt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelCtrN
-            // 
-            this.labelCtrN.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCtrN.Location = new System.Drawing.Point(244, 97);
-            this.labelCtrN.Name = "labelCtrN";
-            this.labelCtrN.Size = new System.Drawing.Size(186, 23);
-            this.labelCtrN.TabIndex = 2;
-            this.labelCtrN.Text = "_";
-            this.labelCtrN.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.richTextBox1.Location = new System.Drawing.Point(41, 506);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(394, 72);
+            this.richTextBox1.TabIndex = 19;
+            this.richTextBox1.Text = "";
             // 
             // Information
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 554);
-            this.Controls.Add(this.labelCtrN);
-            this.Controls.Add(this.labelPt);
-            this.Controls.Add(this.labelPhn);
-            this.Controls.Add(this.labelDate);
-            this.Controls.Add(this.labelSurN);
-            this.Controls.Add(this.labelPst);
-            this.Controls.Add(this.labelPn);
-            this.Controls.Add(this.labelDt);
-            this.Controls.Add(this.labelSrn);
-            this.Controls.Add(this.labelCtrNum);
+            this.ClientSize = new System.Drawing.Size(483, 593);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.dataGridViewInf);
             this.Controls.Add(this.labelMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(499, 632);
+            this.MinimumSize = new System.Drawing.Size(499, 632);
             this.Name = "Information";
             this.Text = "Information";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInf)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -175,15 +134,9 @@
         #endregion
 
         private System.Windows.Forms.Label labelMain;
-        private System.Windows.Forms.Label labelCtrNum;
-        private System.Windows.Forms.Label labelSrn;
-        private System.Windows.Forms.Label labelDt;
-        private System.Windows.Forms.Label labelPn;
-        private System.Windows.Forms.Label labelPst;
-        private System.Windows.Forms.Label labelSurN;
-        private System.Windows.Forms.Label labelDate;
-        private System.Windows.Forms.Label labelPhn;
-        private System.Windows.Forms.Label labelPt;
-        private System.Windows.Forms.Label labelCtrN;
+        private System.Windows.Forms.DataGridView dataGridViewInf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

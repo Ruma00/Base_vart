@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_form));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
+            this.richTextBoxNcDel = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxNcFee = new System.Windows.Forms.RichTextBox();
             this.dataGridViewAddP = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,22 +90,22 @@
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPageSec = new System.Windows.Forms.TabPage();
+            this.richTextBoxFIO = new System.Windows.Forms.RichTextBox();
+            this.labelFIO = new System.Windows.Forms.Label();
+            this.richTextBoxBrPl = new System.Windows.Forms.RichTextBox();
+            this.labelBirth_Place = new System.Windows.Forms.Label();
+            this.labelBirth_Date = new System.Windows.Forms.Label();
+            this.textBoxBrDt = new System.Windows.Forms.TextBox();
+            this.labelPt_Who = new System.Windows.Forms.Label();
+            this.textBoxPt_Date = new System.Windows.Forms.TextBox();
+            this.labelPt_Date = new System.Windows.Forms.Label();
+            this.richTextBoxPtWho = new System.Windows.Forms.RichTextBox();
+            this.labelInf = new System.Windows.Forms.Label();
+            this.labelDebt = new System.Windows.Forms.Label();
+            this.textBoxDebt = new System.Windows.Forms.TextBox();
             this.labelAdr2 = new System.Windows.Forms.Label();
             this.textBoxAdr2 = new System.Windows.Forms.TextBox();
-            this.buttonRcPrint = new System.Windows.Forms.Button();
-            this.listViewRc = new System.Windows.Forms.ListView();
-            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader31 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader34 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.comboBoxRc = new System.Windows.Forms.ComboBox();
-            this.buttonRc = new System.Windows.Forms.Button();
-            this.textBoxRc = new System.Windows.Forms.TextBox();
             this.buttonAddAb = new System.Windows.Forms.Button();
-            this.labelRcpt = new System.Windows.Forms.Label();
             this.labelAddM = new System.Windows.Forms.Label();
             this.richTextBoxNote = new System.Windows.Forms.RichTextBox();
             this.labelText = new System.Windows.Forms.Label();
@@ -120,16 +123,32 @@
             this.textBoxCtr = new System.Windows.Forms.TextBox();
             this.textBoxFam = new System.Windows.Forms.TextBox();
             this.textBoxAdr = new System.Windows.Forms.TextBox();
+            this.tabPageThird = new System.Windows.Forms.TabPage();
+            this.buttonRcPrint = new System.Windows.Forms.Button();
+            this.listViewRc = new System.Windows.Forms.ListView();
+            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader31 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader34 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.textBoxRc = new System.Windows.Forms.TextBox();
+            this.comboBoxRc = new System.Windows.Forms.ComboBox();
+            this.buttonRc = new System.Windows.Forms.Button();
+            this.labelRcpt = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).BeginInit();
             this.tabPageSec.SuspendLayout();
+            this.tabPageThird.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlMain
             // 
             this.tabControlMain.Controls.Add(this.tabPageMain);
             this.tabControlMain.Controls.Add(this.tabPageSec);
+            this.tabControlMain.Controls.Add(this.tabPageThird);
             this.tabControlMain.Location = new System.Drawing.Point(1, 0);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
@@ -138,6 +157,8 @@
             // 
             // tabPageMain
             // 
+            this.tabPageMain.Controls.Add(this.richTextBoxNcDel);
+            this.tabPageMain.Controls.Add(this.richTextBoxNcFee);
             this.tabPageMain.Controls.Add(this.dataGridViewAddP);
             this.tabPageMain.Controls.Add(this.buttonChgAP);
             this.tabPageMain.Controls.Add(this.textBoxPayCH);
@@ -172,6 +193,23 @@
             this.tabPageMain.Text = "Главная";
             this.tabPageMain.UseVisualStyleBackColor = true;
             // 
+            // richTextBoxNcDel
+            // 
+            this.richTextBoxNcDel.Location = new System.Drawing.Point(730, 485);
+            this.richTextBoxNcDel.Name = "richTextBoxNcDel";
+            this.richTextBoxNcDel.Size = new System.Drawing.Size(205, 67);
+            this.richTextBoxNcDel.TabIndex = 19;
+            this.richTextBoxNcDel.Text = "";
+            this.richTextBoxNcDel.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // richTextBoxNcFee
+            // 
+            this.richTextBoxNcFee.Location = new System.Drawing.Point(955, 154);
+            this.richTextBoxNcFee.Name = "richTextBoxNcFee";
+            this.richTextBoxNcFee.Size = new System.Drawing.Size(325, 38);
+            this.richTextBoxNcFee.TabIndex = 18;
+            this.richTextBoxNcFee.Text = "";
+            // 
             // dataGridViewAddP
             // 
             this.dataGridViewAddP.AllowUserToAddRows = false;
@@ -185,14 +223,14 @@
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dataGridViewAddP.Location = new System.Drawing.Point(21, 291);
+            this.dataGridViewAddP.Location = new System.Drawing.Point(21, 303);
             this.dataGridViewAddP.Name = "dataGridViewAddP";
             this.dataGridViewAddP.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridViewAddP.RowHeadersVisible = false;
             this.dataGridViewAddP.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewAddP.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewAddP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridViewAddP.Size = new System.Drawing.Size(914, 42);
+            this.dataGridViewAddP.Size = new System.Drawing.Size(914, 56);
             this.dataGridViewAddP.TabIndex = 17;
             // 
             // Column1
@@ -221,9 +259,9 @@
             // 
             // buttonChgAP
             // 
-            this.buttonChgAP.Location = new System.Drawing.Point(1128, 143);
+            this.buttonChgAP.Location = new System.Drawing.Point(1128, 126);
             this.buttonChgAP.Name = "buttonChgAP";
-            this.buttonChgAP.Size = new System.Drawing.Size(152, 23);
+            this.buttonChgAP.Size = new System.Drawing.Size(152, 22);
             this.buttonChgAP.TabIndex = 16;
             this.buttonChgAP.Text = "Сменить";
             this.buttonChgAP.UseVisualStyleBackColor = true;
@@ -231,7 +269,7 @@
             // 
             // textBoxPayCH
             // 
-            this.textBoxPayCH.Location = new System.Drawing.Point(955, 143);
+            this.textBoxPayCH.Location = new System.Drawing.Point(955, 127);
             this.textBoxPayCH.Name = "textBoxPayCH";
             this.textBoxPayCH.Size = new System.Drawing.Size(160, 20);
             this.textBoxPayCH.TabIndex = 15;
@@ -244,7 +282,7 @@
             this.buttonDt.Name = "buttonDt";
             this.buttonDt.Size = new System.Drawing.Size(152, 59);
             this.buttonDt.TabIndex = 14;
-            this.buttonDt.Text = "Должники";
+            this.buttonDt.Text = "Для суда";
             this.buttonDt.UseVisualStyleBackColor = true;
             this.buttonDt.Click += new System.EventHandler(this.buttonDt_Click);
             // 
@@ -261,7 +299,7 @@
             // labelDelSts
             // 
             this.labelDelSts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDelSts.Location = new System.Drawing.Point(103, 360);
+            this.labelDelSts.Location = new System.Drawing.Point(103, 369);
             this.labelDelSts.Name = "labelDelSts";
             this.labelDelSts.Size = new System.Drawing.Size(118, 23);
             this.labelDelSts.TabIndex = 13;
@@ -345,6 +383,7 @@
             this.buttonAct.TabIndex = 9;
             this.buttonAct.Text = "Акт сверки";
             this.buttonAct.UseVisualStyleBackColor = true;
+            this.buttonAct.Click += new System.EventHandler(this.buttonAct_Click);
             // 
             // buttonAddP
             // 
@@ -358,7 +397,7 @@
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(740, 360);
+            this.buttonDel.Location = new System.Drawing.Point(740, 369);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(184, 23);
             this.buttonDel.TabIndex = 8;
@@ -378,7 +417,7 @@
             // 
             // buttonDelS
             // 
-            this.buttonDelS.Location = new System.Drawing.Point(524, 360);
+            this.buttonDelS.Location = new System.Drawing.Point(524, 369);
             this.buttonDelS.Name = "buttonDelS";
             this.buttonDelS.Size = new System.Drawing.Size(184, 23);
             this.buttonDelS.TabIndex = 7;
@@ -396,7 +435,7 @@
             // 
             // textBoxDel
             // 
-            this.textBoxDel.Location = new System.Drawing.Point(236, 362);
+            this.textBoxDel.Location = new System.Drawing.Point(236, 371);
             this.textBoxDel.Name = "textBoxDel";
             this.textBoxDel.Size = new System.Drawing.Size(257, 20);
             this.textBoxDel.TabIndex = 6;
@@ -415,7 +454,7 @@
             // labelDel
             // 
             this.labelDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDel.Location = new System.Drawing.Point(19, 360);
+            this.labelDel.Location = new System.Drawing.Point(19, 369);
             this.labelDel.Name = "labelDel";
             this.labelDel.Size = new System.Drawing.Size(78, 23);
             this.labelDel.TabIndex = 5;
@@ -460,10 +499,10 @@
             this.columnHeader15,
             this.columnHeader16});
             this.listViewDel.FullRowSelect = true;
-            this.listViewDel.Location = new System.Drawing.Point(21, 394);
+            this.listViewDel.Location = new System.Drawing.Point(21, 403);
             this.listViewDel.MultiSelect = false;
             this.listViewDel.Name = "listViewDel";
-            this.listViewDel.Size = new System.Drawing.Size(914, 56);
+            this.listViewDel.Size = new System.Drawing.Size(914, 75);
             this.listViewDel.TabIndex = 0;
             this.listViewDel.UseCompatibleStateImageBehavior = false;
             this.listViewDel.View = System.Windows.Forms.View.Details;
@@ -526,9 +565,10 @@
             this.columnHeader24,
             this.columnHeader25,
             this.columnHeader26});
+            this.listViewAddP.FullRowSelect = true;
             this.listViewAddP.Location = new System.Drawing.Point(21, 216);
             this.listViewAddP.Name = "listViewAddP";
-            this.listViewAddP.Size = new System.Drawing.Size(914, 56);
+            this.listViewAddP.Size = new System.Drawing.Size(914, 73);
             this.listViewAddP.TabIndex = 0;
             this.listViewAddP.UseCompatibleStateImageBehavior = false;
             this.listViewAddP.View = System.Windows.Forms.View.Details;
@@ -591,9 +631,10 @@
             this.columnHeader6,
             this.columnHeader9,
             this.columnHeader10});
+            this.listViewS.FullRowSelect = true;
             this.listViewS.Location = new System.Drawing.Point(21, 55);
             this.listViewS.Name = "listViewS";
-            this.listViewS.Size = new System.Drawing.Size(914, 56);
+            this.listViewS.Size = new System.Drawing.Size(914, 73);
             this.listViewS.TabIndex = 0;
             this.listViewS.UseCompatibleStateImageBehavior = false;
             this.listViewS.View = System.Windows.Forms.View.Details;
@@ -647,15 +688,22 @@
             // 
             // tabPageSec
             // 
+            this.tabPageSec.Controls.Add(this.richTextBoxFIO);
+            this.tabPageSec.Controls.Add(this.labelFIO);
+            this.tabPageSec.Controls.Add(this.richTextBoxBrPl);
+            this.tabPageSec.Controls.Add(this.labelBirth_Place);
+            this.tabPageSec.Controls.Add(this.labelBirth_Date);
+            this.tabPageSec.Controls.Add(this.textBoxBrDt);
+            this.tabPageSec.Controls.Add(this.labelPt_Who);
+            this.tabPageSec.Controls.Add(this.textBoxPt_Date);
+            this.tabPageSec.Controls.Add(this.labelPt_Date);
+            this.tabPageSec.Controls.Add(this.richTextBoxPtWho);
+            this.tabPageSec.Controls.Add(this.labelInf);
+            this.tabPageSec.Controls.Add(this.labelDebt);
+            this.tabPageSec.Controls.Add(this.textBoxDebt);
             this.tabPageSec.Controls.Add(this.labelAdr2);
             this.tabPageSec.Controls.Add(this.textBoxAdr2);
-            this.tabPageSec.Controls.Add(this.buttonRcPrint);
-            this.tabPageSec.Controls.Add(this.listViewRc);
-            this.tabPageSec.Controls.Add(this.comboBoxRc);
-            this.tabPageSec.Controls.Add(this.buttonRc);
-            this.tabPageSec.Controls.Add(this.textBoxRc);
             this.tabPageSec.Controls.Add(this.buttonAddAb);
-            this.tabPageSec.Controls.Add(this.labelRcpt);
             this.tabPageSec.Controls.Add(this.labelAddM);
             this.tabPageSec.Controls.Add(this.richTextBoxNote);
             this.tabPageSec.Controls.Add(this.labelText);
@@ -678,13 +726,122 @@
             this.tabPageSec.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageSec.Size = new System.Drawing.Size(1288, 653);
             this.tabPageSec.TabIndex = 1;
-            this.tabPageSec.Text = "Квитанции/добавление";
+            this.tabPageSec.Text = "Добавление";
             this.tabPageSec.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxFIO
+            // 
+            this.richTextBoxFIO.Location = new System.Drawing.Point(675, 109);
+            this.richTextBoxFIO.Name = "richTextBoxFIO";
+            this.richTextBoxFIO.Size = new System.Drawing.Size(214, 60);
+            this.richTextBoxFIO.TabIndex = 8;
+            this.richTextBoxFIO.Text = "";
+            // 
+            // labelFIO
+            // 
+            this.labelFIO.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelFIO.Location = new System.Drawing.Point(512, 110);
+            this.labelFIO.Name = "labelFIO";
+            this.labelFIO.Size = new System.Drawing.Size(135, 23);
+            this.labelFIO.TabIndex = 24;
+            this.labelFIO.Text = "ФИО:";
+            // 
+            // richTextBoxBrPl
+            // 
+            this.richTextBoxBrPl.Location = new System.Drawing.Point(675, 425);
+            this.richTextBoxBrPl.Name = "richTextBoxBrPl";
+            this.richTextBoxBrPl.Size = new System.Drawing.Size(214, 60);
+            this.richTextBoxBrPl.TabIndex = 14;
+            this.richTextBoxBrPl.Text = "";
+            // 
+            // labelBirth_Place
+            // 
+            this.labelBirth_Place.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelBirth_Place.Location = new System.Drawing.Point(512, 426);
+            this.labelBirth_Place.Name = "labelBirth_Place";
+            this.labelBirth_Place.Size = new System.Drawing.Size(135, 23);
+            this.labelBirth_Place.TabIndex = 21;
+            this.labelBirth_Place.Text = "Место рождения:";
+            // 
+            // labelBirth_Date
+            // 
+            this.labelBirth_Date.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelBirth_Date.Location = new System.Drawing.Point(512, 386);
+            this.labelBirth_Date.Name = "labelBirth_Date";
+            this.labelBirth_Date.Size = new System.Drawing.Size(135, 23);
+            this.labelBirth_Date.TabIndex = 20;
+            this.labelBirth_Date.Text = "Дата рождения:";
+            // 
+            // textBoxBrDt
+            // 
+            this.textBoxBrDt.Location = new System.Drawing.Point(675, 385);
+            this.textBoxBrDt.Name = "textBoxBrDt";
+            this.textBoxBrDt.Size = new System.Drawing.Size(214, 20);
+            this.textBoxBrDt.TabIndex = 13;
+            // 
+            // labelPt_Who
+            // 
+            this.labelPt_Who.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPt_Who.Location = new System.Drawing.Point(512, 270);
+            this.labelPt_Who.Name = "labelPt_Who";
+            this.labelPt_Who.Size = new System.Drawing.Size(135, 23);
+            this.labelPt_Who.TabIndex = 18;
+            this.labelPt_Who.Text = "Кем выдан:";
+            // 
+            // textBoxPt_Date
+            // 
+            this.textBoxPt_Date.Location = new System.Drawing.Point(675, 229);
+            this.textBoxPt_Date.Name = "textBoxPt_Date";
+            this.textBoxPt_Date.Size = new System.Drawing.Size(214, 20);
+            this.textBoxPt_Date.TabIndex = 10;
+            // 
+            // labelPt_Date
+            // 
+            this.labelPt_Date.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPt_Date.Location = new System.Drawing.Point(512, 230);
+            this.labelPt_Date.Name = "labelPt_Date";
+            this.labelPt_Date.Size = new System.Drawing.Size(135, 23);
+            this.labelPt_Date.TabIndex = 16;
+            this.labelPt_Date.Text = "Дата выдачи:";
+            // 
+            // richTextBoxPtWho
+            // 
+            this.richTextBoxPtWho.Location = new System.Drawing.Point(675, 269);
+            this.richTextBoxPtWho.Name = "richTextBoxPtWho";
+            this.richTextBoxPtWho.Size = new System.Drawing.Size(214, 60);
+            this.richTextBoxPtWho.TabIndex = 11;
+            this.richTextBoxPtWho.Text = "";
+            // 
+            // labelInf
+            // 
+            this.labelInf.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelInf.Location = new System.Drawing.Point(511, 18);
+            this.labelInf.Name = "labelInf";
+            this.labelInf.Size = new System.Drawing.Size(292, 23);
+            this.labelInf.TabIndex = 14;
+            this.labelInf.Text = "Информация о договоре";
+            // 
+            // labelDebt
+            // 
+            this.labelDebt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDebt.Location = new System.Drawing.Point(23, 270);
+            this.labelDebt.Name = "labelDebt";
+            this.labelDebt.Size = new System.Drawing.Size(135, 23);
+            this.labelDebt.TabIndex = 13;
+            this.labelDebt.Text = "Долг:";
+            // 
+            // textBoxDebt
+            // 
+            this.textBoxDebt.Location = new System.Drawing.Point(186, 269);
+            this.textBoxDebt.Name = "textBoxDebt";
+            this.textBoxDebt.Size = new System.Drawing.Size(214, 20);
+            this.textBoxDebt.TabIndex = 5;
+            this.textBoxDebt.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // labelAdr2
             // 
             this.labelAdr2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelAdr2.Location = new System.Drawing.Point(23, 126);
+            this.labelAdr2.Location = new System.Drawing.Point(23, 110);
             this.labelAdr2.Name = "labelAdr2";
             this.labelAdr2.Size = new System.Drawing.Size(135, 23);
             this.labelAdr2.TabIndex = 11;
@@ -692,20 +849,185 @@
             // 
             // textBoxAdr2
             // 
-            this.textBoxAdr2.Location = new System.Drawing.Point(186, 125);
+            this.textBoxAdr2.Location = new System.Drawing.Point(186, 109);
             this.textBoxAdr2.Name = "textBoxAdr2";
             this.textBoxAdr2.Size = new System.Drawing.Size(214, 20);
-            this.textBoxAdr2.TabIndex = 10;
+            this.textBoxAdr2.TabIndex = 1;
+            // 
+            // buttonAddAb
+            // 
+            this.buttonAddAb.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddAb.Location = new System.Drawing.Point(675, 537);
+            this.buttonAddAb.Name = "buttonAddAb";
+            this.buttonAddAb.Size = new System.Drawing.Size(214, 54);
+            this.buttonAddAb.TabIndex = 15;
+            this.buttonAddAb.Text = "Добавить";
+            this.buttonAddAb.UseVisualStyleBackColor = true;
+            this.buttonAddAb.Click += new System.EventHandler(this.buttonAddAb_Click);
+            // 
+            // labelAddM
+            // 
+            this.labelAddM.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAddM.Location = new System.Drawing.Point(22, 18);
+            this.labelAddM.Name = "labelAddM";
+            this.labelAddM.Size = new System.Drawing.Size(136, 23);
+            this.labelAddM.TabIndex = 3;
+            this.labelAddM.Text = "Абонент";
+            // 
+            // richTextBoxNote
+            // 
+            this.richTextBoxNote.Location = new System.Drawing.Point(186, 309);
+            this.richTextBoxNote.Name = "richTextBoxNote";
+            this.richTextBoxNote.Size = new System.Drawing.Size(214, 96);
+            this.richTextBoxNote.TabIndex = 6;
+            this.richTextBoxNote.Text = "";
+            // 
+            // labelText
+            // 
+            this.labelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelText.Location = new System.Drawing.Point(23, 310);
+            this.labelText.Name = "labelText";
+            this.labelText.Size = new System.Drawing.Size(135, 23);
+            this.labelText.TabIndex = 1;
+            this.labelText.Text = "Примечание:";
+            // 
+            // labelPay
+            // 
+            this.labelPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPay.Location = new System.Drawing.Point(23, 230);
+            this.labelPay.Name = "labelPay";
+            this.labelPay.Size = new System.Drawing.Size(135, 23);
+            this.labelPay.TabIndex = 1;
+            this.labelPay.Text = "Аб. плата:";
+            // 
+            // labelDtc
+            // 
+            this.labelDtc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDtc.Location = new System.Drawing.Point(512, 70);
+            this.labelDtc.Name = "labelDtc";
+            this.labelDtc.Size = new System.Drawing.Size(135, 23);
+            this.labelDtc.TabIndex = 1;
+            this.labelDtc.Text = "Дата заключения:";
+            // 
+            // labelPst
+            // 
+            this.labelPst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPst.Location = new System.Drawing.Point(512, 190);
+            this.labelPst.Name = "labelPst";
+            this.labelPst.Size = new System.Drawing.Size(135, 23);
+            this.labelPst.TabIndex = 1;
+            this.labelPst.Text = "Паспорт:";
+            // 
+            // labelPh
+            // 
+            this.labelPh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPh.Location = new System.Drawing.Point(512, 346);
+            this.labelPh.Name = "labelPh";
+            this.labelPh.Size = new System.Drawing.Size(135, 23);
+            this.labelPh.TabIndex = 1;
+            this.labelPh.Text = "Телефон:";
+            // 
+            // labelCtr
+            // 
+            this.labelCtr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCtr.Location = new System.Drawing.Point(23, 190);
+            this.labelCtr.Name = "labelCtr";
+            this.labelCtr.Size = new System.Drawing.Size(135, 23);
+            this.labelCtr.TabIndex = 1;
+            this.labelCtr.Text = "№ договора:";
+            // 
+            // labelFam
+            // 
+            this.labelFam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelFam.Location = new System.Drawing.Point(23, 150);
+            this.labelFam.Name = "labelFam";
+            this.labelFam.Size = new System.Drawing.Size(135, 23);
+            this.labelFam.TabIndex = 1;
+            this.labelFam.Text = "Фамилия:";
+            // 
+            // labelAdr
+            // 
+            this.labelAdr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAdr.Location = new System.Drawing.Point(23, 70);
+            this.labelAdr.Name = "labelAdr";
+            this.labelAdr.Size = new System.Drawing.Size(135, 23);
+            this.labelAdr.TabIndex = 1;
+            this.labelAdr.Text = "Адрес:";
+            // 
+            // textBoxPay
+            // 
+            this.textBoxPay.Location = new System.Drawing.Point(186, 229);
+            this.textBoxPay.Name = "textBoxPay";
+            this.textBoxPay.Size = new System.Drawing.Size(214, 20);
+            this.textBoxPay.TabIndex = 4;
+            // 
+            // textBoxDate
+            // 
+            this.textBoxDate.Location = new System.Drawing.Point(675, 69);
+            this.textBoxDate.Name = "textBoxDate";
+            this.textBoxDate.Size = new System.Drawing.Size(214, 20);
+            this.textBoxDate.TabIndex = 7;
+            // 
+            // textBoxPt
+            // 
+            this.textBoxPt.Location = new System.Drawing.Point(675, 189);
+            this.textBoxPt.Name = "textBoxPt";
+            this.textBoxPt.Size = new System.Drawing.Size(214, 20);
+            this.textBoxPt.TabIndex = 9;
+            // 
+            // textBoxPhn
+            // 
+            this.textBoxPhn.Location = new System.Drawing.Point(675, 345);
+            this.textBoxPhn.Name = "textBoxPhn";
+            this.textBoxPhn.Size = new System.Drawing.Size(214, 20);
+            this.textBoxPhn.TabIndex = 12;
+            // 
+            // textBoxCtr
+            // 
+            this.textBoxCtr.Location = new System.Drawing.Point(186, 189);
+            this.textBoxCtr.Name = "textBoxCtr";
+            this.textBoxCtr.Size = new System.Drawing.Size(214, 20);
+            this.textBoxCtr.TabIndex = 3;
+            // 
+            // textBoxFam
+            // 
+            this.textBoxFam.Location = new System.Drawing.Point(186, 149);
+            this.textBoxFam.Name = "textBoxFam";
+            this.textBoxFam.Size = new System.Drawing.Size(214, 20);
+            this.textBoxFam.TabIndex = 2;
+            // 
+            // textBoxAdr
+            // 
+            this.textBoxAdr.Location = new System.Drawing.Point(186, 69);
+            this.textBoxAdr.Name = "textBoxAdr";
+            this.textBoxAdr.Size = new System.Drawing.Size(214, 20);
+            this.textBoxAdr.TabIndex = 0;
+            // 
+            // tabPageThird
+            // 
+            this.tabPageThird.Controls.Add(this.buttonRcPrint);
+            this.tabPageThird.Controls.Add(this.listViewRc);
+            this.tabPageThird.Controls.Add(this.textBoxRc);
+            this.tabPageThird.Controls.Add(this.comboBoxRc);
+            this.tabPageThird.Controls.Add(this.buttonRc);
+            this.tabPageThird.Controls.Add(this.labelRcpt);
+            this.tabPageThird.Location = new System.Drawing.Point(4, 22);
+            this.tabPageThird.Name = "tabPageThird";
+            this.tabPageThird.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageThird.Size = new System.Drawing.Size(1288, 653);
+            this.tabPageThird.TabIndex = 2;
+            this.tabPageThird.Text = "Квитанции";
+            this.tabPageThird.UseVisualStyleBackColor = true;
             // 
             // buttonRcPrint
             // 
-            this.buttonRcPrint.Location = new System.Drawing.Point(1153, 18);
+            this.buttonRcPrint.Enabled = false;
+            this.buttonRcPrint.Location = new System.Drawing.Point(937, 12);
             this.buttonRcPrint.Name = "buttonRcPrint";
             this.buttonRcPrint.Size = new System.Drawing.Size(121, 26);
-            this.buttonRcPrint.TabIndex = 9;
+            this.buttonRcPrint.TabIndex = 15;
             this.buttonRcPrint.Text = "Печать";
             this.buttonRcPrint.UseVisualStyleBackColor = true;
-            this.buttonRcPrint.Click += new System.EventHandler(this.buttonRcPrint_Click);
             // 
             // listViewRc
             // 
@@ -717,10 +1039,11 @@
             this.columnHeader31,
             this.columnHeader32,
             this.columnHeader34});
-            this.listViewRc.Location = new System.Drawing.Point(445, 62);
+            this.listViewRc.FullRowSelect = true;
+            this.listViewRc.Location = new System.Drawing.Point(229, 56);
             this.listViewRc.Name = "listViewRc";
             this.listViewRc.Size = new System.Drawing.Size(835, 585);
-            this.listViewRc.TabIndex = 8;
+            this.listViewRc.TabIndex = 14;
             this.listViewRc.UseCompatibleStateImageBehavior = false;
             this.listViewRc.View = System.Windows.Forms.View.Details;
             // 
@@ -765,6 +1088,14 @@
             this.columnHeader34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader34.Width = 200;
             // 
+            // textBoxRc
+            // 
+            this.textBoxRc.Enabled = false;
+            this.textBoxRc.Location = new System.Drawing.Point(586, 15);
+            this.textBoxRc.Name = "textBoxRc";
+            this.textBoxRc.Size = new System.Drawing.Size(182, 20);
+            this.textBoxRc.TabIndex = 11;
+            // 
             // comboBoxRc
             // 
             this.comboBoxRc.FormattingEnabled = true;
@@ -773,204 +1104,49 @@
             "Долг свыше 500",
             "Долг свыше 1000",
             "Иная сумма"});
-            this.comboBoxRc.Location = new System.Drawing.Point(583, 21);
+            this.comboBoxRc.Location = new System.Drawing.Point(367, 15);
             this.comboBoxRc.Name = "comboBoxRc";
             this.comboBoxRc.Size = new System.Drawing.Size(201, 21);
-            this.comboBoxRc.TabIndex = 7;
-            this.comboBoxRc.SelectedIndexChanged += new System.EventHandler(this.comboBoxRc_SelectedIndexChanged);
+            this.comboBoxRc.TabIndex = 13;
             // 
             // buttonRc
             // 
-            this.buttonRc.Location = new System.Drawing.Point(1008, 18);
+            this.buttonRc.Location = new System.Drawing.Point(792, 12);
             this.buttonRc.Name = "buttonRc";
             this.buttonRc.Size = new System.Drawing.Size(132, 26);
-            this.buttonRc.TabIndex = 6;
+            this.buttonRc.TabIndex = 12;
             this.buttonRc.Text = "Найти";
             this.buttonRc.UseVisualStyleBackColor = true;
             this.buttonRc.Click += new System.EventHandler(this.buttonRc_Click);
             // 
-            // textBoxRc
-            // 
-            this.textBoxRc.Enabled = false;
-            this.textBoxRc.Location = new System.Drawing.Point(802, 21);
-            this.textBoxRc.Name = "textBoxRc";
-            this.textBoxRc.Size = new System.Drawing.Size(182, 20);
-            this.textBoxRc.TabIndex = 5;
-            // 
-            // buttonAddAb
-            // 
-            this.buttonAddAb.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddAb.Location = new System.Drawing.Point(186, 532);
-            this.buttonAddAb.Name = "buttonAddAb";
-            this.buttonAddAb.Size = new System.Drawing.Size(214, 54);
-            this.buttonAddAb.TabIndex = 4;
-            this.buttonAddAb.Text = "Добавить";
-            this.buttonAddAb.UseVisualStyleBackColor = true;
-            this.buttonAddAb.Click += new System.EventHandler(this.buttonAddAb_Click);
-            // 
             // labelRcpt
             // 
             this.labelRcpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelRcpt.Location = new System.Drawing.Point(441, 18);
+            this.labelRcpt.Location = new System.Drawing.Point(225, 12);
             this.labelRcpt.Name = "labelRcpt";
             this.labelRcpt.Size = new System.Drawing.Size(136, 23);
-            this.labelRcpt.TabIndex = 3;
+            this.labelRcpt.TabIndex = 10;
             this.labelRcpt.Text = "Квитанции";
-            // 
-            // labelAddM
-            // 
-            this.labelAddM.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelAddM.Location = new System.Drawing.Point(22, 20);
-            this.labelAddM.Name = "labelAddM";
-            this.labelAddM.Size = new System.Drawing.Size(136, 23);
-            this.labelAddM.TabIndex = 3;
-            this.labelAddM.Text = "Добавление";
-            // 
-            // richTextBoxNote
-            // 
-            this.richTextBoxNote.Location = new System.Drawing.Point(186, 405);
-            this.richTextBoxNote.Name = "richTextBoxNote";
-            this.richTextBoxNote.Size = new System.Drawing.Size(214, 96);
-            this.richTextBoxNote.TabIndex = 2;
-            this.richTextBoxNote.Text = "";
-            // 
-            // labelText
-            // 
-            this.labelText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelText.Location = new System.Drawing.Point(23, 406);
-            this.labelText.Name = "labelText";
-            this.labelText.Size = new System.Drawing.Size(135, 23);
-            this.labelText.TabIndex = 1;
-            this.labelText.Text = "Примечание:";
-            // 
-            // labelPay
-            // 
-            this.labelPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPay.Location = new System.Drawing.Point(23, 366);
-            this.labelPay.Name = "labelPay";
-            this.labelPay.Size = new System.Drawing.Size(135, 23);
-            this.labelPay.TabIndex = 1;
-            this.labelPay.Text = "Аб. плата:";
-            // 
-            // labelDtc
-            // 
-            this.labelDtc.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDtc.Location = new System.Drawing.Point(23, 326);
-            this.labelDtc.Name = "labelDtc";
-            this.labelDtc.Size = new System.Drawing.Size(135, 23);
-            this.labelDtc.TabIndex = 1;
-            this.labelDtc.Text = "Дата заключения:";
-            // 
-            // labelPst
-            // 
-            this.labelPst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPst.Location = new System.Drawing.Point(23, 286);
-            this.labelPst.Name = "labelPst";
-            this.labelPst.Size = new System.Drawing.Size(135, 23);
-            this.labelPst.TabIndex = 1;
-            this.labelPst.Text = "Паспорт:";
-            // 
-            // labelPh
-            // 
-            this.labelPh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPh.Location = new System.Drawing.Point(23, 246);
-            this.labelPh.Name = "labelPh";
-            this.labelPh.Size = new System.Drawing.Size(135, 23);
-            this.labelPh.TabIndex = 1;
-            this.labelPh.Text = "Телефон:";
-            // 
-            // labelCtr
-            // 
-            this.labelCtr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCtr.Location = new System.Drawing.Point(23, 206);
-            this.labelCtr.Name = "labelCtr";
-            this.labelCtr.Size = new System.Drawing.Size(135, 23);
-            this.labelCtr.TabIndex = 1;
-            this.labelCtr.Text = "№ договора:";
-            // 
-            // labelFam
-            // 
-            this.labelFam.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelFam.Location = new System.Drawing.Point(23, 166);
-            this.labelFam.Name = "labelFam";
-            this.labelFam.Size = new System.Drawing.Size(135, 23);
-            this.labelFam.TabIndex = 1;
-            this.labelFam.Text = "Фамилия:";
-            // 
-            // labelAdr
-            // 
-            this.labelAdr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelAdr.Location = new System.Drawing.Point(23, 86);
-            this.labelAdr.Name = "labelAdr";
-            this.labelAdr.Size = new System.Drawing.Size(135, 23);
-            this.labelAdr.TabIndex = 1;
-            this.labelAdr.Text = "Адрес:";
-            // 
-            // textBoxPay
-            // 
-            this.textBoxPay.Location = new System.Drawing.Point(186, 365);
-            this.textBoxPay.Name = "textBoxPay";
-            this.textBoxPay.Size = new System.Drawing.Size(214, 20);
-            this.textBoxPay.TabIndex = 0;
-            // 
-            // textBoxDate
-            // 
-            this.textBoxDate.Location = new System.Drawing.Point(186, 325);
-            this.textBoxDate.Name = "textBoxDate";
-            this.textBoxDate.Size = new System.Drawing.Size(214, 20);
-            this.textBoxDate.TabIndex = 0;
-            // 
-            // textBoxPt
-            // 
-            this.textBoxPt.Location = new System.Drawing.Point(186, 285);
-            this.textBoxPt.Name = "textBoxPt";
-            this.textBoxPt.Size = new System.Drawing.Size(214, 20);
-            this.textBoxPt.TabIndex = 0;
-            // 
-            // textBoxPhn
-            // 
-            this.textBoxPhn.Location = new System.Drawing.Point(186, 245);
-            this.textBoxPhn.Name = "textBoxPhn";
-            this.textBoxPhn.Size = new System.Drawing.Size(214, 20);
-            this.textBoxPhn.TabIndex = 0;
-            // 
-            // textBoxCtr
-            // 
-            this.textBoxCtr.Location = new System.Drawing.Point(186, 205);
-            this.textBoxCtr.Name = "textBoxCtr";
-            this.textBoxCtr.Size = new System.Drawing.Size(214, 20);
-            this.textBoxCtr.TabIndex = 0;
-            // 
-            // textBoxFam
-            // 
-            this.textBoxFam.Location = new System.Drawing.Point(186, 165);
-            this.textBoxFam.Name = "textBoxFam";
-            this.textBoxFam.Size = new System.Drawing.Size(214, 20);
-            this.textBoxFam.TabIndex = 0;
-            // 
-            // textBoxAdr
-            // 
-            this.textBoxAdr.Location = new System.Drawing.Point(186, 85);
-            this.textBoxAdr.Name = "textBoxAdr";
-            this.textBoxAdr.Size = new System.Drawing.Size(214, 20);
-            this.textBoxAdr.TabIndex = 0;
             // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1297, 681);
+            this.ClientSize = new System.Drawing.Size(1297, 680);
             this.Controls.Add(this.tabControlMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1313, 719);
             this.MinimumSize = new System.Drawing.Size(1313, 719);
             this.Name = "Main_form";
-            this.Text = "Not excel!";
+            this.Text = "BaseWork";
             this.tabControlMain.ResumeLayout(false);
             this.tabPageMain.ResumeLayout(false);
             this.tabPageMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).EndInit();
             this.tabPageSec.ResumeLayout(false);
             this.tabPageSec.PerformLayout();
+            this.tabPageThird.ResumeLayout(false);
+            this.tabPageThird.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -983,7 +1159,6 @@
         private System.Windows.Forms.ListView listViewDets;
         private System.Windows.Forms.ColumnHeader columnHeader17;
         private System.Windows.Forms.ColumnHeader columnHeader18;
-        private System.Windows.Forms.Button buttonAct;
         private System.Windows.Forms.Button buttonDel;
         private System.Windows.Forms.Button buttonDelS;
         private System.Windows.Forms.TextBox textBoxDel;
@@ -1000,7 +1175,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader14;
         private System.Windows.Forms.ColumnHeader columnHeader15;
         private System.Windows.Forms.ColumnHeader columnHeader16;
-        private System.Windows.Forms.ListView listViewS;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -1011,12 +1185,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.TabPage tabPageSec;
         private System.Windows.Forms.Label labelDelSts;
-        private System.Windows.Forms.Button buttonWrAll;
-        private System.Windows.Forms.Button buttonCtrInf;
         private System.Windows.Forms.Button buttonExp;
         private System.Windows.Forms.Button buttonChgAP;
         private System.Windows.Forms.TextBox textBoxPayCH;
-        private System.Windows.Forms.Button buttonDt;
         private System.Windows.Forms.Button buttonAddAb;
         private System.Windows.Forms.Label labelAddM;
         private System.Windows.Forms.RichTextBox richTextBoxNote;
@@ -1054,6 +1225,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Label labelAdr2;
+        private System.Windows.Forms.TextBox textBoxAdr2;
+        private System.Windows.Forms.TextBox textBoxDebt;
+        private System.Windows.Forms.Label labelDebt;
+        public System.Windows.Forms.Button buttonCtrInf;
+        public System.Windows.Forms.Button buttonWrAll;
+        public System.Windows.Forms.Button buttonDt;
+        public System.Windows.Forms.Button buttonAct;
+        private System.Windows.Forms.TabPage tabPageThird;
         private System.Windows.Forms.Button buttonRcPrint;
         private System.Windows.Forms.ListView listViewRc;
         private System.Windows.Forms.ColumnHeader columnHeader27;
@@ -1063,12 +1243,24 @@
         private System.Windows.Forms.ColumnHeader columnHeader31;
         private System.Windows.Forms.ColumnHeader columnHeader32;
         private System.Windows.Forms.ColumnHeader columnHeader34;
+        private System.Windows.Forms.TextBox textBoxRc;
         private System.Windows.Forms.ComboBox comboBoxRc;
         private System.Windows.Forms.Button buttonRc;
-        private System.Windows.Forms.TextBox textBoxRc;
         private System.Windows.Forms.Label labelRcpt;
-        private System.Windows.Forms.Label labelAdr2;
-        private System.Windows.Forms.TextBox textBoxAdr2;
+        private System.Windows.Forms.RichTextBox richTextBoxFIO;
+        private System.Windows.Forms.Label labelFIO;
+        private System.Windows.Forms.RichTextBox richTextBoxBrPl;
+        private System.Windows.Forms.Label labelBirth_Place;
+        private System.Windows.Forms.Label labelBirth_Date;
+        private System.Windows.Forms.TextBox textBoxBrDt;
+        private System.Windows.Forms.Label labelPt_Who;
+        private System.Windows.Forms.TextBox textBoxPt_Date;
+        private System.Windows.Forms.Label labelPt_Date;
+        private System.Windows.Forms.RichTextBox richTextBoxPtWho;
+        private System.Windows.Forms.Label labelInf;
+        private System.Windows.Forms.RichTextBox richTextBoxNcFee;
+        private System.Windows.Forms.RichTextBox richTextBoxNcDel;
+        internal System.Windows.Forms.ListView listViewS;
     }
 }
 
