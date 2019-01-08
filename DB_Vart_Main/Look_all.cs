@@ -49,7 +49,6 @@ namespace DB_Vart_Main
                     element.Surname = reader.GetValue(3).ToString();
                     element.Contract = reader.GetValue(4).ToString();
                     element.Debt = reader.GetValue(5).ToString();
-                    //element.Monthly_fee = reader.GetValue(6).ToString();
                     string fee = reader.GetString(6);
                     string[] temp = fee.Split(',');
                     element.Monthly_fee = temp[temp.Length - 1].Split('_')[0];

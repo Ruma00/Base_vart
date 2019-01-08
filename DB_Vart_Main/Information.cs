@@ -25,26 +25,18 @@ namespace DB_Vart_Main
 
             Program.form.setButtonCtrInf(false);
 
-            /*SqlCommand */
             command = new SqlCommand();
             command.Connection = connection;
             command.CommandText = "SELECT * FROM ContractInf WHERE Contract_num = " + contract;
-
-            /*SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataSet data = new DataSet();
-            adapter.Fill(data);
-            //dataGridViewInf.DataSource = data.Tables[0];*/
-
             
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-            //object[] arr = data.Tables[0].Rows[0].ItemArray;
                 vs = new String[10];
                 String s;
                 dataGridViewInf.Rows.Add("№ договора:", reader.GetValue(0).ToString());
-                dataGridViewInf.Rows.Add("Дата заключения:", reader.GetDateTime(1).ToShortDateString());//reader.GetValue(1).ToString());
+                dataGridViewInf.Rows.Add("Дата заключения:", reader.GetDateTime(1).ToShortDateString());
                 dataGridViewInf.Rows.Add("ФИО:", reader.GetValue(2).ToString());
                 dataGridViewInf.Rows.Add("Паспорт:", reader.GetValue(3).ToString());
                 DateTime ttt = reader.GetDateTime(4);
@@ -52,7 +44,7 @@ namespace DB_Vart_Main
                     s = "";
                 else
                     s = ttt.ToShortDateString();
-                dataGridViewInf.Rows.Add("Дата выдачи:", s);//reader.GetValue(4).ToString());
+                dataGridViewInf.Rows.Add("Дата выдачи:", s);
                 dataGridViewInf.Rows.Add("Выдан:", reader.GetValue(5).ToString());
                 dataGridViewInf.Rows.Add("Телефон:", reader.GetValue(6).ToString());
                 ttt = reader.GetDateTime(7);
@@ -60,7 +52,7 @@ namespace DB_Vart_Main
                     s = "";
                 else
                     s = ttt.ToShortDateString();
-                dataGridViewInf.Rows.Add("Дата рождения:", s);//reader.GetValue(7).ToString());
+                dataGridViewInf.Rows.Add("Дата рождения:", s);
                 dataGridViewInf.Rows.Add("Место рождения:", reader.GetValue(8).ToString());
                 ttt = reader.GetDateTime(9);
                 if (ttt.Year == 1900)
@@ -119,8 +111,6 @@ namespace DB_Vart_Main
 
                 command.ExecuteNonQuery();
             }
-
-            //Program.form.listViewS.
 
             Program.form.setButtonCtrInf(true);
         }

@@ -32,44 +32,8 @@ namespace DB_Vart_Main
                     writer.WriteLine(DateTime.Today.Month);
                     writer.Close();
                     rez = DateTime.Today.Month - month;
-                    //
+                    
                     Console.WriteLine(rez);
-                    //SetDebt(rez);
-
-                    /*SqlCommand command = new SqlCommand("SELECT Monthly_fee, Contract_num FROM Main", sqlConnection);
-
-                    Dictionary<String, int> keys = new Dictionary<String, int>();
-                    Console.WriteLine(rez);
-                    /*Console.WriteLine("reading data");
-                    SqlDataReader sqlReader = command.ExecuteReader();
-                    if (sqlReader.HasRows)
-                        Console.WriteLine("-------------");
-                    while (sqlReader.Read())
-                    {
-                        String[] arr = sqlReader.GetString(0).Split(',');
-                        int fee = Convert.ToInt32(arr[arr.Length - 1].Split('_')[0]);
-                        //MessageBox.Show(fee.ToString());
-                        keys.Add(sqlReader.GetString(1), fee);
-                        Console.WriteLine("contrat: {0}, fee: {1}", keys.Last().Key, keys.Last().Value);
-                        /*command.CommandText = "UPDATE Main SET Debt += '" + (fee * month) +
-                            "' WHERE Contract_num = '" + sqlReader.GetString(1) + "'";
-                        command.ExecuteNonQuery();*
-                    }
-                    sqlReader.Close();
-                    Console.WriteLine("reader closed");
-
-                    for (int i = 0; i < keys.Count; i++)
-                    {
-                        KeyValuePair<String, int> t = keys.Last();
-                        Console.WriteLine("contrat: {0}, fee: {1}", keys.Last().Key, keys.Last().Value);
-                        command.CommandText = "UPDATE Main SET Debt += '" + (t.Value * rez) + "' WHERE Contract_num = '" + t.Key + "'";
-                        command.ExecuteNonQuery();
-                        keys.Remove(t.Key);
-                        Console.WriteLine("removed");
-                    }
-                    Console.WriteLine("end");
-
-                    Console.WriteLine("duck");*/
                 }
             }
             catch
@@ -105,33 +69,7 @@ namespace DB_Vart_Main
             textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
             textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
             textBoxDel.Text = "Введите адрес или № договора"; textBoxDel.ForeColor = Color.Gray;
-            /*textBoxAdr.Text = "Введите адрес"; textBoxAdr.ForeColor = Color.Gray;
-            textBoxFam.Text = "Введите фамилию"; textBoxFam.ForeColor = Color.Gray;
-            textBoxCtr.Text = "Введите № договора"; textBoxCtr.ForeColor = Color.Gray;
-            textBoxPhn.Text = "Введите телефон"; textBoxPhn.ForeColor = Color.Gray;
-            textBoxPt.Text = "Введите данные паспорта"; textBoxPt.ForeColor = Color.Gray;
-            textBoxDate.Text = "Введите дату"; textBoxDate.ForeColor = Color.Gray;
-            textBoxPay.Text = "Введите аб. плату"; textBoxPay.ForeColor = Color.Gray;
-            textBoxAdr2.Text = "Введите подъезд, кв"; textBoxAdr2.ForeColor = Color.Gray;
-            textBoxDebt.Text = "0"; textBoxDebt.ForeColor = Color.Gray;*/
-
-            /*textBoxAdr.Enter += new EventHandler(textBoxAdr_Enter);
-            textBoxAdr.Leave += new EventHandler(textBoxAdr_Leave);
-            textBoxFam.Enter += new EventHandler(textBoxFam_Enter);
-            textBoxFam.Leave += new EventHandler(textBoxFam_Leave);
-            textBoxCtr.Enter += new EventHandler(textBoxCtr_Enter);
-            textBoxCtr.Leave += new EventHandler(textBoxCtr_Leave);
-            textBoxPhn.Enter += new EventHandler(textBoxPhn_Enter);
-            textBoxPhn.Leave += new EventHandler(textBoxPhn_Leave);
-            textBoxPt.Enter += new EventHandler(textBoxPt_Enter);
-            textBoxPt.Leave += new EventHandler(textBoxPt_Leave);
-            textBoxDate.Enter += new EventHandler(textBoxDate_Enter);
-            textBoxDate.Leave += new EventHandler(textBoxDate_Leave);
-            textBoxPay.Enter += new EventHandler(textBoxPay_Enter);
-            textBoxPay.Leave += new EventHandler(textBoxPay_Leave);
-            textBoxAdr2.Enter += new EventHandler(textBoxAdr2_Enter);
-            textBoxAdr2.Leave += new EventHandler(textBoxAdr2_Leave);*/
-
+            
             textBoxSD.Enter += new EventHandler(textBoxSD_Enter);
             textBoxSD.Leave += new EventHandler(textBoxSD_Leave);
             textBoxSA.Enter += new EventHandler(textBoxSA_Enter);
@@ -143,7 +81,6 @@ namespace DB_Vart_Main
             textBoxDel.Enter += new EventHandler(textBoxDel_Enter);
             textBoxDel.Leave += new EventHandler(textBoxDel_Leave);
 
-            //columnHeader1.TextAlign = HorizontalAlignment.Center;
             dataGridViewAddP.Rows[0].Cells[0].Value = "";
             dataGridViewAddP.Rows[0].Cells[1].Value = "";
             dataGridViewAddP.Rows[0].Cells[2].Value = "";
@@ -165,12 +102,8 @@ namespace DB_Vart_Main
             {
                 String[] arr = sqlReader.GetString(0).Split(',');
                 int fee = Convert.ToInt32(arr[arr.Length - 1].Split('_')[0]);
-                //MessageBox.Show(fee.ToString());
                 keys.Add(sqlReader.GetString(1), fee);
                 Console.WriteLine("contrat: {0}, fee: {1}", keys.Last().Key, keys.Last().Value);
-                /*command.CommandText = "UPDATE Main SET Debt += '" + (fee * month) +
-                    "' WHERE Contract_num = '" + sqlReader.GetString(1) + "'";
-                command.ExecuteNonQuery();*/
             }
             sqlReader.Close();
             Console.WriteLine("reader closed");
@@ -472,10 +405,7 @@ namespace DB_Vart_Main
                     object apartment = reader.GetValue(2);
                     object surname = reader.GetValue(3);
                     object contract_num = reader.GetValue(4);
-                    //object phone = reader.GetValue(5);
                     object debt = reader.GetValue(5);
-                    //object passport = reader.GetValue(7);
-                    //object date_of_contract = reader.GetValue(8);
                     object monthly_fee = reader.GetValue(6);
                     string[] temp = monthly_fee.ToString().Split(',');
                     object notice = reader.GetValue(7);
@@ -503,7 +433,7 @@ namespace DB_Vart_Main
                     foreach (string str in arr)
                     {
                         string[] a = str.Split('_');
-                        ListViewItem item = new ListViewItem(a); //str.Split('_');
+                        ListViewItem item = new ListViewItem(a);
                         listViewDets.Items.Add(item);
                     }
                 }
@@ -614,21 +544,13 @@ namespace DB_Vart_Main
 
             SqlCommand command = new SqlCommand(sqlExpressions[3] + " Monthly_fee += '," + textBoxPayCH.Text + 
                 '_' + str[0] + "' " + sqlExpressions[5] + contract, sqlConnection);
-            //MessageBox.Show(command.CommandText);
             command.ExecuteNonQuery();
 
             if (str.Length > 1)
             {
                 command.CommandText = sqlExpressions[3] + " Notice += '" + str[1] + "'";
-                //MessageBox.Show(command.CommandText);
                 command.ExecuteNonQuery();
             }
-
-            //command.CommandText = sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + contract;
-
-            //SqlDataReader reader = command.ExecuteReader();
-
-            //SqlReader(reader, listViewS);
             
             listViewS.Items[0].SubItems[6].Text = textBoxPayCH.Text;
             command.CommandText = "SELECT Monthly_fee FROM Main WHERE Contract_num = '" + contract + "'";
@@ -651,7 +573,6 @@ namespace DB_Vart_Main
             DateTime today = DateTime.Today;
 
             int u, month;
-            //string[] temp = textBoxPay.Text.Split('_');
             int pay = Convert.ToInt32(textBoxPay.Text);
             if (date.Year < 2015)
             {
@@ -673,18 +594,14 @@ namespace DB_Vart_Main
 
             SqlCommand command = new SqlCommand();
             command.Connection = sqlConnection;
-            //SqlCommand command = new SqlCommand(sqlExpressions[4] + "('" + textBoxAdr.Text + "'," + adr[0] + "," + adr[1] + ",'" + textBoxFam.Text + "','" + textBoxCtr.Text +
-            //    "','" + textBoxPhn.Text + "'," + debt.ToString() + ",'" + textBoxPt.Text + "','" + textBoxDate.Text + "'," + textBoxPay.Text + ",'" + richTextBoxNote.Text + "')", sqlConnection);
             command.CommandText = sqlExpressions[4] + "('" + textBoxAdr.Text + "'," + adr[0] + "," + adr[1] + ",'" + textBoxFam.Text + "','" + textBoxCtr.Text +
                                 "','" + textBoxPay.Text + "_" + textBoxDate.Text + "','" + debt.ToString() + "','" + richTextBoxNote.Text + "',0)";
             command.ExecuteNonQuery();
 
-            //String adress = textBoxAdr.Text + " кв " + adr[1];
             command.CommandText = "INSERT INTO ContractInf VALUES ('" + textBoxCtr.Text + "','" + textBoxDate.Text + "','" +
                 richTextBoxFIO.Text + "','" + textBoxPt.Text + "','" + textBoxPt_Date.Text + "','" + richTextBoxPtWho.Text + "','" +
                 textBoxPhn.Text + "','" + textBoxBrDt.Text + "','" + richTextBoxBrPl.Text + "','')";
             command.ExecuteNonQuery();
-            //command.ExecuteNonQuery();
 
             command.CommandText = "INSERT INTO Payments VALUES ('" + textBoxCtr.Text + "','')";
             command.ExecuteNonQuery();
@@ -693,15 +610,6 @@ namespace DB_Vart_Main
                                                 "','" + textBoxCtr.Text + "','" + textBoxDebt.Text + "')";
             command.ExecuteNonQuery();
 
-            /*textBoxAdr.Text = "Введите адрес"; textBoxAdr.ForeColor = Color.Gray;
-            textBoxFam.Text = "Введите фамилию"; textBoxFam.ForeColor = Color.Gray;
-            textBoxCtr.Text = "Введите № договора"; textBoxCtr.ForeColor = Color.Gray;
-            textBoxPhn.Text = "Введите телефон"; textBoxPhn.ForeColor = Color.Gray;
-            textBoxPt.Text = "Введите данные паспорта"; textBoxPt.ForeColor = Color.Gray;
-            textBoxDate.Text = "Введите дату"; textBoxDate.ForeColor = Color.Gray;
-            textBoxPay.Text = "Введите аб. плату"; textBoxPay.ForeColor = Color.Gray;
-            textBoxAdr2.Text = "Введите кв, подъезд"; textBoxAdr2.ForeColor = Color.Gray;
-            textBoxDebt.Text = "0"; textBoxDebt.ForeColor = Color.Gray;*/
             textBoxAdr.Text = "";           textBoxPt_Date.Text = "";
             textBoxFam.Text = "";           richTextBoxFIO.Text = "";
             textBoxCtr.Text = "";           richTextBoxPtWho.Text = "";
@@ -728,7 +636,6 @@ namespace DB_Vart_Main
 
         private void buttonAddP_Click(object sender, EventArgs e)
         {
-            //string str = dataGridViewAddP[0, 0].Value.ToString() + "_" + dataGridViewAddP[1, 0].Value.ToString();
             string str = dataGridViewAddP.Rows[0].Cells[0].Value.ToString() + "_" + dataGridViewAddP.Rows[0].Cells[1].Value.ToString();
             string contract_num = listViewAddP.Items[0].SubItems[4].Text;
 
@@ -736,7 +643,6 @@ namespace DB_Vart_Main
             SqlDataReader reader = command.ExecuteReader();
 
             string arr = "";
-            //MessageBox.Show(reader.HasRows.ToString());
             if (reader.HasRows)
             {
                 while (reader.Read())
@@ -754,7 +660,7 @@ namespace DB_Vart_Main
                     foreach (string st in ar)
                     {
                         string[] a = st.Split('_');
-                        ListViewItem item = new ListViewItem(a); //st.Split('_');
+                        ListViewItem item = new ListViewItem(a);
                         listViewDets.Items.Add(item);
                     }
                 }
@@ -823,10 +729,6 @@ namespace DB_Vart_Main
 
             if (Convert.ToInt16(listViewDel.Items[0].SubItems[5].Text) > 0)
             {
-                /*command.CommandText = "INSERT INTO Debtors VALUES ('" + listViewDel.Items[0].SubItems[0].Text + "_" + listViewDel.Items[0].SubItems[2].Text +
-                    "','" + listViewDel.Items[0].SubItems[3].Text + "','" + listViewDel.Items[0].SubItems[4].Text + "'," + listViewDel.Items[0].SubItems[5].Text + ")";
-                //command.Connection = sqlConnection;
-                command.ExecuteNonQuery();*/
                 command.CommandText = "UPDATE Main SET Is_Deleted = 1 WHERE Contract_num = " + listViewDel.Items[0].SubItems[4].Text;
                 command.ExecuteNonQuery();
 
@@ -867,15 +769,9 @@ namespace DB_Vart_Main
             FolderBrowserDialog dialog = new FolderBrowserDialog();
 
 
-            //TODO
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
-            string path = dialog.SelectedPath;
-
-            /*FileInfo file = new FileInfo(path + "\\export.txt");
-            if (!file.Exists)
-                file.Create();*/
-            
+            string path = dialog.SelectedPath;            
 
             StreamWriter writer = new StreamWriter(path + "\\export.txt", false, Encoding.Default);
             SqlDataReader reader = command.ExecuteReader();
@@ -902,26 +798,12 @@ namespace DB_Vart_Main
 
         private void buttonIm_Click(object sender, EventArgs e)
         {
-            //TODO
-            /*FolderBrowserDialog dialog = new FolderBrowserDialog();
-            dialog.ShowDialog();
-
-            string path = dialog.SelectedPath + "\\import.txt";
-
-            FileInfo file = new FileInfo(path);
-            if (!file.Exists)
-                file.Create();*/
-
             bool flag = false;
 
-            //File file = new FileInfo("impErr.txt");
             if (!File.Exists("impErr.txt"))
             {
-                //File.Delete("inpErr.txt");
                 File.Create("impErr.txt").Close();
             }
-            //else
-                //file.Create();
             
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Выберите файл импорта";
@@ -937,8 +819,6 @@ namespace DB_Vart_Main
                 bool f = false;
                 while ((line = fileReader.ReadLine()) != null)
                 {
-                    //MessageBox.Show(line);
-                    //MessageBox.Show(((int)line[0]).ToString());
                     if (line == "" || line[0] == '~' || line[0] == '#')
                     {
                         if (line != "" && line[0] == '~')
@@ -946,8 +826,7 @@ namespace DB_Vart_Main
                         continue;
                     }
                     string[] split = line.Split(';');
-                    /*string[] splUse = new string[] { split[2], split[4], split[5].Replace("ЛИЦЕВОЙ СЧЕТ: ", ""), split[6].Replace(" ФИО: ", ""),
-                                split[7].Replace(" АДРЕС: НИЖНЕВАРТОВСК,", ""), split[8].Replace(" К_ОПЛАТЕ: ", "") };*/
+
                     List<string> list = new List<string>();
                     SqlCommand command = new SqlCommand();
                     command.Connection = sqlConnection;
@@ -955,15 +834,9 @@ namespace DB_Vart_Main
                     {
                         string[] splUse = new string[] { split[2].Replace("/", "."), split[4].Replace(".00", ""), split[5].Replace("ЛИЦЕВОЙ СЧЕТ: ", "") };
 
-                        /*SqlCommand command = new SqlCommand();
-                        command.Connection = sqlConnection;*/
-
-                        //
                         command.CommandText = "SELECT COUNT(Contract_num) FROM Main WHERE Contract_num = " + splUse[2];
                         SqlDataReader reader = command.ExecuteReader();
                         reader.Read();
-
-                        //
 
                         if (reader.GetInt32(0) == 0)
                         {
@@ -974,12 +847,10 @@ namespace DB_Vart_Main
                         }
                         else
                             reader.Close();
-                        //
 
                         command.CommandText = "SELECT List FROM Payments WHERE Contract_num = '" + splUse[2] + "'";
                         reader = command.ExecuteReader();
 
-                        //List<string> list = new List<string>();
                         while (reader.Read())
                         {
                             object value = reader.GetValue(0);
@@ -989,20 +860,14 @@ namespace DB_Vart_Main
                                 line = splUse[0] + "_" + splUse[1];
                             list.Add("UPDATE Payments SET List = '" + line + "' WHERE Contract_num = '" + splUse[2] + "'");
                             list.Add("UPDATE Main SET Debt -= " + splUse[1] + "' WHERE Contract_num = '" + splUse[2] + "'");
-                            /*SqlCommand update = new SqlCommand("UPDATE Payments SET List = '" + line + "' WHERE Contract_num = '" + splUse[2] + "'", sqlConnection);
-                            update.ExecuteNonQueryAsync();*/
                             line = "";
                         }
                         reader.Close();
                     }
                     else
                     {
-                        //3, 4, 9
-                        /*SqlCommand command = new SqlCommand();
-                        command.Connection = sqlConnection;*/
-                        //MessageBox.Show(split[3] + " " + split[4] + " " + split[split.Length - 3]);
                         string[] splUse = new string[] { split[2], split[3], split[split.Length - 3].Replace("/", ".") };
-                        //
+
                         command.CommandText = "SELECT COUNT(Contract_num) FROM Main WHERE Contract_num = '" + splUse[0] + "'";
                         SqlDataReader reader = command.ExecuteReader();
 
@@ -1013,12 +878,8 @@ namespace DB_Vart_Main
                             str = reader.GetValue(0).ToString();
                         }
 
-                        //
-
-                        //MessageBox.Show(str);//-----------------------
                         if (str == "0")
                         {
-                            //MessageBox.Show(splUse[0]);
                             writer.WriteLine(split[0] + " " + splUse[2] + " " + splUse[1] + " " + splUse[0]);
                             reader.Close();
                             flag = true;
@@ -1026,12 +887,10 @@ namespace DB_Vart_Main
                         }
                         else
                             reader.Close();
-                        //
 
                         command.CommandText = "SELECT List FROM Payments WHERE Contract_num = '" + splUse[0] + "'";
                         reader = command.ExecuteReader();
 
-                        //List<string> list = new List<string>();
                         while (reader.Read())
                         {
                             object value = reader.GetValue(0);
@@ -1041,8 +900,6 @@ namespace DB_Vart_Main
                                 line = splUse[2] + "_" + splUse[1];
                             list.Add("UPDATE Payments SET List = '" + line + "' WHERE Contract_num = '" + splUse[0] + "'");
                             list.Add("UPDATE Main SET Debt -= " + splUse[1] + "' WHERE Contract_num = '" + splUse[0] + "'");
-                            /*SqlCommand update = new SqlCommand("UPDATE Payments SET List = '" + line + "' WHERE Contract_num = '" + splUse[2] + "'", sqlConnection);
-                            update.ExecuteNonQueryAsync();*/
                             line = "";
                         }
                         reader.Close();
@@ -1064,7 +921,6 @@ namespace DB_Vart_Main
                     TxtImport form = new TxtImport();
                     form.Show();
                 }
-                //FileDialog dialog = new FileDialog
             }
         }
 
@@ -1083,7 +939,6 @@ namespace DB_Vart_Main
 
         private void listViewRc_ItemClick(object sender, EventArgs e)
         {
-            //TODO
         }
 
         private void buttonRcPrint_Click(object sender, EventArgs e)
@@ -1191,14 +1046,12 @@ namespace DB_Vart_Main
                 u = list[i].Fee;
                 date = Convert.ToDateTime(list[i].Date);
                 end = Convert.ToDateTime(list[i + 1].Date);
-                //MessageBox.Show(end.ToShortDateString());
-                while (date < end)// || date.Month == end.Month)
+
+                while (date < end)
                 {
                     debt += u;
                     date = date.AddMonths(1);
-                    //MessageBox.Show(date.ToShortDateString());
                 }
-                //debt -= u;
             }
             
             SqlCommand command = new SqlCommand("SELECT Contract_end FROM ContractInf WHERE Contract_num = '" + contract + "'", sqlConnection);
@@ -1212,17 +1065,14 @@ namespace DB_Vart_Main
 
             date = list[list.Count - 1].Date;
             u = list[list.Count - 1].Fee;
-            //end = DateTime.Today;
             while (date < end)
             {
                 debt += u;
                 date = date.AddMonths(1);
-                //MessageBox.Show(date.ToShortDateString());
             }
 
             debt -= u;
-            //MessageBox.Show(debt.ToString());
-            //pays
+
             command = new SqlCommand("SELECT List FROM Payments WHERE Contract_num = " + contract, sqlConnection);
             reader = command.ExecuteReader();
             reader.Read();
@@ -1241,7 +1091,6 @@ namespace DB_Vart_Main
             for (int i = 0; i < vs.Length; i++)
             {
                 double d = Convert.ToDouble(vs[i].Split('_')[1]);
-                //MessageBox.Show(d.ToString());
                 debt -= d;
             }
 

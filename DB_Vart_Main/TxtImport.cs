@@ -28,7 +28,6 @@ namespace DB_Vart_Main
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    //Console.WriteLine(str);
                     arr = line.Split(' ');
                     item = new ListViewItem(new string[] { arr[0], arr[1], arr[2], arr[3] } );
                     listViewImport.Items.Add(item);
