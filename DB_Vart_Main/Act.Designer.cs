@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Act));
             this.labelTitle = new System.Windows.Forms.Label();
             this.listViewAct = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -111,6 +112,7 @@
             this.Controls.Add(this.labelAdress);
             this.Controls.Add(this.listViewAct);
             this.Controls.Add(this.labelTitle);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Act";
             this.Text = "Act";
             this.Load += new System.EventHandler(this.Act_Load);

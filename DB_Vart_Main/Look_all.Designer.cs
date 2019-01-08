@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Look_all));
             this.listViewLook = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -182,6 +183,7 @@
             this.Controls.Add(this.comboBoxSort);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listViewLook);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1075, 701);
             this.MinimumSize = new System.Drawing.Size(1075, 701);
             this.Name = "Look_all";

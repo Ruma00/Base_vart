@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_form));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
             this.richTextBoxNcDel = new System.Windows.Forms.RichTextBox();
@@ -733,7 +734,7 @@
             this.richTextBoxFIO.Location = new System.Drawing.Point(675, 109);
             this.richTextBoxFIO.Name = "richTextBoxFIO";
             this.richTextBoxFIO.Size = new System.Drawing.Size(214, 60);
-            this.richTextBoxFIO.TabIndex = 25;
+            this.richTextBoxFIO.TabIndex = 8;
             this.richTextBoxFIO.Text = "";
             // 
             // labelFIO
@@ -750,7 +751,7 @@
             this.richTextBoxBrPl.Location = new System.Drawing.Point(675, 425);
             this.richTextBoxBrPl.Name = "richTextBoxBrPl";
             this.richTextBoxBrPl.Size = new System.Drawing.Size(214, 60);
-            this.richTextBoxBrPl.TabIndex = 22;
+            this.richTextBoxBrPl.TabIndex = 14;
             this.richTextBoxBrPl.Text = "";
             // 
             // labelBirth_Place
@@ -776,7 +777,7 @@
             this.textBoxBrDt.Location = new System.Drawing.Point(675, 385);
             this.textBoxBrDt.Name = "textBoxBrDt";
             this.textBoxBrDt.Size = new System.Drawing.Size(214, 20);
-            this.textBoxBrDt.TabIndex = 19;
+            this.textBoxBrDt.TabIndex = 13;
             // 
             // labelPt_Who
             // 
@@ -792,7 +793,7 @@
             this.textBoxPt_Date.Location = new System.Drawing.Point(675, 229);
             this.textBoxPt_Date.Name = "textBoxPt_Date";
             this.textBoxPt_Date.Size = new System.Drawing.Size(214, 20);
-            this.textBoxPt_Date.TabIndex = 17;
+            this.textBoxPt_Date.TabIndex = 10;
             // 
             // labelPt_Date
             // 
@@ -808,7 +809,7 @@
             this.richTextBoxPtWho.Location = new System.Drawing.Point(675, 269);
             this.richTextBoxPtWho.Name = "richTextBoxPtWho";
             this.richTextBoxPtWho.Size = new System.Drawing.Size(214, 60);
-            this.richTextBoxPtWho.TabIndex = 15;
+            this.richTextBoxPtWho.TabIndex = 11;
             this.richTextBoxPtWho.Text = "";
             // 
             // labelInf
@@ -834,7 +835,7 @@
             this.textBoxDebt.Location = new System.Drawing.Point(186, 269);
             this.textBoxDebt.Name = "textBoxDebt";
             this.textBoxDebt.Size = new System.Drawing.Size(214, 20);
-            this.textBoxDebt.TabIndex = 12;
+            this.textBoxDebt.TabIndex = 5;
             this.textBoxDebt.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // labelAdr2
@@ -851,7 +852,7 @@
             this.textBoxAdr2.Location = new System.Drawing.Point(186, 109);
             this.textBoxAdr2.Name = "textBoxAdr2";
             this.textBoxAdr2.Size = new System.Drawing.Size(214, 20);
-            this.textBoxAdr2.TabIndex = 10;
+            this.textBoxAdr2.TabIndex = 1;
             // 
             // buttonAddAb
             // 
@@ -859,7 +860,7 @@
             this.buttonAddAb.Location = new System.Drawing.Point(675, 537);
             this.buttonAddAb.Name = "buttonAddAb";
             this.buttonAddAb.Size = new System.Drawing.Size(214, 54);
-            this.buttonAddAb.TabIndex = 4;
+            this.buttonAddAb.TabIndex = 15;
             this.buttonAddAb.Text = "Добавить";
             this.buttonAddAb.UseVisualStyleBackColor = true;
             this.buttonAddAb.Click += new System.EventHandler(this.buttonAddAb_Click);
@@ -878,7 +879,7 @@
             this.richTextBoxNote.Location = new System.Drawing.Point(186, 309);
             this.richTextBoxNote.Name = "richTextBoxNote";
             this.richTextBoxNote.Size = new System.Drawing.Size(214, 96);
-            this.richTextBoxNote.TabIndex = 2;
+            this.richTextBoxNote.TabIndex = 6;
             this.richTextBoxNote.Text = "";
             // 
             // labelText
@@ -958,42 +959,42 @@
             this.textBoxPay.Location = new System.Drawing.Point(186, 229);
             this.textBoxPay.Name = "textBoxPay";
             this.textBoxPay.Size = new System.Drawing.Size(214, 20);
-            this.textBoxPay.TabIndex = 0;
+            this.textBoxPay.TabIndex = 4;
             // 
             // textBoxDate
             // 
             this.textBoxDate.Location = new System.Drawing.Point(675, 69);
             this.textBoxDate.Name = "textBoxDate";
             this.textBoxDate.Size = new System.Drawing.Size(214, 20);
-            this.textBoxDate.TabIndex = 0;
+            this.textBoxDate.TabIndex = 7;
             // 
             // textBoxPt
             // 
             this.textBoxPt.Location = new System.Drawing.Point(675, 189);
             this.textBoxPt.Name = "textBoxPt";
             this.textBoxPt.Size = new System.Drawing.Size(214, 20);
-            this.textBoxPt.TabIndex = 0;
+            this.textBoxPt.TabIndex = 9;
             // 
             // textBoxPhn
             // 
             this.textBoxPhn.Location = new System.Drawing.Point(675, 345);
             this.textBoxPhn.Name = "textBoxPhn";
             this.textBoxPhn.Size = new System.Drawing.Size(214, 20);
-            this.textBoxPhn.TabIndex = 0;
+            this.textBoxPhn.TabIndex = 12;
             // 
             // textBoxCtr
             // 
             this.textBoxCtr.Location = new System.Drawing.Point(186, 189);
             this.textBoxCtr.Name = "textBoxCtr";
             this.textBoxCtr.Size = new System.Drawing.Size(214, 20);
-            this.textBoxCtr.TabIndex = 0;
+            this.textBoxCtr.TabIndex = 3;
             // 
             // textBoxFam
             // 
             this.textBoxFam.Location = new System.Drawing.Point(186, 149);
             this.textBoxFam.Name = "textBoxFam";
             this.textBoxFam.Size = new System.Drawing.Size(214, 20);
-            this.textBoxFam.TabIndex = 0;
+            this.textBoxFam.TabIndex = 2;
             // 
             // textBoxAdr
             // 
@@ -1133,6 +1134,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1297, 680);
             this.Controls.Add(this.tabControlMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1313, 719);
             this.MinimumSize = new System.Drawing.Size(1313, 719);
             this.Name = "Main_form";
@@ -1173,7 +1175,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader14;
         private System.Windows.Forms.ColumnHeader columnHeader15;
         private System.Windows.Forms.ColumnHeader columnHeader16;
-        private System.Windows.Forms.ListView listViewS;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -1259,6 +1260,7 @@
         private System.Windows.Forms.Label labelInf;
         private System.Windows.Forms.RichTextBox richTextBoxNcFee;
         private System.Windows.Forms.RichTextBox richTextBoxNcDel;
+        internal System.Windows.Forms.ListView listViewS;
     }
 }
 
