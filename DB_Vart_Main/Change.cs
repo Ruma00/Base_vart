@@ -143,6 +143,8 @@ namespace DB_Vart_Main
 
             command.CommandText = "UPDATE Main SET Debt = " + debt + "WHERE Contract_num = '" + contract + "'";
             command.ExecuteNonQuery();
+            command.CommandText = "UPDATE ToExcel SET Debt = " + debt + "WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
 
             return debt;
         }

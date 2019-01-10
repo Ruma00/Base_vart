@@ -31,15 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main_form));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
+            this.buttonPayF = new System.Windows.Forms.Button();
             this.richTextBoxNcDel = new System.Windows.Forms.RichTextBox();
-            this.dataGridViewAddP = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonChgAP = new System.Windows.Forms.Button();
             this.buttonDt = new System.Windows.Forms.Button();
-            this.labelStAddP = new System.Windows.Forms.Label();
             this.labelDelSts = new System.Windows.Forms.Label();
             this.buttonWrAll = new System.Windows.Forms.Button();
             this.buttonCtrInf = new System.Windows.Forms.Button();
@@ -49,13 +44,9 @@
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonAct = new System.Windows.Forms.Button();
-            this.buttonAddP = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
-            this.buttonAddPS = new System.Windows.Forms.Button();
             this.buttonDelS = new System.Windows.Forms.Button();
-            this.textBoxAddP = new System.Windows.Forms.TextBox();
             this.textBoxDel = new System.Windows.Forms.TextBox();
-            this.labelAddP = new System.Windows.Forms.Label();
             this.labelDel = new System.Windows.Forms.Label();
             this.buttonSD = new System.Windows.Forms.Button();
             this.textBoxSA = new System.Windows.Forms.TextBox();
@@ -69,15 +60,6 @@
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listViewAddP = new System.Windows.Forms.ListView();
-            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listViewS = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -135,10 +117,8 @@
             this.comboBoxRc = new System.Windows.Forms.ComboBox();
             this.buttonRc = new System.Windows.Forms.Button();
             this.labelRcpt = new System.Windows.Forms.Label();
-            this.buttonPayF = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).BeginInit();
             this.tabPageSec.SuspendLayout();
             this.tabPageThird.SuspendLayout();
             this.SuspendLayout();
@@ -158,10 +138,8 @@
             // 
             this.tabPageMain.Controls.Add(this.buttonPayF);
             this.tabPageMain.Controls.Add(this.richTextBoxNcDel);
-            this.tabPageMain.Controls.Add(this.dataGridViewAddP);
             this.tabPageMain.Controls.Add(this.buttonChgAP);
             this.tabPageMain.Controls.Add(this.buttonDt);
-            this.tabPageMain.Controls.Add(this.labelStAddP);
             this.tabPageMain.Controls.Add(this.labelDelSts);
             this.tabPageMain.Controls.Add(this.buttonWrAll);
             this.tabPageMain.Controls.Add(this.buttonCtrInf);
@@ -169,19 +147,14 @@
             this.tabPageMain.Controls.Add(this.buttonIm);
             this.tabPageMain.Controls.Add(this.listViewDets);
             this.tabPageMain.Controls.Add(this.buttonAct);
-            this.tabPageMain.Controls.Add(this.buttonAddP);
             this.tabPageMain.Controls.Add(this.buttonDel);
-            this.tabPageMain.Controls.Add(this.buttonAddPS);
             this.tabPageMain.Controls.Add(this.buttonDelS);
-            this.tabPageMain.Controls.Add(this.textBoxAddP);
             this.tabPageMain.Controls.Add(this.textBoxDel);
-            this.tabPageMain.Controls.Add(this.labelAddP);
             this.tabPageMain.Controls.Add(this.labelDel);
             this.tabPageMain.Controls.Add(this.buttonSD);
             this.tabPageMain.Controls.Add(this.textBoxSA);
             this.tabPageMain.Controls.Add(this.textBoxSD);
             this.tabPageMain.Controls.Add(this.listViewDel);
-            this.tabPageMain.Controls.Add(this.listViewAddP);
             this.tabPageMain.Controls.Add(this.listViewS);
             this.tabPageMain.Location = new System.Drawing.Point(4, 22);
             this.tabPageMain.Name = "tabPageMain";
@@ -191,62 +164,25 @@
             this.tabPageMain.Text = "Главная";
             this.tabPageMain.UseVisualStyleBackColor = true;
             // 
+            // buttonPayF
+            // 
+            this.buttonPayF.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonPayF.Location = new System.Drawing.Point(1128, 467);
+            this.buttonPayF.Name = "buttonPayF";
+            this.buttonPayF.Size = new System.Drawing.Size(152, 49);
+            this.buttonPayF.TabIndex = 20;
+            this.buttonPayF.Text = "Платежи";
+            this.buttonPayF.UseVisualStyleBackColor = true;
+            this.buttonPayF.Click += new System.EventHandler(this.buttonPayF_Click);
+            // 
             // richTextBoxNcDel
             // 
-            this.richTextBoxNcDel.Location = new System.Drawing.Point(730, 485);
+            this.richTextBoxNcDel.Location = new System.Drawing.Point(653, 263);
             this.richTextBoxNcDel.Name = "richTextBoxNcDel";
-            this.richTextBoxNcDel.Size = new System.Drawing.Size(205, 67);
+            this.richTextBoxNcDel.Size = new System.Drawing.Size(282, 111);
             this.richTextBoxNcDel.TabIndex = 19;
             this.richTextBoxNcDel.Text = "";
             this.richTextBoxNcDel.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
-            // dataGridViewAddP
-            // 
-            this.dataGridViewAddP.AllowUserToAddRows = false;
-            this.dataGridViewAddP.AllowUserToResizeColumns = false;
-            this.dataGridViewAddP.AllowUserToResizeRows = false;
-            this.dataGridViewAddP.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridViewAddP.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridViewAddP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAddP.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4});
-            this.dataGridViewAddP.Enabled = false;
-            this.dataGridViewAddP.Location = new System.Drawing.Point(21, 303);
-            this.dataGridViewAddP.Name = "dataGridViewAddP";
-            this.dataGridViewAddP.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridViewAddP.RowHeadersVisible = false;
-            this.dataGridViewAddP.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dataGridViewAddP.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewAddP.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridViewAddP.Size = new System.Drawing.Size(914, 56);
-            this.dataGridViewAddP.TabIndex = 17;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Дата";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 228;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Сумма";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 228;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Банк";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 228;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Примечание";
-            this.Column4.Name = "Column4";
-            this.Column4.Width = 228;
             // 
             // buttonChgAP
             // 
@@ -269,20 +205,10 @@
             this.buttonDt.UseVisualStyleBackColor = true;
             this.buttonDt.Click += new System.EventHandler(this.buttonDt_Click);
             // 
-            // labelStAddP
-            // 
-            this.labelStAddP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelStAddP.Location = new System.Drawing.Point(171, 170);
-            this.labelStAddP.Name = "labelStAddP";
-            this.labelStAddP.Size = new System.Drawing.Size(118, 23);
-            this.labelStAddP.TabIndex = 13;
-            this.labelStAddP.Text = "Ожидание";
-            this.labelStAddP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // labelDelSts
             // 
             this.labelDelSts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDelSts.Location = new System.Drawing.Point(103, 369);
+            this.labelDelSts.Location = new System.Drawing.Point(103, 147);
             this.labelDelSts.Name = "labelDelSts";
             this.labelDelSts.Size = new System.Drawing.Size(118, 23);
             this.labelDelSts.TabIndex = 13;
@@ -368,20 +294,9 @@
             this.buttonAct.UseVisualStyleBackColor = true;
             this.buttonAct.Click += new System.EventHandler(this.buttonAct_Click);
             // 
-            // buttonAddP
-            // 
-            this.buttonAddP.Enabled = false;
-            this.buttonAddP.Location = new System.Drawing.Point(751, 170);
-            this.buttonAddP.Name = "buttonAddP";
-            this.buttonAddP.Size = new System.Drawing.Size(184, 23);
-            this.buttonAddP.TabIndex = 8;
-            this.buttonAddP.Text = "Добавить";
-            this.buttonAddP.UseVisualStyleBackColor = true;
-            this.buttonAddP.Click += new System.EventHandler(this.buttonAddP_Click);
-            // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(740, 369);
+            this.buttonDel.Location = new System.Drawing.Point(740, 147);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(184, 23);
             this.buttonDel.TabIndex = 8;
@@ -389,20 +304,9 @@
             this.buttonDel.UseVisualStyleBackColor = true;
             this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
-            // buttonAddPS
-            // 
-            this.buttonAddPS.Enabled = false;
-            this.buttonAddPS.Location = new System.Drawing.Point(561, 170);
-            this.buttonAddPS.Name = "buttonAddPS";
-            this.buttonAddPS.Size = new System.Drawing.Size(184, 23);
-            this.buttonAddPS.TabIndex = 7;
-            this.buttonAddPS.Text = "Поиск";
-            this.buttonAddPS.UseVisualStyleBackColor = true;
-            this.buttonAddPS.Click += new System.EventHandler(this.buttonAddPS_Click);
-            // 
             // buttonDelS
             // 
-            this.buttonDelS.Location = new System.Drawing.Point(524, 369);
+            this.buttonDelS.Location = new System.Drawing.Point(524, 147);
             this.buttonDelS.Name = "buttonDelS";
             this.buttonDelS.Size = new System.Drawing.Size(184, 23);
             this.buttonDelS.TabIndex = 7;
@@ -410,37 +314,18 @@
             this.buttonDelS.UseVisualStyleBackColor = true;
             this.buttonDelS.Click += new System.EventHandler(this.buttonDelS_Click);
             // 
-            // textBoxAddP
-            // 
-            this.textBoxAddP.Enabled = false;
-            this.textBoxAddP.Location = new System.Drawing.Point(295, 172);
-            this.textBoxAddP.Name = "textBoxAddP";
-            this.textBoxAddP.Size = new System.Drawing.Size(257, 20);
-            this.textBoxAddP.TabIndex = 6;
-            this.textBoxAddP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // textBoxDel
             // 
-            this.textBoxDel.Location = new System.Drawing.Point(236, 371);
+            this.textBoxDel.Location = new System.Drawing.Point(236, 149);
             this.textBoxDel.Name = "textBoxDel";
             this.textBoxDel.Size = new System.Drawing.Size(257, 20);
             this.textBoxDel.TabIndex = 6;
             this.textBoxDel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // labelAddP
-            // 
-            this.labelAddP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelAddP.Location = new System.Drawing.Point(18, 170);
-            this.labelAddP.Name = "labelAddP";
-            this.labelAddP.Size = new System.Drawing.Size(157, 23);
-            this.labelAddP.TabIndex = 5;
-            this.labelAddP.Text = "Добавление платежа:";
-            this.labelAddP.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // labelDel
             // 
             this.labelDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDel.Location = new System.Drawing.Point(19, 369);
+            this.labelDel.Location = new System.Drawing.Point(19, 147);
             this.labelDel.Name = "labelDel";
             this.labelDel.Size = new System.Drawing.Size(78, 23);
             this.labelDel.TabIndex = 5;
@@ -485,7 +370,7 @@
             this.columnHeader15,
             this.columnHeader16});
             this.listViewDel.FullRowSelect = true;
-            this.listViewDel.Location = new System.Drawing.Point(21, 403);
+            this.listViewDel.Location = new System.Drawing.Point(21, 181);
             this.listViewDel.MultiSelect = false;
             this.listViewDel.Name = "listViewDel";
             this.listViewDel.Size = new System.Drawing.Size(914, 75);
@@ -539,73 +424,6 @@
             this.columnHeader16.Text = "Примечание";
             this.columnHeader16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader16.Width = 200;
-            // 
-            // listViewAddP
-            // 
-            this.listViewAddP.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader19,
-            this.columnHeader20,
-            this.columnHeader21,
-            this.columnHeader22,
-            this.columnHeader23,
-            this.columnHeader24,
-            this.columnHeader25,
-            this.columnHeader26});
-            this.listViewAddP.Enabled = false;
-            this.listViewAddP.FullRowSelect = true;
-            this.listViewAddP.Location = new System.Drawing.Point(21, 216);
-            this.listViewAddP.Name = "listViewAddP";
-            this.listViewAddP.Size = new System.Drawing.Size(914, 73);
-            this.listViewAddP.TabIndex = 0;
-            this.listViewAddP.UseCompatibleStateImageBehavior = false;
-            this.listViewAddP.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader19
-            // 
-            this.columnHeader19.Text = "Адрес";
-            this.columnHeader19.Width = 150;
-            // 
-            // columnHeader20
-            // 
-            this.columnHeader20.Text = "Пд";
-            this.columnHeader20.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader20.Width = 40;
-            // 
-            // columnHeader21
-            // 
-            this.columnHeader21.Text = "Кв";
-            this.columnHeader21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader21.Width = 40;
-            // 
-            // columnHeader22
-            // 
-            this.columnHeader22.Text = "Фамилия";
-            this.columnHeader22.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader22.Width = 200;
-            // 
-            // columnHeader23
-            // 
-            this.columnHeader23.Text = "№ договора";
-            this.columnHeader23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader23.Width = 120;
-            // 
-            // columnHeader24
-            // 
-            this.columnHeader24.Text = "Долг";
-            this.columnHeader24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader24.Width = 80;
-            // 
-            // columnHeader25
-            // 
-            this.columnHeader25.Text = "Аб. плата";
-            this.columnHeader25.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader25.Width = 80;
-            // 
-            // columnHeader26
-            // 
-            this.columnHeader26.Text = "Примечание";
-            this.columnHeader26.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader26.Width = 200;
             // 
             // listViewS
             // 
@@ -1115,17 +933,6 @@
             this.labelRcpt.TabIndex = 10;
             this.labelRcpt.Text = "Квитанции";
             // 
-            // buttonPayF
-            // 
-            this.buttonPayF.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonPayF.Location = new System.Drawing.Point(1128, 467);
-            this.buttonPayF.Name = "buttonPayF";
-            this.buttonPayF.Size = new System.Drawing.Size(152, 49);
-            this.buttonPayF.TabIndex = 20;
-            this.buttonPayF.Text = "Платежи";
-            this.buttonPayF.UseVisualStyleBackColor = true;
-            this.buttonPayF.Click += new System.EventHandler(this.buttonPayF_Click);
-            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1140,7 +947,6 @@
             this.tabControlMain.ResumeLayout(false);
             this.tabPageMain.ResumeLayout(false);
             this.tabPageMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).EndInit();
             this.tabPageSec.ResumeLayout(false);
             this.tabPageSec.PerformLayout();
             this.tabPageThird.ResumeLayout(false);
@@ -1202,25 +1008,6 @@
         private System.Windows.Forms.TextBox textBoxCtr;
         private System.Windows.Forms.TextBox textBoxFam;
         private System.Windows.Forms.TextBox textBoxAdr;
-        private System.Windows.Forms.DataGridView dataGridViewAddP;
-        private System.Windows.Forms.Label labelStAddP;
-        private System.Windows.Forms.Button buttonAddP;
-        private System.Windows.Forms.Button buttonAddPS;
-        private System.Windows.Forms.TextBox textBoxAddP;
-        private System.Windows.Forms.Label labelAddP;
-        private System.Windows.Forms.ListView listViewAddP;
-        private System.Windows.Forms.ColumnHeader columnHeader19;
-        private System.Windows.Forms.ColumnHeader columnHeader20;
-        private System.Windows.Forms.ColumnHeader columnHeader21;
-        private System.Windows.Forms.ColumnHeader columnHeader22;
-        private System.Windows.Forms.ColumnHeader columnHeader23;
-        private System.Windows.Forms.ColumnHeader columnHeader24;
-        private System.Windows.Forms.ColumnHeader columnHeader25;
-        private System.Windows.Forms.ColumnHeader columnHeader26;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Label labelAdr2;
         private System.Windows.Forms.TextBox textBoxAdr2;
         private System.Windows.Forms.TextBox textBoxDebt;

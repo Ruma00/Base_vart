@@ -53,8 +53,10 @@ namespace DB_Vart_Main
                     String[] h = str[i].Split('_');
                     if (h.Length == 2)
                         inf = new PayInf(Convert.ToDateTime(h[0]), Convert.ToDouble(h[1]));
-                    else
+                    else if (h.Length > 2)
                         inf = new PayInf(Convert.ToDateTime(h[0]), Convert.ToDouble(h[1]), h[2]);
+                    else
+                        break;
                     list.Add(inf);
                     //count++;
                 }

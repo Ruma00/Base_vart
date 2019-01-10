@@ -277,6 +277,8 @@ namespace DB_Vart_Main
             }
             command.CommandText = "UPDATE Main SET Debt = " + (sumFee - sumPay).ToString() + " WHERE Contract_num = '" + contract + "'";
             command.ExecuteNonQuery();
+            command.CommandText = "UPDATE ToExcel SET Debt = " + (sumFee - sumPay).ToString() + " WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
         }
 
         private void Act_FormClosing(object sender, FormClosingEventArgs e)

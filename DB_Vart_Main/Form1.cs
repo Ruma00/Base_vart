@@ -54,21 +54,21 @@ namespace DB_Vart_Main
             comboBoxRc.SelectedIndex = 0;
 
             listViewS.DoubleClick += new EventHandler(listViewS_DoubleClick);
-            listViewAddP.DoubleClick += new EventHandler(listViewAddP_DoubleClick);
+            //listViewAddP.DoubleClick += new EventHandler(listViewAddP_DoubleClick);
             listViewDel.DoubleClick += new EventHandler(listViewDel_DoubleClick);
             listViewRc.DoubleClick += new EventHandler(listViewRc_DoubleClick);
             comboBoxRc.SelectedIndexChanged += new EventHandler(comboBoxRc_SelectedIndexChanged);
 
-            dataGridViewAddP.Rows.Add();
-            dataGridViewAddP.ClearSelection();
-            dataGridViewAddP.Rows[0].Cells[0].Selected = false;
+            //dataGridViewAddP.Rows.Add();
+            //dataGridViewAddP.ClearSelection();
+            //dataGridViewAddP.Rows[0].Cells[0].Selected = false;
             buttonChgAP.Enabled = false;
             buttonPayF.Enabled = false;
 
             textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
             textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
             //textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
-            textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
+            //textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
             textBoxDel.Text = "Введите адрес или № договора"; textBoxDel.ForeColor = Color.Gray;
             
             textBoxSD.Enter += new EventHandler(textBoxSD_Enter);
@@ -77,17 +77,17 @@ namespace DB_Vart_Main
             textBoxSA.Leave += new EventHandler(textBoxSA_Leave);
             //textBoxPayCH.Enter += new EventHandler(textBoxPayCH_Enter);
             //textBoxPayCH.Leave += new EventHandler(textBoxPayCH_Leave);
-            textBoxAddP.Enter += new EventHandler(textBoxAddP_Enter);
-            textBoxAddP.Leave += new EventHandler(textBoxAddP_Leave);
+            //textBoxAddP.Enter += new EventHandler(textBoxAddP_Enter);
+            //textBoxAddP.Leave += new EventHandler(textBoxAddP_Leave);
             textBoxDel.Enter += new EventHandler(textBoxDel_Enter);
             textBoxDel.Leave += new EventHandler(textBoxDel_Leave);
 
-            dataGridViewAddP.Rows[0].Cells[0].Value = "";
+            /*dataGridViewAddP.Rows[0].Cells[0].Value = "";
             dataGridViewAddP.Rows[0].Cells[1].Value = "";
             dataGridViewAddP.Rows[0].Cells[2].Value = "";
             dataGridViewAddP.Rows[0].Cells[3].Value = "";
 
-            dataGridViewAddP.ClearSelection();
+            dataGridViewAddP.ClearSelection();*/
         }
 
         public void SetDebt(int rez)
@@ -182,23 +182,23 @@ namespace DB_Vart_Main
             }
         }*/
 
-        private void textBoxAddP_Enter(object sender, EventArgs e)
+        /*private void textBoxAddP_Enter(object sender, EventArgs e)
         {
             if (textBoxAddP.Text == "Введите адрес или № договора")
             {
                 textBoxAddP.Clear();
                 textBoxAddP.ForeColor = Color.Black;
             }
-        }
+        }*/
 
-        private void textBoxAddP_Leave(object sender, EventArgs e)
+        /*private void textBoxAddP_Leave(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBoxAddP.Text))
             {
                 textBoxAddP.Text = "Введите адрес или № договора";
                 textBoxAddP.ForeColor = Color.Gray;
             }
-        }
+        }*/
 
         private void textBoxDel_Enter(object sender, EventArgs e)
         {
@@ -368,11 +368,11 @@ namespace DB_Vart_Main
                 Clipboard.SetText(listViewS.SelectedItems[0].SubItems[4].Text);
         }
 
-        private void listViewAddP_DoubleClick(object sender, EventArgs e)
+        /*private void listViewAddP_DoubleClick(object sender, EventArgs e)
         {
             if (listViewAddP.SelectedItems.Count > 0)
                 Clipboard.SetText(listViewAddP.SelectedItems[0].SubItems[4].Text);
-        }
+        }*/
         private void listViewDel_DoubleClick(object sender, EventArgs e)
         {
             if (listViewDel.SelectedItems.Count > 0)
@@ -393,7 +393,7 @@ namespace DB_Vart_Main
                 textBoxRc.Enabled = false;
         }
 
-        private void SqlReader(SqlDataReader reader, ListView list)
+        private void SqlReader(SqlDataReader reader, ListView list, bool check)
         {
             foreach (ListViewItem it in list.Items)
                 list.Items.Remove(it);
@@ -409,12 +409,17 @@ namespace DB_Vart_Main
                     object debt = reader.GetValue(5);
                     object monthly_fee = reader.GetValue(6);
                     string[] temp = monthly_fee.ToString().Split(',');
-                    object notice = reader.GetValue(7);
+                    string notice = reader.GetString(7);
 
                     string[] tmp = temp[temp.Length - 1].Split('_');
                     ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), surname.ToString(),
-                        contract_num.ToString(), debt.ToString(), tmp[0], notice.ToString() });
+                        contract_num.ToString(), debt.ToString(), tmp[0], notice });
                     list.Items.Add(item);
+                    if (check)
+                    {
+                        list.Items[0].SubItems[7].Text = "---↓↓↓---";
+                        richTextBoxNcDel.Text = notice;
+                    }
                 }
             }
             reader.Close();
@@ -468,13 +473,13 @@ namespace DB_Vart_Main
             return true;
         }
 
-        private void Search(TextBox textBox, ListView list)
+        private void Search(TextBox textBox, ListView list, bool check)
         {
             string[] split = textBox.Text.Split(';');
             if (split.Length > 1)
             {
                 SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress='" + split[0] + "' AND Apartment=" + split[1], sqlConnection);
-                SqlReader(command.ExecuteReader(), list);
+                SqlReader(command.ExecuteReader(), list, check);
                 command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + list.Items[0].SubItems[4].Text;
                 SqlReadDate(command.ExecuteReader());
             }
@@ -482,7 +487,7 @@ namespace DB_Vart_Main
             {
                 SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBox.Text, sqlConnection);
 
-                SqlReader(command.ExecuteReader(), list);
+                SqlReader(command.ExecuteReader(), list, check);
             }
         }
 
@@ -496,7 +501,7 @@ namespace DB_Vart_Main
                 string[] arr = textBoxSA.Text.Split(';');
                 SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress=" + '\'' + arr[0] + '\'' + " AND Apartment=" + arr[1], sqlConnection);
 
-                SqlReader(command.ExecuteReader(), listViewS);
+                SqlReader(command.ExecuteReader(), listViewS, false);
 
                 command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewS.Items[0].SubItems[4].Text;
 
@@ -508,7 +513,7 @@ namespace DB_Vart_Main
             {
                 SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxSD.Text, sqlConnection);
 
-                SqlReader(command.ExecuteReader(), listViewS);
+                SqlReader(command.ExecuteReader(), listViewS, false);
 
                 command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + textBoxSD.Text;
 
@@ -529,7 +534,7 @@ namespace DB_Vart_Main
             SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress=" + '\'' + arr[0] + '\'' + " AND Apartment=" + arr[1], sqlConnection);
             SqlDataReader reader = command.ExecuteReader();
 
-            SqlReader(reader, listViewS);
+            SqlReader(reader, listViewS, false);
 
             command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewS.Items[0].SubItems[4].Text;
             reader = command.ExecuteReader();
@@ -632,15 +637,15 @@ namespace DB_Vart_Main
 
         
 
-        private void buttonAddPS_Click(object sender, EventArgs e)
+        /*private void buttonAddPS_Click(object sender, EventArgs e)
         {
             Search(textBoxAddP, listViewAddP);
 
             textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
             dataGridViewAddP.ClearSelection();
-        }
+        }*/
 
-        private void buttonAddP_Click(object sender, EventArgs e)
+        /*private void buttonAddP_Click(object sender, EventArgs e)
         {
             string str = dataGridViewAddP.Rows[0].Cells[0].Value.ToString() + "_" + dataGridViewAddP.Rows[0].Cells[1].Value.ToString();
             string h = dataGridViewAddP.Rows[0].Cells[3].Value.ToString();
@@ -708,7 +713,7 @@ namespace DB_Vart_Main
             }
             reader.Close();
             command.CommandText = "UPDATE Main SET Notice='" + notice + "' WHERE Contract_num='" + contract_num + '\'';
-            command.ExecuteNonQuery();*/
+            command.ExecuteNonQuery();*
 
             command.CommandText = "SELECT List FROM Payments WHERE Contract_num='" + contract_num + '\'';
             SqlReadDate(command.ExecuteReader());
@@ -727,11 +732,11 @@ namespace DB_Vart_Main
 
             dataGridViewAddP.Rows[0].Cells[2].Value = "";
             dataGridViewAddP.Rows[0].Cells[3].Value = "";
-        }
+        }*/
 
         private void buttonDelS_Click(object sender, EventArgs e)
         {
-            Search(textBoxDel, listViewDel);
+            Search(textBoxDel, listViewDel, true);
 
             textBoxDel.Text = "Введите адрес или № договора"; textBoxDel.ForeColor = Color.Gray;
         }
@@ -743,7 +748,7 @@ namespace DB_Vart_Main
 
             string str = richTextBoxNcDel.Text;
             richTextBoxNcDel.Text = "";
-            command.CommandText = "UPDATE Main SET Notice += '" + str + "' WHERE Contract_num = " + listViewDel.Items[0].SubItems[4].Text;
+            command.CommandText = "UPDATE Main SET Notice = '" + str + "' WHERE Contract_num = " + listViewDel.Items[0].SubItems[4].Text;
             command.ExecuteNonQuery();
 
 
@@ -1037,7 +1042,7 @@ namespace DB_Vart_Main
 
             SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Debt >= " + count, sqlConnection);
 
-            SqlReader(command.ExecuteReader(), listViewRc);
+            SqlReader(command.ExecuteReader(), listViewRc, false);
             textBoxRc.Text = ""; textBoxRc.Enabled = false;
         }
 
