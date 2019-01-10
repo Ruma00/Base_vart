@@ -66,7 +66,7 @@ namespace DB_Vart_Main
 
             textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
             textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
-            textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
+            //textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
             textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
             textBoxDel.Text = "Введите адрес или № договора"; textBoxDel.ForeColor = Color.Gray;
             
@@ -74,8 +74,8 @@ namespace DB_Vart_Main
             textBoxSD.Leave += new EventHandler(textBoxSD_Leave);
             textBoxSA.Enter += new EventHandler(textBoxSA_Enter);
             textBoxSA.Leave += new EventHandler(textBoxSA_Leave);
-            textBoxPayCH.Enter += new EventHandler(textBoxPayCH_Enter);
-            textBoxPayCH.Leave += new EventHandler(textBoxPayCH_Leave);
+            //textBoxPayCH.Enter += new EventHandler(textBoxPayCH_Enter);
+            //textBoxPayCH.Leave += new EventHandler(textBoxPayCH_Leave);
             textBoxAddP.Enter += new EventHandler(textBoxAddP_Enter);
             textBoxAddP.Leave += new EventHandler(textBoxAddP_Leave);
             textBoxDel.Enter += new EventHandler(textBoxDel_Enter);
@@ -163,7 +163,7 @@ namespace DB_Vart_Main
             }
         }
 
-        private void textBoxPayCH_Enter(object sender, EventArgs e)
+        /*private void textBoxPayCH_Enter(object sender, EventArgs e)
         {
             if (textBoxPayCH.Text == "Смена аб. платы")
             {
@@ -179,7 +179,7 @@ namespace DB_Vart_Main
                 textBoxPayCH.Text = "Смена аб. платы";
                 textBoxPayCH.ForeColor = Color.Gray;
             }
-        }
+        }*/
 
         private void textBoxAddP_Enter(object sender, EventArgs e)
         {
@@ -540,7 +540,11 @@ namespace DB_Vart_Main
         private void buttonChgAP_Click(object sender, EventArgs e)
         {
             string contract = listViewS.Items[0].SubItems[4].Text;
-            string[] str = richTextBoxNcFee.Text.Split(';');
+            Change change = new Change(contract, sqlConnection, ref listViewS);
+            change.Show();
+
+            //-----------------------------------
+            /*string[] str = richTextBoxNcFee.Text.Split(';');
 
             SqlCommand command = new SqlCommand(sqlExpressions[3] + " Monthly_fee += '," + textBoxPayCH.Text + 
                 '_' + str[0] + "' " + sqlExpressions[5] + contract, sqlConnection);
@@ -559,7 +563,7 @@ namespace DB_Vart_Main
             listViewS.Items[0].SubItems[5].Text = dd.ToString();
 
             textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
-            richTextBoxNcFee.Text = "";
+            richTextBoxNcFee.Text = "";*/
         }
 
         private void buttonAddAb_Click(object sender, EventArgs e)
@@ -637,6 +641,21 @@ namespace DB_Vart_Main
         private void buttonAddP_Click(object sender, EventArgs e)
         {
             string str = dataGridViewAddP.Rows[0].Cells[0].Value.ToString() + "_" + dataGridViewAddP.Rows[0].Cells[1].Value.ToString();
+            string h = dataGridViewAddP.Rows[0].Cells[3].Value.ToString();
+            if (h != "" && h != null)
+            {
+                str += "_" + dataGridViewAddP.Rows[0].Cells[3].Value.ToString();
+                h = dataGridViewAddP.Rows[0].Cells[2].Value.ToString();
+                if (h != null && h != "")
+                    str += ";Банк: " + h;
+
+            }
+            else
+            {
+                h = dataGridViewAddP.Rows[0].Cells[2].Value.ToString();
+                if (h != null && h != "")
+                    str += "_Банк: " + h;
+            }
             string contract_num = listViewAddP.Items[0].SubItems[4].Text;
 
             SqlCommand command = new SqlCommand("SELECT List FROM Payments WHERE Contract_num='" + contract_num + '\'', sqlConnection);
@@ -660,7 +679,7 @@ namespace DB_Vart_Main
                     foreach (string st in ar)
                     {
                         string[] a = st.Split('_');
-                        ListViewItem item = new ListViewItem(a);
+                        ListViewItem item = new ListViewItem(new string[] { a[0], a[1] });
                         listViewDets.Items.Add(item);
                     }
                 }
@@ -672,7 +691,7 @@ namespace DB_Vart_Main
             command.CommandText = "UPDATE Payments SET List=" + arr + " WHERE Contract_num='" + contract_num + '\'';
             command.ExecuteNonQuery();
 
-            command.CommandText = "SELECT Notice FROM Main WHERE Contract_num='" + contract_num + "'";
+            /*command.CommandText = "SELECT Notice FROM Main WHERE Contract_num='" + contract_num + "'";
             reader = command.ExecuteReader();
             reader.Read();
             string notice = "";
@@ -688,7 +707,7 @@ namespace DB_Vart_Main
             }
             reader.Close();
             command.CommandText = "UPDATE Main SET Notice='" + notice + "' WHERE Contract_num='" + contract_num + '\'';
-            command.ExecuteNonQuery();
+            command.ExecuteNonQuery();*/
 
             command.CommandText = "SELECT List FROM Payments WHERE Contract_num='" + contract_num + '\'';
             SqlReadDate(command.ExecuteReader());
@@ -800,17 +819,24 @@ namespace DB_Vart_Main
         {
             bool flag = false;
 
-            if (!File.Exists("impErr.txt"))
-            {
-                File.Create("impErr.txt").Close();
-            }
-            
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Title = "Выберите файл импорта";
+
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
 
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
-            StreamReader fileReader = new StreamReader(dialog.FileName, Encoding.Default);
+            string path = dialog.SelectedPath;
+
+            if (!File.Exists(path + "\\impErr.txt"))
+            {
+                File.Create(path + "\\impErr.txt").Close();
+            }
+            
+            OpenFileDialog open = new OpenFileDialog();
+            open.Title = "Выберите файл импорта";
+
+            if (open.ShowDialog() == DialogResult.Cancel)
+                return;
+            StreamReader fileReader = new StreamReader(open.FileName, Encoding.Default);
 
             string line = "";
             //------------------------------------------------WRITER----------------------------------------------------
@@ -859,7 +885,7 @@ namespace DB_Vart_Main
                             else
                                 line = splUse[0] + "_" + splUse[1];
                             list.Add("UPDATE Payments SET List = '" + line + "' WHERE Contract_num = '" + splUse[2] + "'");
-                            list.Add("UPDATE Main SET Debt -= " + splUse[1] + "' WHERE Contract_num = '" + splUse[2] + "'");
+                            list.Add("UPDATE Main SET Debt -= " + splUse[1] + " WHERE Contract_num = '" + splUse[2] + "'");
                             line = "";
                         }
                         reader.Close();
@@ -899,7 +925,7 @@ namespace DB_Vart_Main
                             else
                                 line = splUse[2] + "_" + splUse[1];
                             list.Add("UPDATE Payments SET List = '" + line + "' WHERE Contract_num = '" + splUse[0] + "'");
-                            list.Add("UPDATE Main SET Debt -= " + splUse[1] + "' WHERE Contract_num = '" + splUse[0] + "'");
+                            list.Add("UPDATE Main SET Debt -= " + splUse[1] + " WHERE Contract_num = '" + splUse[0] + "'");
                             line = "";
                         }
                         reader.Close();
@@ -1019,85 +1045,11 @@ namespace DB_Vart_Main
 
         }
 
-        private double DebtCalc(SqlDataReader reader, string contract)
+        private void buttonPayF_Click(object sender, EventArgs e)
         {
-            reader.Read();
-            String str = reader.GetString(0);
-            reader.Close();
-
-            List<Dat> list = new List<Dat>();
-
-            Dat dat;
-            String[] vb = str.Split(',');
-            for (int i = 0; i < vb.Length; i++)
-            {
-                dat = new Dat();
-                String[] h = vb[i].Split('_');
-                dat.Fee = Convert.ToInt32(h[0]);
-                dat.Date = Convert.ToDateTime(h[1]);
-                list.Add(dat);
-            }
-
-            DateTime date, end;
-            int u = 0;
-            double debt = 0;
-            for (int i = 0; i <= list.Count - 2; i++)
-            {
-                u = list[i].Fee;
-                date = Convert.ToDateTime(list[i].Date);
-                end = Convert.ToDateTime(list[i + 1].Date);
-
-                while (date < end)
-                {
-                    debt += u;
-                    date = date.AddMonths(1);
-                }
-            }
-            
-            SqlCommand command = new SqlCommand("SELECT Contract_end FROM ContractInf WHERE Contract_num = '" + contract + "'", sqlConnection);
-            reader = command.ExecuteReader();
-            reader.Read();
-
-            end = reader.GetDateTime(0);
-            if (end.Year == 1900)
-                end = DateTime.Today;
-            reader.Close();
-
-            date = list[list.Count - 1].Date;
-            u = list[list.Count - 1].Fee;
-            while (date < end)
-            {
-                debt += u;
-                date = date.AddMonths(1);
-            }
-
-            debt -= u;
-
-            command = new SqlCommand("SELECT List FROM Payments WHERE Contract_num = " + contract, sqlConnection);
-            reader = command.ExecuteReader();
-            reader.Read();
-            str = reader.GetString(0);
-            reader.Close();
-
-            if (str == null || str == "")
-            {
-                command.CommandText = "UPDATE Main SET Debt = " + debt + "WHERE Contract_num = '" + contract + "'";
-                command.ExecuteNonQuery();
-                return debt;
-            }
-
-            String[] vs = str.Split(',');
-
-            for (int i = 0; i < vs.Length; i++)
-            {
-                double d = Convert.ToDouble(vs[i].Split('_')[1]);
-                debt -= d;
-            }
-
-            command.CommandText = "UPDATE Main SET Debt = " + debt + "WHERE Contract_num = '" + contract + "'";
-            command.ExecuteNonQuery();
-
-            return debt;
+            string contract = listViewS.Items[0].SubItems[4].Text;
+            Pay pay = new Pay(contract, sqlConnection);
+            pay.Show();
         }
     }
 }

@@ -49,6 +49,7 @@ namespace DB_Vart_Main
 
             Dat dat;
             String[] vb = str.Split(',');
+
             for (i = 0; i < vb.Length; i++)
             {
                 dat = new Dat();
@@ -57,14 +58,17 @@ namespace DB_Vart_Main
                 dat.Date = Convert.ToDateTime(h[1]);
                 list.Add(dat);
             }
+            list.Add(new Dat(list[list.Count - 1].Fee, DateTime.Today));
 
             int k = 0, c = 0;
             int u = 0;
+            int f = 0;
 
             double sumFeeYear = 0, sumPayYear = 0;
             double sumFee = 0, sumPay = 0;
 
             bool flag = true, pFlag = true;
+            bool[] sFlag = { true, true };
 
             DateTime date, end;
 
@@ -92,6 +96,8 @@ namespace DB_Vart_Main
                 for (i = 0; i < vs.Length; i++)
                 {
                     String[] s = vs[i].Split('_');
+                    if (s.Length == 1)
+                        break;
                     Dat d = new Dat();
                     d.Fee = Convert.ToInt32(s[1]);
                     d.Date = Convert.ToDateTime(s[0]);
@@ -104,15 +110,25 @@ namespace DB_Vart_Main
 
             if (endYear.Year == 1900)
                 endYear = DateTime.Today;
-            if (startYear.Year < 2015)
+            /*if (startYear.Year < 2015)
             {
                 DateTime d = startYear;
                 startYear = new DateTime(2015, 1, 1);
-
-                for (i = 0; (i <= list.Count - 2) && (d < startYear); i++)
+                i = 0;
+                //for (i = 0; (i <= list.Count - 2) && (d < startYear); i++)
+                do
                 {
                     u = list[i].Fee;
                     date = Convert.ToDateTime(list[i].Date);
+
+                    if (d.Day > 15)
+                    {
+                        debt += u / 2;
+                        f = u / 2;
+                        date = date.AddMonths(1);
+                    }
+                    sFlag[0] = false;
+
                     end = Convert.ToDateTime(list[i + 1].Date);
                     while (date < end && d < startYear)
                     {
@@ -120,9 +136,10 @@ namespace DB_Vart_Main
                         date = date.AddMonths(1);
                         d = d.AddMonths(1);
                     }
-                }
+                    i++;
+                } while ((i <= list.Count - 2) && (d < startYear));
 
-                for (c = 0; c < dats.Count; c++)
+                for (c = 0; flag && c < dats.Count; c++)
                 {
                     if (dats[c].Date.Year < 2015)
                         debt -= dats[c].Fee;
@@ -132,22 +149,25 @@ namespace DB_Vart_Main
 
                 sumFee += debt;
 
-                ListViewItem item = new ListViewItem(new string[] { "Долг на 01.01.2015" + i.ToString(), debt.ToString() });
+                ListViewItem item;
+                if (f != 0)
+                    item = new ListViewItem(new string[] { "Долг на 01.01.2015", debt.ToString(),
+                                                        "-" + f.ToString() });
+                else
+                    item = new ListViewItem(new string[] { "Долг на 01.01.2015", debt.ToString() });
                 listViewAct.Items.Add(item);
-            }
+            }*/
 
             //calculate and write to listView
 
             string[] monthes = DateTimeFormatInfo.CurrentInfo.MonthNames;
 
-            int f = 0;
-
-            k = i;
+            /*k = i;
             if (list[k].Date > startYear)
-                k--;
+                k--;*/
 
-            list.Add(new Dat(list[list.Count - 1].Fee, DateTime.Today));
-
+            //list.Add(new Dat(list[list.Count - 1].Fee, DateTime.Today));
+            f = 0;
             for (i = startYear.Year; i <= endYear.Year; i++)
             {
                 ListViewItem item;
@@ -157,12 +177,31 @@ namespace DB_Vart_Main
 
                 for (int j = 1; j <= 12; j++)
                 {
-                    if ((j == DateTime.Today.Month) && (i == endYear.Year))
-                        break;
                     if (startYear.Year == i && j < startYear.Month)
                         continue;
 
+                    if ((j == DateTime.Today.Month) && (i == endYear.Year))
+                    {
+                        item = new ListViewItem(new string[] { "", monthes[j - 1] });
+                        listViewAct.Items.Add(item);
+                        for (int o = c; o < dats.Count; o++)
+                        {
+                            sumPayYear += dats[o].Fee;
+                            item = new ListViewItem(new string[] { "", "", "", dats[o].Fee.ToString(), dats[o].Date.ToShortDateString() });
+                            listViewAct.Items.Add(item);
+                        }
+                        break;
+                    }
+                    //
+                    
+
                     int pay = list[k].Fee;
+
+                    if (sFlag[0] && startYear.Day > 15)
+                    {
+                        f = pay / 2;
+                        sumFeeYear -= f;
+                    }
 
                     if (pFlag && i == list[k + 1].Date.Year && j == list[k + 1].Date.Month)
                     {
@@ -181,12 +220,24 @@ namespace DB_Vart_Main
                         if (c == dats.Count)
                             flag = false;
                     }
+                    else if (sFlag[0])
+                    {
+                        sFlag[0] = false;
+                        item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), "-" + f.ToString(), "" });
+                    }
                     else
                         item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), "", "" });
 
                     listViewAct.Items.Add(item);
 
                     sumFeeYear += pay;
+
+                    if (j == endYear.Month && i == endYear.Year)
+                    {
+                        f = u / 2;
+                        item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), f.ToString(), "" });
+                        break;
+                    }
                 }
 
                 item = new ListViewItem(new string[] { "", "Обороты за период:", sumFeeYear.ToString(), sumPayYear.ToString(), "" });
@@ -199,7 +250,16 @@ namespace DB_Vart_Main
                     item = new ListViewItem(new string[] { "Долг на 31.12." + i.ToString(), (sumFee - sumPay).ToString() });
                     listViewAct.Items.Add(item);
                 }
+                else
+                {
+                    item = new ListViewItem(new string[] { "Долг на " + DateTime.Today.ToShortDateString(),
+                                                                (sumFee - sumPay).ToString() });
+                    item.BackColor = Color.Cornsilk;
+                    listViewAct.Items.Add(item);
+                }
             }
+            command.CommandText = "UPDATE Main SET Debt = " + (sumFee - sumPay).ToString() + " WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
         }
 
         private void Act_FormClosing(object sender, FormClosingEventArgs e)

@@ -32,14 +32,12 @@
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageMain = new System.Windows.Forms.TabPage();
             this.richTextBoxNcDel = new System.Windows.Forms.RichTextBox();
-            this.richTextBoxNcFee = new System.Windows.Forms.RichTextBox();
             this.dataGridViewAddP = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonChgAP = new System.Windows.Forms.Button();
-            this.textBoxPayCH = new System.Windows.Forms.TextBox();
             this.buttonDt = new System.Windows.Forms.Button();
             this.labelStAddP = new System.Windows.Forms.Label();
             this.labelDelSts = new System.Windows.Forms.Label();
@@ -137,6 +135,7 @@
             this.comboBoxRc = new System.Windows.Forms.ComboBox();
             this.buttonRc = new System.Windows.Forms.Button();
             this.labelRcpt = new System.Windows.Forms.Label();
+            this.buttonPayF = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAddP)).BeginInit();
@@ -157,11 +156,10 @@
             // 
             // tabPageMain
             // 
+            this.tabPageMain.Controls.Add(this.buttonPayF);
             this.tabPageMain.Controls.Add(this.richTextBoxNcDel);
-            this.tabPageMain.Controls.Add(this.richTextBoxNcFee);
             this.tabPageMain.Controls.Add(this.dataGridViewAddP);
             this.tabPageMain.Controls.Add(this.buttonChgAP);
-            this.tabPageMain.Controls.Add(this.textBoxPayCH);
             this.tabPageMain.Controls.Add(this.buttonDt);
             this.tabPageMain.Controls.Add(this.labelStAddP);
             this.tabPageMain.Controls.Add(this.labelDelSts);
@@ -201,14 +199,6 @@
             this.richTextBoxNcDel.TabIndex = 19;
             this.richTextBoxNcDel.Text = "";
             this.richTextBoxNcDel.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
-            // richTextBoxNcFee
-            // 
-            this.richTextBoxNcFee.Location = new System.Drawing.Point(955, 154);
-            this.richTextBoxNcFee.Name = "richTextBoxNcFee";
-            this.richTextBoxNcFee.Size = new System.Drawing.Size(325, 38);
-            this.richTextBoxNcFee.TabIndex = 18;
-            this.richTextBoxNcFee.Text = "";
             // 
             // dataGridViewAddP
             // 
@@ -259,21 +249,13 @@
             // 
             // buttonChgAP
             // 
-            this.buttonChgAP.Location = new System.Drawing.Point(1128, 126);
+            this.buttonChgAP.Location = new System.Drawing.Point(955, 126);
             this.buttonChgAP.Name = "buttonChgAP";
-            this.buttonChgAP.Size = new System.Drawing.Size(152, 22);
+            this.buttonChgAP.Size = new System.Drawing.Size(325, 66);
             this.buttonChgAP.TabIndex = 16;
-            this.buttonChgAP.Text = "Сменить";
+            this.buttonChgAP.Text = "Сменить абонентскую плату";
             this.buttonChgAP.UseVisualStyleBackColor = true;
             this.buttonChgAP.Click += new System.EventHandler(this.buttonChgAP_Click);
-            // 
-            // textBoxPayCH
-            // 
-            this.textBoxPayCH.Location = new System.Drawing.Point(955, 127);
-            this.textBoxPayCH.Name = "textBoxPayCH";
-            this.textBoxPayCH.Size = new System.Drawing.Size(160, 20);
-            this.textBoxPayCH.TabIndex = 15;
-            this.textBoxPayCH.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // buttonDt
             // 
@@ -1128,6 +1110,17 @@
             this.labelRcpt.TabIndex = 10;
             this.labelRcpt.Text = "Квитанции";
             // 
+            // buttonPayF
+            // 
+            this.buttonPayF.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonPayF.Location = new System.Drawing.Point(1128, 467);
+            this.buttonPayF.Name = "buttonPayF";
+            this.buttonPayF.Size = new System.Drawing.Size(152, 49);
+            this.buttonPayF.TabIndex = 20;
+            this.buttonPayF.Text = "Платежи";
+            this.buttonPayF.UseVisualStyleBackColor = true;
+            this.buttonPayF.Click += new System.EventHandler(this.buttonPayF_Click);
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1186,8 +1179,6 @@
         private System.Windows.Forms.TabPage tabPageSec;
         private System.Windows.Forms.Label labelDelSts;
         private System.Windows.Forms.Button buttonExp;
-        private System.Windows.Forms.Button buttonChgAP;
-        private System.Windows.Forms.TextBox textBoxPayCH;
         private System.Windows.Forms.Button buttonAddAb;
         private System.Windows.Forms.Label labelAddM;
         private System.Windows.Forms.RichTextBox richTextBoxNote;
@@ -1258,9 +1249,10 @@
         private System.Windows.Forms.Label labelPt_Date;
         private System.Windows.Forms.RichTextBox richTextBoxPtWho;
         private System.Windows.Forms.Label labelInf;
-        private System.Windows.Forms.RichTextBox richTextBoxNcFee;
         private System.Windows.Forms.RichTextBox richTextBoxNcDel;
         internal System.Windows.Forms.ListView listViewS;
+        public System.Windows.Forms.Button buttonChgAP;
+        private System.Windows.Forms.Button buttonPayF;
     }
 }
 
