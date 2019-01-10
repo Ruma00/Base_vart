@@ -213,6 +213,7 @@
             this.Column2,
             this.Column3,
             this.Column4});
+            this.dataGridViewAddP.Enabled = false;
             this.dataGridViewAddP.Location = new System.Drawing.Point(21, 303);
             this.dataGridViewAddP.Name = "dataGridViewAddP";
             this.dataGridViewAddP.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -369,6 +370,7 @@
             // 
             // buttonAddP
             // 
+            this.buttonAddP.Enabled = false;
             this.buttonAddP.Location = new System.Drawing.Point(751, 170);
             this.buttonAddP.Name = "buttonAddP";
             this.buttonAddP.Size = new System.Drawing.Size(184, 23);
@@ -389,6 +391,7 @@
             // 
             // buttonAddPS
             // 
+            this.buttonAddPS.Enabled = false;
             this.buttonAddPS.Location = new System.Drawing.Point(561, 170);
             this.buttonAddPS.Name = "buttonAddPS";
             this.buttonAddPS.Size = new System.Drawing.Size(184, 23);
@@ -409,6 +412,7 @@
             // 
             // textBoxAddP
             // 
+            this.textBoxAddP.Enabled = false;
             this.textBoxAddP.Location = new System.Drawing.Point(295, 172);
             this.textBoxAddP.Name = "textBoxAddP";
             this.textBoxAddP.Size = new System.Drawing.Size(257, 20);
@@ -547,6 +551,7 @@
             this.columnHeader24,
             this.columnHeader25,
             this.columnHeader26});
+            this.listViewAddP.Enabled = false;
             this.listViewAddP.FullRowSelect = true;
             this.listViewAddP.Location = new System.Drawing.Point(21, 216);
             this.listViewAddP.Name = "listViewAddP";

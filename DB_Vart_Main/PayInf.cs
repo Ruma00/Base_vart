@@ -12,6 +12,8 @@ namespace DB_Vart_Main
         public double Pay { get; set; }
         public string Notice { get; set; }
 
+        public PayInf() { }
+
         public PayInf(DateTime date, double pay)
         {
             Date = date;

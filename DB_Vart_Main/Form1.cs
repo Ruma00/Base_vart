@@ -63,6 +63,7 @@ namespace DB_Vart_Main
             dataGridViewAddP.ClearSelection();
             dataGridViewAddP.Rows[0].Cells[0].Selected = false;
             buttonChgAP.Enabled = false;
+            buttonPayF.Enabled = false;
 
             textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
             textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
@@ -419,7 +420,7 @@ namespace DB_Vart_Main
             reader.Close();
         }
 
-        private void SqlReadDate(SqlDataReader reader)
+        public void SqlReadDate(SqlDataReader reader)
         {
             if (reader.HasRows)
             {
@@ -488,6 +489,7 @@ namespace DB_Vart_Main
         //----------------------------Buttons-------------------------------------------------
         private void buttonSD_Click(object sender, EventArgs e)
         {
+            buttonPayF.Enabled = true;
             buttonChgAP.Enabled = true;
             if (textBoxSA.Text != "Введите адрес и кв")
             {
@@ -653,7 +655,7 @@ namespace DB_Vart_Main
             else
             {
                 h = dataGridViewAddP.Rows[0].Cells[2].Value.ToString();
-                if (h != null && h != "")
+                if (h != "" && h != null)
                     str += "_Банк: " + h;
             }
             string contract_num = listViewAddP.Items[0].SubItems[4].Text;
@@ -671,8 +673,7 @@ namespace DB_Vart_Main
                         arr = "'" + str + "'";
                     else
                         arr = "'" + temp + "," + str + "'";
-                    string[] ar = temp.Split(',');
-
+                    string[] ar = arr.Split(',');//temp = arr
                     foreach (ListViewItem it in listViewDets.Items)
                         listViewDets.Items.Remove(it);
 

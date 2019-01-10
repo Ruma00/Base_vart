@@ -12,11 +12,11 @@ namespace DB_Vart_Main
         {
             if (a.Date > b.Date)
             {
-                return -1;
+                return 1;
             }
             else if (a.Date < b.Date)
             {
-                return 1;
+                return -1;
             }
 
             return 0;

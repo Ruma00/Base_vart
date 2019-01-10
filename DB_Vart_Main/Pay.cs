@@ -22,13 +22,16 @@ namespace DB_Vart_Main
         {
             InitializeComponent();
 
-            dataGridViewInf.RowTemplate.Height = 43;
+            dataGridViewInf.RowTemplate.MinimumHeight = 43;
+            dataGridViewInf.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewInf.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             dataGridViewInf.AllowUserToAddRows = true;
 
             this.contract = contract;
             this.connection = connection;
 
             this.FormClosing += new FormClosingEventHandler(Pay_FormClosing);
+            dataGridViewInf.CellEndEdit += new DataGridViewCellEventHandler(dataGridViewInf_CellEndEdit);
 
             command = new SqlCommand();
             command.Connection = connection;
@@ -58,24 +61,56 @@ namespace DB_Vart_Main
                 YearComparer yc = new YearComparer();
                 list.Sort(yc);
                 for (int i = 0; i < list.Count; i++)
-                    dataGridViewInf.Rows.Add(list[i].Date, list[i].Pay, list[i].Notice);
+                    dataGridViewInf.Rows.Add(list[i].Date.ToShortDateString(), list[i].Pay, list[i].Notice);
             }
             reader.Close();
         }
 
-
+        public void dataGridViewInf_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int u = dataGridViewInf.CurrentCell.ColumnIndex;
+            int i = dataGridViewInf.CurrentCell.RowIndex;
+            DataGridViewCell cell = dataGridViewInf.CurrentCell;
+            if (i == list.Count)
+                list.Add(new PayInf());
+            switch(u)
+            {
+                case 0: list[i].Date = Convert.ToDateTime(cell.Value); break;
+                case 1: list[i].Pay = Convert.ToDouble(cell.Value); break;
+                case 2:
+                    if (cell.Value == null)
+                        list[i].Notice = "";
+                    else
+                        list[i].Notice = cell.Value.ToString();
+                    break;
+            }
+        }
 
         public void Pay_FormClosing(object sender, FormClosingEventArgs e)
         {
-            YearComparer yc = new YearComparer();
-            list.Sort(yc);
-            String str = "";
-            for (int i = 0; i < list.Count; i++)
+            YearComparer comparer = new YearComparer();
+            list.Sort(comparer);
+
+            String str = "'";
+            if (list.Count > 0)
             {
-                str += list[i].Date.ToShortDateString() + "_" + list[i].Pay.ToString();
+                str += list[0].Date.ToShortDateString() + "_" + list[0].Pay.ToString();
+                if (list[0].Notice != "")
+                    str += "_" + list[0].Notice;
+            }
+            for (int i = 1; i < list.Count; i++)
+            {
+                str += "," + list[i].Date.ToShortDateString() + "_" + list[i].Pay.ToString();
                 if (list[i].Notice != "")
                     str += "_" + list[i].Notice;
             }
+            str += "'";
+            command.CommandText = "UPDATE Payments SET List = " + str + " WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
+
+            command.CommandText = "SELECT List FROM Payments WHERE Contract_num = '" + contract + "'";
+            SqlDataReader reader = command.ExecuteReader();
+            Program.form.SqlReadDate(reader);
         }
     }
 }
