@@ -193,7 +193,7 @@ namespace DB_Vart_Main
                         break;
                     }
                     //
-                    
+
 
                     int pay = list[k].Fee;
 
@@ -216,7 +216,22 @@ namespace DB_Vart_Main
                         item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(),
                                             dats[c].Fee.ToString(), dats[c].Date.ToShortDateString() });
                         sumPayYear += dats[c].Fee;
+                        listViewAct.Items.Add(item);
                         c++;
+
+                        if (c == dats.Count)
+                            flag = false;
+
+                        while (flag && i == dats[c].Date.Year && j == dats[c].Date.Month)
+                        {
+                            item = new ListViewItem(new string[] { "", "", "", dats[c].Fee.ToString(), dats[c].Date.ToShortDateString() });
+                            listViewAct.Items.Add(item);
+                            sumPayYear += dats[c].Fee;
+                            c++;
+                            if (c == dats.Count)
+                                flag = false;
+                        }
+
                         if (c == dats.Count)
                             flag = false;
                     }
@@ -224,11 +239,13 @@ namespace DB_Vart_Main
                     {
                         sFlag[0] = false;
                         item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), "-" + f.ToString(), "" });
+                        listViewAct.Items.Add(item);
                     }
                     else
+                    { 
                         item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), "", "" });
-
-                    listViewAct.Items.Add(item);
+                        listViewAct.Items.Add(item);
+                    }
 
                     sumFeeYear += pay;
 
@@ -254,7 +271,7 @@ namespace DB_Vart_Main
                 {
                     item = new ListViewItem(new string[] { "Долг на " + DateTime.Today.ToShortDateString(),
                                                                 (sumFee - sumPay).ToString() });
-                    item.BackColor = Color.Cornsilk;
+                    item.BackColor = Color.PeachPuff;
                     listViewAct.Items.Add(item);
                 }
             }

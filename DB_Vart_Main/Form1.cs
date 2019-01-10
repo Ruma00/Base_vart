@@ -827,9 +827,9 @@ namespace DB_Vart_Main
                 return;
             string path = dialog.SelectedPath;
 
-            if (!File.Exists(path + "\\impErr.txt"))
+            if (!File.Exists(path + "\\Ошибки.txt"))
             {
-                File.Create(path + "\\impErr.txt").Close();
+                File.Create(path + "\\Ошибки.txt").Close();
             }
             
             OpenFileDialog open = new OpenFileDialog();
@@ -841,7 +841,7 @@ namespace DB_Vart_Main
 
             string line = "";
             //------------------------------------------------WRITER----------------------------------------------------
-            using (StreamWriter writer = new StreamWriter("impErr.txt", false, Encoding.Default))
+            using (StreamWriter writer = new StreamWriter(path + "\\Ошибки.txt", false, Encoding.Default))
             {
                 bool f = false;
                 while ((line = fileReader.ReadLine()) != null)

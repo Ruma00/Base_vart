@@ -75,8 +75,20 @@ namespace DB_Vart_Main
                 list.Add(new PayInf());
             switch(u)
             {
-                case 0: list[i].Date = Convert.ToDateTime(cell.Value); break;
-                case 1: list[i].Pay = Convert.ToDouble(cell.Value); break;
+                case 0:
+                    if (cell.Value != null && cell.Value.ToString() != "")
+                        list[i].Date = Convert.ToDateTime(cell.Value);
+                    else
+                    {
+                        list.RemoveAt(i);
+                        dataGridViewInf.Rows.RemoveAt(i);
+                    }
+                    break;
+                case 1:
+                    if (cell.Value != null && cell.Value.ToString() == "")
+                        list[i].Pay = 0;
+                    else
+                        list[i].Pay = Convert.ToDouble(cell.Value); break;
                 case 2:
                     if (cell.Value == null)
                         list[i].Notice = "";
