@@ -68,6 +68,8 @@ namespace DB_Vart_Main
             reader.Close();
         }
 
+        //public void dataGrid_LostFocus(object sender, )
+
         public void dataGridViewInf_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             int u = dataGridViewInf.CurrentCell.ColumnIndex;

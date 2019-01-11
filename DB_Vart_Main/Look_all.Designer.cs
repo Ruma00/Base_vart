@@ -141,6 +141,7 @@
             this.buttonSort.TabIndex = 4;
             this.buttonSort.Text = "Сортировать";
             this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
             // labelSort
             // 

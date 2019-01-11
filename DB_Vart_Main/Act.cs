@@ -110,63 +110,9 @@ namespace DB_Vart_Main
 
             if (endYear.Year == 1900)
                 endYear = DateTime.Today;
-            /*if (startYear.Year < 2015)
-            {
-                DateTime d = startYear;
-                startYear = new DateTime(2015, 1, 1);
-                i = 0;
-                //for (i = 0; (i <= list.Count - 2) && (d < startYear); i++)
-                do
-                {
-                    u = list[i].Fee;
-                    date = Convert.ToDateTime(list[i].Date);
-
-                    if (d.Day > 15)
-                    {
-                        debt += u / 2;
-                        f = u / 2;
-                        date = date.AddMonths(1);
-                    }
-                    sFlag[0] = false;
-
-                    end = Convert.ToDateTime(list[i + 1].Date);
-                    while (date < end && d < startYear)
-                    {
-                        debt += u;
-                        date = date.AddMonths(1);
-                        d = d.AddMonths(1);
-                    }
-                    i++;
-                } while ((i <= list.Count - 2) && (d < startYear));
-
-                for (c = 0; flag && c < dats.Count; c++)
-                {
-                    if (dats[c].Date.Year < 2015)
-                        debt -= dats[c].Fee;
-                    else
-                        break;
-                }
-
-                sumFee += debt;
-
-                ListViewItem item;
-                if (f != 0)
-                    item = new ListViewItem(new string[] { "Долг на 01.01.2015", debt.ToString(),
-                                                        "-" + f.ToString() });
-                else
-                    item = new ListViewItem(new string[] { "Долг на 01.01.2015", debt.ToString() });
-                listViewAct.Items.Add(item);
-            }*/
-
-            //calculate and write to listView
 
             string[] monthes = DateTimeFormatInfo.CurrentInfo.MonthNames;
 
-            /*k = i;
-            if (list[k].Date > startYear)
-                k--;*/
-
-            //list.Add(new Dat(list[list.Count - 1].Fee, DateTime.Today));
             f = 0;
             for (i = startYear.Year; i <= endYear.Year; i++)
             {
@@ -232,13 +178,20 @@ namespace DB_Vart_Main
                                 flag = false;
                         }
 
+                        if (sFlag[0])
+                        {
+                            sFlag[0] = false;
+                            item = new ListViewItem(new string[] { "", "", pay.ToString()/*??????*/, f.ToString(), "-----" });
+                            listViewAct.Items.Add(item);
+                        }
+
                         if (c == dats.Count)
                             flag = false;
                     }
                     else if (sFlag[0])
                     {
                         sFlag[0] = false;
-                        item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), "-" + f.ToString(), "" });
+                        item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), f.ToString(), "" });
                         listViewAct.Items.Add(item);
                     }
                     else
@@ -252,7 +205,7 @@ namespace DB_Vart_Main
                     if (j == endYear.Month && i == endYear.Year)
                     {
                         f = u / 2;
-                        item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), f.ToString(), "" });
+                        item = new ListViewItem(new string[] { "", monthes[j - 1], pay.ToString(), f.ToString(), "-----" });
                         break;
                     }
                 }
@@ -264,7 +217,7 @@ namespace DB_Vart_Main
                 sumFeeYear = 0; sumPayYear = 0;
                 if (i != endYear.Year)
                 {
-                    item = new ListViewItem(new string[] { "Долг на 31.12." + i.ToString(), (sumFee - sumPay).ToString() });
+                    item = new ListViewItem(new string[] { "Долг на 01.01." + (i + 1).ToString(), (sumFee - sumPay).ToString() });
                     listViewAct.Items.Add(item);
                 }
                 else

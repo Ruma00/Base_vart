@@ -17,6 +17,7 @@ namespace DB_Vart_Main
         SqlConnection connection;
         String contract;
         ListView list;
+        List<Dat> sorted = new List<Dat>();
         int count = 0;
 
         public Change(string contract, SqlConnection connection, ref ListView list)
@@ -31,6 +32,7 @@ namespace DB_Vart_Main
             this.connection = connection;
 
             this.FormClosing += new FormClosingEventHandler(Change_FormClosing);
+            dataGridViewInf.CellEndEdit += new DataGridViewCellEventHandler(dataGrid_CellEndEdit);
 
             command = new SqlCommand();
             command.Connection = connection;
@@ -49,6 +51,9 @@ namespace DB_Vart_Main
                 for (int i = 0; i < str.Length; i++)
                 {
                     String[] h = str[i].Split('_');
+                    //
+                    Dat r = new Dat(Convert.ToInt32(h[0]), Convert.ToDateTime(h[1]));
+                    sorted.Add(r);
                     dataGridViewInf.Rows.Add(h[0], h[1]);
                     //count++;
                 }
@@ -149,24 +154,64 @@ namespace DB_Vart_Main
             return debt;
         }
 
+        public void dataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int u = dataGridViewInf.CurrentCell.ColumnIndex;
+            int i = dataGridViewInf.CurrentCell.RowIndex;
+            DataGridViewCell cell = dataGridViewInf.CurrentCell;
+            if (i == sorted.Count)
+                sorted.Add(new Dat());
+
+            switch (u)
+            {
+                case 0:
+                    if (cell.Value != null && cell.Value.ToString() != "")
+                        sorted[i].Fee = Convert.ToInt32(cell.Value);
+                    else
+                        sorted[i].Fee = 0; break;
+                case 1:
+                    if (cell.Value != null && cell.Value.ToString() != "")
+                        sorted[i].Date = Convert.ToDateTime(cell.Value);
+                    else
+                    {
+                        sorted.RemoveAt(i);
+                        dataGridViewInf.Rows.RemoveAt(i);
+                    }
+                    break;
+            }
+        }
+
         public void Change_FormClosing(object sender, FormClosingEventArgs e)
         {
-            String str = dataGridViewInf.Rows[0].Cells[0].Value.ToString() + "_" + dataGridViewInf.Rows[0].Cells[1].Value.ToString();
+            ChangeComparer comparer = new ChangeComparer();
+            sorted.Sort(comparer);
+            String str = "'";
+            if (sorted.Count > 0)
+            {
+                str += sorted[0].Fee.ToString() + "_" + sorted[0].Date.ToShortDateString();
+            }
+
+            for (int i = 1; i < sorted.Count; i++)
+            {
+                str += "," + sorted[i].Fee.ToString() + "_" + sorted[i].Date.ToShortDateString();
+            }
+            str += "'";
+            /*String str = dataGridViewInf.Rows[0].Cells[0].Value.ToString() + "_" + dataGridViewInf.Rows[0].Cells[1].Value.ToString();
             for (int i = 1; i < dataGridViewInf.Rows.Count; i++)
             {
                 if (dataGridViewInf.Rows[i].Cells[0].Value == null || dataGridViewInf.Rows[i].Cells[0].Value.ToString() == "")
                     continue;
                 str += "," + dataGridViewInf.Rows[i].Cells[0].Value.ToString() + "_" + dataGridViewInf.Rows[i].Cells[1].Value.ToString();
                 count = Convert.ToInt32(dataGridViewInf.Rows[i].Cells[0].Value);
-            }
-            command.CommandText = "UPDATE Main SET Monthly_fee = '" + str + "' WHERE Contract_num = '" + contract + "'";
+            }*/
+            command.CommandText = "UPDATE Main SET Monthly_fee = " + str + " WHERE Contract_num = '" + contract + "'";
             command.ExecuteNonQuery();
 
             command.CommandText = "SELECT Monthly_fee FROM Main WHERE Contract_num = '" + contract + "'";
             SqlDataReader reader = command.ExecuteReader();
             double dd = DebtCalc(reader, contract);
             list.Items[0].SubItems[5].Text = dd.ToString();
-            list.Items[0].SubItems[6].Text = count.ToString();
+            list.Items[0].SubItems[6].Text = sorted[sorted.Count - 1].Fee.ToString();
             Program.form.buttonChgAP.Enabled = true;
         }
     }

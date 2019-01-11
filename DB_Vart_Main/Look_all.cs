@@ -15,6 +15,7 @@ namespace DB_Vart_Main
     {
         SqlConnection connection;
         int count;
+        ContextMenuStrip menu;
         public Look_all(SqlConnection connection)
         {
             this.connection = connection;
@@ -23,7 +24,26 @@ namespace DB_Vart_Main
             Program.form.setButtonWrAll(false);
             this.FormClosing += new FormClosingEventHandler(LookAll_FormClosing);
             listViewLook.DoubleClick += new EventHandler(listViewLook_DoubleClick);
+            listViewLook.Click += new EventHandler(listLook_ItemClick);
             Output("");
+
+            List<String> ar = new List<string>();
+            ar.Add("Адрес");
+            ar.Add("Фамилия");
+            ar.Add("Договор");
+            ar.Add("Долг");
+
+            ToolStripMenuItem[] items = new ToolStripMenuItem[4];
+            for (int i = 0; i < 4; i++)
+            {
+                items[i] = new ToolStripMenuItem();
+                items[i].Text = ar[i];
+            }
+
+            menu = new ContextMenuStrip();
+            menu.Items.AddRange(items);
+            menu.Name = "Копировать";
+            menu.ItemClicked += MenuItemClick0;
         }
 
         private List<BaseElement> list = new List<BaseElement>();
@@ -108,7 +128,6 @@ namespace DB_Vart_Main
 
         private void buttonSort_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(comboBoxSort.SelectedIndex.ToString());
             buttonPrev.Enabled = false;
             switch (comboBoxSort.SelectedIndex)
             {
@@ -128,6 +147,32 @@ namespace DB_Vart_Main
         {
             if (listViewLook.SelectedItems.Count > 0)
                 Clipboard.SetText(listViewLook.SelectedItems[0].SubItems[4].Text);
+        }
+
+        private void listLook_ItemClick(object sender, EventArgs e)
+        {
+            menu.Show(listViewLook, listViewLook.PointToClient(Cursor.Position));//, Cursor.Position);
+        }
+
+        private void MenuItemClick0(object sender, ToolStripItemClickedEventArgs e)
+        {
+            ToolStripItem item = e.ClickedItem;
+            ListView view = menu.SourceControl as ListView;
+            switch (item.Text)
+            {
+                case "Адрес":
+                    Clipboard.SetText(view.Items[0].SubItems[0].Text + ", " + view.Items[0].SubItems[2].Text);
+                    break;
+                case "Фамилия":
+                    Clipboard.SetText(view.Items[0].SubItems[3].Text);
+                    break;
+                case "Договор":
+                    Clipboard.SetText(view.Items[0].SubItems[4].Text);
+                    break;
+                case "Долг":
+                    Clipboard.SetText(view.Items[0].SubItems[5].Text);
+                    break;
+            }
         }
     }
 }

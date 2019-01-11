@@ -443,6 +443,7 @@
             this.listViewS.TabIndex = 0;
             this.listViewS.UseCompatibleStateImageBehavior = false;
             this.listViewS.View = System.Windows.Forms.View.Details;
+            this.listViewS.SelectedIndexChanged += new System.EventHandler(this.listViewS_SelectedIndexChanged);
             // 
             // columnHeader1
             // 

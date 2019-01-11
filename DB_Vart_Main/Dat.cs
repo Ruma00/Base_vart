@@ -8,7 +8,9 @@ namespace DB_Vart_Main
 {
     class Dat
     {
+        
         public int Fee { get; set; }
+        public double FeeD { get; set; }
         public DateTime Date { get; set; }
 
         public Dat() { }

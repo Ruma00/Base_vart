@@ -75,6 +75,12 @@ namespace DB_Vart_Main
             for (int i = 0; i < 10; i++)
                 vs[i] = dataGridViewInf.Rows[i].Cells[1].Value.ToString();
 
+            command.CommandText = "SELECT Adress, Section, Apartment FROM Main WHERE Contract_num = '" + contract + "'";
+            reader = command.ExecuteReader();
+            reader.Read();
+            dataGridViewInf.Rows.Add("Адрес", reader.GetString(0) + "!" + reader.GetString(1) + "!" + reader.GetInt32(2));
+            reader.Close();
+
             this.FormClosing += new FormClosingEventHandler(Information_FormClosing);
             dataGridViewInf.CellEndEdit += new DataGridViewCellEventHandler(dataGridViewInf_CellEndEdit);
             richTextBox1.LostFocus += new EventHandler(richTextBox1_LostFocus);
@@ -82,6 +88,8 @@ namespace DB_Vart_Main
 
         public void dataGridViewInf_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (dataGridViewInf.CurrentCell.RowIndex == vs.Length)
+                return;
             flag[0] = true;
             if (dataGridViewInf.CurrentCell.Value == null)
                 dataGridViewInf.CurrentCell.Value = "";
@@ -111,6 +119,12 @@ namespace DB_Vart_Main
 
                 command.ExecuteNonQuery();
             }
+
+            int i = dataGridViewInf.Rows.Count - 1;
+            string[] str = dataGridViewInf.Rows[i].Cells[1].Value.ToString().Split('!');
+            command.CommandText = "UPDATE Main SET Adress = '" + str[0] + "', Section = '" + str[1] + "', Apartment = '" + str[2] +
+                                            "' WHERE Contract_num = '" + dataGridViewInf.Rows[0].Cells[1].Value.ToString() + "'";
+            command.ExecuteNonQuery();
 
             Program.form.setButtonCtrInf(true);
         }
