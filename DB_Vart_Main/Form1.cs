@@ -93,7 +93,9 @@ namespace DB_Vart_Main
             buttonPayF.Enabled = false;
 
             textBoxSD.Text = "Введите № договора"; textBoxSD.ForeColor = Color.Gray;
+            textBoxSD.KeyDown += new KeyEventHandler(tbS_KeyDown);
             textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
+            textBoxSA.KeyDown += new KeyEventHandler(tbS_KeyDown);
             //textBoxPayCH.Text = "Смена аб. платы"; textBoxPayCH.ForeColor = Color.Gray;
             //textBoxAddP.Text = "Введите адрес или № договора"; textBoxAddP.ForeColor = Color.Gray;
             textBoxDel.Text = "Введите адрес или № договора"; textBoxDel.ForeColor = Color.Gray;
@@ -859,9 +861,9 @@ namespace DB_Vart_Main
                 return;
             string path = dialog.SelectedPath;
 
-            if (!File.Exists(path + "\\Ошибки.txt"))
+            if (!File.Exists(path + "\\Errors.txt"))
             {
-                File.Create(path + "\\Ошибки.txt").Close();
+                File.Create(path + "\\Errors.txt").Close();
             }
             
             OpenFileDialog open = new OpenFileDialog();
@@ -873,8 +875,9 @@ namespace DB_Vart_Main
 
             string line = "";
             //------------------------------------------------WRITER----------------------------------------------------
-            using (StreamWriter writer = new StreamWriter(path + "\\Ошибки.txt", false, Encoding.Default))
+            using (StreamWriter writer = new StreamWriter(path + "\\Errors.txt", true, Encoding.Default))
             {
+                //MessageBox.Show(path + "\\Ошибки.txt");
                 bool f = false;
                 while ((line = fileReader.ReadLine()) != null)
                 {
@@ -899,7 +902,7 @@ namespace DB_Vart_Main
 
                         if (reader.GetInt32(0) == 0)
                         {
-                            writer.WriteLine(split[6].Replace(" ФИО: ", "") + " " + splUse[0] + " " + splUse[1] + " " + splUse[2]);
+                            writer.WriteLine(split[6].Replace(" ФИО: ", "") + "\\ " + splUse[0] + "\\ " + splUse[1] + "\\ " + splUse[2]);
                             reader.Close();
                             flag = true;
                             continue;
@@ -1092,7 +1095,7 @@ namespace DB_Vart_Main
             switch (item.Text)
             {
                 case "Адрес":
-                    Clipboard.SetText(view.Items[0].SubItems[0].Text + ", " + view.Items[0].SubItems[2].Text);
+                    Clipboard.SetText(view.Items[0].SubItems[0].Text + ";" + view.Items[0].SubItems[2].Text);
                     break;
                 case "Фамилия":
                     Clipboard.SetText(view.Items[0].SubItems[3].Text);
@@ -1118,6 +1121,21 @@ namespace DB_Vart_Main
         private void listDel_ItemClick(object sender, EventArgs e)
         {
             menu.Show(listViewDel, listViewDel.PointToClient(Cursor.Position));//, Cursor.Position);
+        }
+
+        private void buttonChAll_Click(object sender, EventArgs e)
+        {
+            ChangeAll change = new ChangeAll(sqlConnection);
+            change.Show();
+        }
+
+        void tbS_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonSD_Click(sender, e);
+                buttonAct.Focus();
+            }
         }
     }
 }

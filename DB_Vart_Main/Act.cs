@@ -34,7 +34,7 @@ namespace DB_Vart_Main
 
         }
 
-        private void Calc(SqlConnection connection, String contract)
+        public void Calc(SqlConnection connection, String contract)
         {
             SqlCommand command = new SqlCommand("SELECT Monthly_fee FROM Main WHERE Contract_num = '" + contract + "'", connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -181,7 +181,7 @@ namespace DB_Vart_Main
                         if (sFlag[0])
                         {
                             sFlag[0] = false;
-                            item = new ListViewItem(new string[] { "", "", pay.ToString()/*??????*/, f.ToString(), "-----" });
+                            item = new ListViewItem(new string[] { "", "", "", f.ToString(), "-----" });
                             listViewAct.Items.Add(item);
                         }
 
@@ -232,6 +232,7 @@ namespace DB_Vart_Main
             command.ExecuteNonQuery();
             command.CommandText = "UPDATE ToExcel SET Debt = " + (sumFee - sumPay).ToString() + " WHERE Contract_num = '" + contract + "'";
             command.ExecuteNonQuery();
+            Program.form.setButtonAct(true);
         }
 
         private void Act_FormClosing(object sender, FormClosingEventArgs e)

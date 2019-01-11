@@ -117,6 +117,7 @@
             this.comboBoxRc = new System.Windows.Forms.ComboBox();
             this.buttonRc = new System.Windows.Forms.Button();
             this.labelRcpt = new System.Windows.Forms.Label();
+            this.buttonChAll = new System.Windows.Forms.Button();
             this.tabControlMain.SuspendLayout();
             this.tabPageMain.SuspendLayout();
             this.tabPageSec.SuspendLayout();
@@ -136,6 +137,7 @@
             // 
             // tabPageMain
             // 
+            this.tabPageMain.Controls.Add(this.buttonChAll);
             this.tabPageMain.Controls.Add(this.buttonPayF);
             this.tabPageMain.Controls.Add(this.richTextBoxNcDel);
             this.tabPageMain.Controls.Add(this.buttonChgAP);
@@ -186,9 +188,9 @@
             // 
             // buttonChgAP
             // 
-            this.buttonChgAP.Location = new System.Drawing.Point(955, 126);
+            this.buttonChgAP.Location = new System.Drawing.Point(955, 125);
             this.buttonChgAP.Name = "buttonChgAP";
-            this.buttonChgAP.Size = new System.Drawing.Size(325, 66);
+            this.buttonChgAP.Size = new System.Drawing.Size(160, 66);
             this.buttonChgAP.TabIndex = 16;
             this.buttonChgAP.Text = "Сменить абонентскую плату";
             this.buttonChgAP.UseVisualStyleBackColor = true;
@@ -934,6 +936,17 @@
             this.labelRcpt.TabIndex = 10;
             this.labelRcpt.Text = "Квитанции";
             // 
+            // buttonChAll
+            // 
+            this.buttonChAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonChAll.Location = new System.Drawing.Point(1128, 125);
+            this.buttonChAll.Name = "buttonChAll";
+            this.buttonChAll.Size = new System.Drawing.Size(152, 66);
+            this.buttonChAll.TabIndex = 21;
+            this.buttonChAll.Text = "Сменить всем";
+            this.buttonChAll.UseVisualStyleBackColor = true;
+            this.buttonChAll.Click += new System.EventHandler(this.buttonChAll_Click);
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1046,6 +1059,7 @@
         internal System.Windows.Forms.ListView listViewS;
         public System.Windows.Forms.Button buttonChgAP;
         private System.Windows.Forms.Button buttonPayF;
+        private System.Windows.Forms.Button buttonChAll;
     }
 }
 

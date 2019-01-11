@@ -181,6 +181,8 @@ namespace DB_Vart_Main
             }
         }
 
+        //public void CellLostFocus
+
         public void Change_FormClosing(object sender, FormClosingEventArgs e)
         {
             ChangeComparer comparer = new ChangeComparer();
@@ -193,6 +195,8 @@ namespace DB_Vart_Main
 
             for (int i = 1; i < sorted.Count; i++)
             {
+                if (sorted[i].Date == sorted[i - 1].Date)
+                    continue;
                 str += "," + sorted[i].Fee.ToString() + "_" + sorted[i].Date.ToShortDateString();
             }
             str += "'";
@@ -207,11 +211,15 @@ namespace DB_Vart_Main
             command.CommandText = "UPDATE Main SET Monthly_fee = " + str + " WHERE Contract_num = '" + contract + "'";
             command.ExecuteNonQuery();
 
-            command.CommandText = "SELECT Monthly_fee FROM Main WHERE Contract_num = '" + contract + "'";
-            SqlDataReader reader = command.ExecuteReader();
-            double dd = DebtCalc(reader, contract);
+            /*command.CommandText = "SELECT Monthly_fee FROM Main WHERE Contract_num = '" + contract + "'";
+            SqlDataReader reader = command.ExecuteReader();*/
+            /*double dd = DebtCalc(reader, contract);
             list.Items[0].SubItems[5].Text = dd.ToString();
-            list.Items[0].SubItems[6].Text = sorted[sorted.Count - 1].Fee.ToString();
+            list.Items[0].SubItems[6].Text = sorted[sorted.Count - 1].Fee.ToString();*/
+            Act act = new Act(contract, "", "", connection);
+            //act.Calc(connection, contract);
+            act.Dispose();
+            Program.form.setButtonAct(true);
             Program.form.buttonChgAP.Enabled = true;
         }
     }

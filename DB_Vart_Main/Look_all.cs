@@ -23,7 +23,7 @@ namespace DB_Vart_Main
             comboBoxSort.SelectedIndex = 0;
             Program.form.setButtonWrAll(false);
             this.FormClosing += new FormClosingEventHandler(LookAll_FormClosing);
-            listViewLook.DoubleClick += new EventHandler(listViewLook_DoubleClick);
+            //listViewLook.DoubleClick += new EventHandler(listViewLook_DoubleClick);
             listViewLook.Click += new EventHandler(listLook_ItemClick);
             Output("");
 
@@ -161,16 +161,16 @@ namespace DB_Vart_Main
             switch (item.Text)
             {
                 case "Адрес":
-                    Clipboard.SetText(view.Items[0].SubItems[0].Text + ", " + view.Items[0].SubItems[2].Text);
+                    Clipboard.SetText(view.SelectedItems[0].SubItems[0].Text + ";" + view.Items[0].SubItems[2].Text);
                     break;
                 case "Фамилия":
-                    Clipboard.SetText(view.Items[0].SubItems[3].Text);
+                    Clipboard.SetText(view.SelectedItems[0].SubItems[3].Text);
                     break;
                 case "Договор":
-                    Clipboard.SetText(view.Items[0].SubItems[4].Text);
+                    Clipboard.SetText(view.SelectedItems[0].SubItems[4].Text);
                     break;
                 case "Долг":
-                    Clipboard.SetText(view.Items[0].SubItems[5].Text);
+                    Clipboard.SetText(view.SelectedItems[0].SubItems[5].Text);
                     break;
             }
         }

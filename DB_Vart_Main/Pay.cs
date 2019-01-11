@@ -127,6 +127,11 @@ namespace DB_Vart_Main
             command.CommandText = "SELECT List FROM Payments WHERE Contract_num = '" + contract + "'";
             SqlDataReader reader = command.ExecuteReader();
             Program.form.SqlReadDate(reader);
+
+            Act act = new Act(contract, "", "", connection);
+            //act.Calc(connection, contract);
+            act.Dispose();
+            Program.form.setButtonAct(true);
         }
     }
 }
