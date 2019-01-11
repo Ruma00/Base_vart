@@ -984,6 +984,25 @@ namespace DB_Vart_Main
                     form.Show();
                 }
             }
+
+            SqlCommand com = new SqlCommand();
+            com.CommandText = "SELECT Contract_num FROM Payments";
+            com.Connection = sqlConnection;
+
+            SqlDataReader rea = com.ExecuteReader();
+            //Dictionary<string, DateTime> dic = new Dictionary<string, DateTime>();
+            List<String> dic = new List<string>();
+            while (rea.Read())
+            {
+                dic.Add(rea.GetString(0));//, rea.GetDateTime(1));
+            }
+            rea.Close();
+
+            foreach (string s in dic)
+            {
+                Pay pay = new Pay(s, sqlConnection);
+                pay.Pay_FormClosing(sender, new FormClosingEventArgs(CloseReason.UserClosing, false));
+            }
         }
 
         private void buttonCtrInf_Click(object sender, EventArgs e)
