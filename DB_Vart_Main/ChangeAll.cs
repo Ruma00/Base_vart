@@ -58,6 +58,12 @@ namespace DB_Vart_Main
                 DateTime arr = reader.GetDateTime(0);
                 reader.Close();
 
+                if (!Program.CheckInputDate(textBoxDate.Text) || !Program.CheckInputNum(textBoxSum.Text))
+                {
+                    MessageBox.Show("Неверный формат суммы и/или даты");
+                    return;
+                }
+
                 Act act = new Act(s, "", "", connection);
 
                 if (arr.Year != 1900 && Convert.ToDateTime(textBoxDate.Text) > arr)
@@ -69,6 +75,7 @@ namespace DB_Vart_Main
                     act.Dispose();
                     continue;
                 }
+
                 list.Add(new Dat(Convert.ToInt32(textBoxSum.Text), Convert.ToDateTime(textBoxDate.Text)));
                 list.Sort(new ChangeComparer());
 

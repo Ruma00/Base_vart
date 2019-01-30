@@ -13,12 +13,14 @@ namespace DB_Vart_Main
 {
     public partial class Change : Form
     {
+        bool cansel = false;
         SqlCommand command;
         SqlConnection connection;
         String contract;
         ListView list;
         List<Dat> sorted = new List<Dat>();
         int count = 0;
+        object backup;
 
         public Change(string contract, SqlConnection connection, ref ListView list)
         {
@@ -33,6 +35,7 @@ namespace DB_Vart_Main
 
             this.FormClosing += new FormClosingEventHandler(Change_FormClosing);
             dataGridViewInf.CellEndEdit += new DataGridViewCellEventHandler(dataGrid_CellEndEdit);
+            dataGridViewInf.CellBeginEdit += new DataGridViewCellCancelEventHandler(dataGrid_CellBeginEdit);
 
             command = new SqlCommand();
             command.Connection = connection;
@@ -159,17 +162,32 @@ namespace DB_Vart_Main
             int u = dataGridViewInf.CurrentCell.ColumnIndex;
             int i = dataGridViewInf.CurrentCell.RowIndex;
             DataGridViewCell cell = dataGridViewInf.CurrentCell;
+
+            if (i == 0)
+                dataGridViewInf.CancelEdit();
             if (i == sorted.Count)
                 sorted.Add(new Dat());
 
             switch (u)
             {
                 case 0:
+                    if (cell.Value != null && cell.Value.ToString() != "" && !Program.CheckInputNum(cell.Value.ToString()))
+                    {
+                        MessageBox.Show("Неверный формат суммы, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    }
                     if (cell.Value != null && cell.Value.ToString() != "")
                         sorted[i].Fee = Convert.ToInt32(cell.Value);
                     else
-                        sorted[i].Fee = 0; break;
+                        sorted[i].Fee = 0; dataGridViewInf.CurrentCell.Value = "0"; break;
                 case 1:
+                    if (cell.Value != null && cell.Value.ToString() != "" && !Program.CheckInputDate(cell.Value.ToString()))
+                    {
+                        MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    }
                     if (cell.Value != null && cell.Value.ToString() != "")
                         sorted[i].Date = Convert.ToDateTime(cell.Value);
                     else
@@ -181,7 +199,10 @@ namespace DB_Vart_Main
             }
         }
 
-        //public void CellLostFocus
+        public void dataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            backup = dataGridViewInf.CurrentCell.Value;
+        }
 
         public void Change_FormClosing(object sender, FormClosingEventArgs e)
         {

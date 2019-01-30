@@ -17,6 +17,7 @@ namespace DB_Vart_Main
         SqlConnection connection;
         SqlCommand command;
         List<PayInf> list = new List<PayInf>();
+        object backup;
 
         public Pay(string contract, SqlConnection connection)
         {
@@ -32,6 +33,7 @@ namespace DB_Vart_Main
 
             this.FormClosing += new FormClosingEventHandler(Pay_FormClosing);
             dataGridViewInf.CellEndEdit += new DataGridViewCellEventHandler(dataGridViewInf_CellEndEdit);
+            dataGridViewInf.CellBeginEdit += new DataGridViewCellCancelEventHandler(dataGridViewInf_CellBeginEdit);
 
             command = new SqlCommand();
             command.Connection = connection;
@@ -68,7 +70,10 @@ namespace DB_Vart_Main
             reader.Close();
         }
 
-        //public void dataGrid_LostFocus(object sender, )
+        public void dataGridViewInf_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            backup = dataGridViewInf.CurrentCell.Value;
+        }
 
         public void dataGridViewInf_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -80,6 +85,12 @@ namespace DB_Vart_Main
             switch(u)
             {
                 case 0:
+                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    {
+                        MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    }
                     if (cell.Value != null && cell.Value.ToString() != "")
                         list[i].Date = Convert.ToDateTime(cell.Value);
                     else
@@ -89,6 +100,12 @@ namespace DB_Vart_Main
                     }
                     break;
                 case 1:
+                    if (!Program.CheckInputNum(cell.Value.ToString()))
+                    {
+                        MessageBox.Show("Неверный формат суммы, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    }
                     if (cell.Value != null && cell.Value.ToString() == "")
                         list[i].Pay = 0;
                     else

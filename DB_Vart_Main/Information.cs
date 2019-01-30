@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,7 @@ namespace DB_Vart_Main
         String[] vs;
         SqlCommand command;
         bool[] flag = { false, false };
+        object backup;
         public Information(string contract, SqlConnection connection)
         {
             InitializeComponent();
@@ -84,6 +86,12 @@ namespace DB_Vart_Main
             this.FormClosing += new FormClosingEventHandler(Information_FormClosing);
             dataGridViewInf.CellEndEdit += new DataGridViewCellEventHandler(dataGridViewInf_CellEndEdit);
             richTextBox1.LostFocus += new EventHandler(richTextBox1_LostFocus);
+            dataGridViewInf.CellBeginEdit += new DataGridViewCellCancelEventHandler(dataGridViewInf_CellBeginEdit);
+        }
+
+        public void dataGridViewInf_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            backup = dataGridViewInf.CurrentCell.Value;
         }
 
         public void dataGridViewInf_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -93,6 +101,49 @@ namespace DB_Vart_Main
             flag[0] = true;
             if (dataGridViewInf.CurrentCell.Value == null)
                 dataGridViewInf.CurrentCell.Value = "";
+
+            DataGridViewCell cell = dataGridViewInf.CurrentCell;
+            switch (dataGridViewInf.CurrentCell.RowIndex)
+            {
+                case 1:
+                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    {
+                        MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    } break;
+                case 4:
+                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    {
+                        MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    } break;
+                case 7:
+                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    {
+                        MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    } break;
+                case 9:
+                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    {
+                        MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    } break;
+
+                case 3:
+                    string pattern = @"\d{4}\s\d{6}";
+                    if (!Regex.IsMatch(dataGridViewInf.CurrentCell.Value.ToString(), pattern))
+                    {
+                        MessageBox.Show("Неверные паспортные данные, восстановлено предыдущее значение");
+                        dataGridViewInf.CurrentCell.Value = backup;
+                        return;
+                    } break;
+            }
+
             vs[dataGridViewInf.CurrentCell.RowIndex] = dataGridViewInf.CurrentCell.Value.ToString();
         }
 
