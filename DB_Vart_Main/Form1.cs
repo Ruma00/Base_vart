@@ -428,27 +428,34 @@ namespace DB_Vart_Main
                 list.Items.Remove(it);
             if (reader.HasRows)
             {
-                while (reader.Read()) // построчно считываем данные
+                try
                 {
-                    object adress = reader.GetValue(0);
-                    object section = reader.GetValue(1);
-                    object apartment = reader.GetValue(2);
-                    object surname = reader.GetValue(3);
-                    object contract_num = reader.GetValue(4);
-                    object debt = reader.GetValue(5);
-                    object monthly_fee = reader.GetValue(6);
-                    string[] temp = monthly_fee.ToString().Split(',');
-                    string notice = reader.GetString(7);
-
-                    string[] tmp = temp[temp.Length - 1].Split('_');
-                    ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), surname.ToString(),
-                        contract_num.ToString(), debt.ToString(), tmp[0], notice });
-                    list.Items.Add(item);
-                    if (check)
+                    while (reader.Read()) // построчно считываем данные
                     {
-                        list.Items[0].SubItems[7].Text = "---↓↓↓---";
-                        richTextBoxNcDel.Text = notice;
+                        object adress = reader.GetValue(0);
+                        object section = reader.GetValue(1);
+                        object apartment = reader.GetValue(2);
+                        object surname = reader.GetValue(3);
+                        object contract_num = reader.GetValue(4);
+                        object debt = reader.GetValue(5);
+                        object monthly_fee = reader.GetValue(6);
+                        string[] temp = monthly_fee.ToString().Split(',');
+                        string notice = reader.GetString(7);
+
+                        string[] tmp = temp[temp.Length - 1].Split('_');
+                        ListViewItem item = new ListViewItem(new string[] { adress.ToString(), section.ToString(), apartment.ToString(), surname.ToString(),
+                        contract_num.ToString(), debt.ToString(), tmp[0], notice });
+                        list.Items.Add(item);
+                        if (check)
+                        {
+                            list.Items[0].SubItems[7].Text = "---↓↓↓---";
+                            richTextBoxNcDel.Text = notice;
+                        }
                     }
+                }
+                catch (IndexOutOfRangeException e)
+                {
+                    //MessageBox.Show("Абонент не найден");
                 }
             }
             reader.Close();
@@ -528,10 +535,31 @@ namespace DB_Vart_Main
             if (textBoxSA.Text != "Введите адрес и кв")
             {
                 string[] arr = textBoxSA.Text.Split(';');
-                SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress=" + '\'' + arr[0] + '\'' + " AND Apartment=" + arr[1], sqlConnection);
+                SqlCommand command = new SqlCommand();
+                command.Connection = sqlConnection;
+                try
+                {
+                    command.CommandText = sqlExpressions[0] + sqlExpressions[1] + "WHERE Adress=" + '\'' + arr[0] + '\'' + " AND Apartment=" + arr[1];
+                    SqlReader(command.ExecuteReader(), listViewS, false);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Неверный формат адреса");
+                    //textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
+                    return;
+                }
 
-                SqlReader(command.ExecuteReader(), listViewS, false);
-
+                if (listViewS.Items.Count == 0)
+                {
+                    MessageBox.Show("Абонент не найден");
+                    textBoxSA.Text = "Введите адрес и кв"; textBoxSA.ForeColor = Color.Gray;
+                    buttonAct.Enabled = false;
+                    buttonCtrInf.Enabled = false;
+                    buttonPayF.Enabled = false;
+                    buttonChgAP.Enabled = false;
+                    return;
+                }
+                    
                 command.CommandText = "SELECT List FROM " + sqlExpressions[2] + sqlExpressions[5] + listViewS.Items[0].SubItems[4].Text;
 
                 SqlReadDate(command.ExecuteReader());
@@ -540,6 +568,11 @@ namespace DB_Vart_Main
             }
             else if (textBoxSD.Text != "Введите № договора")
             {
+                if (!Regex.IsMatch(textBoxSD.Text, @"\d{" + textBoxSD.Text.Length + "}"))
+                {
+                    MessageBox.Show("Номер договора введён неверно");
+                    return;
+                }
                 SqlCommand command = new SqlCommand(sqlExpressions[0] + sqlExpressions[1] + sqlExpressions[5] + textBoxSD.Text, sqlConnection);
 
                 SqlReader(command.ExecuteReader(), listViewS, false);
@@ -554,6 +587,8 @@ namespace DB_Vart_Main
             {
                 buttonCtrInf.Enabled = true;
                 buttonAct.Enabled = true;
+                buttonChgAP.Enabled = true;
+                buttonPayF.Enabled = true;
             }
         }
 
@@ -671,7 +706,7 @@ namespace DB_Vart_Main
                 list.Add("\n      Аб. плата");
             }
 
-            if (textBoxDate.Text == "" || textBoxDate.Text == null)
+            if (textBoxDate.Text == "" || textBoxDate.Text == null || !Program.CheckInputDate(textBoxDate.Text))
             {
                 list.Add("\n      Дата заключения");
             }
@@ -681,7 +716,7 @@ namespace DB_Vart_Main
                 list.Add("\n      ФИО");
             }
 
-            if (textBoxPt.Text.Length > 11)
+            if (textBoxPt.Text.Length != 11 && textBoxPt.Text != "")
             {
                 list.Add("\n      Паспорт");
             }
@@ -692,6 +727,13 @@ namespace DB_Vart_Main
                 return;
             }
             //---------------------------------------------------------
+
+            if (textBoxFam.Text.Split(' ').Length > 1)
+            {
+                DialogResult result = MessageBox.Show("Фамилия введена правильно?\n\n" + textBoxFam.Text, "", MessageBoxButtons.YesNo);
+                if (result == DialogResult.No)
+                    return;
+            }
 
             DateTime date = Convert.ToDateTime(textBoxDate.Text);
             DateTime today = DateTime.Today;
@@ -714,25 +756,49 @@ namespace DB_Vart_Main
                 else
                     month = 12 - date.Month + today.Month;
             }
+
+            int d = debt;
+
             debt += pay * (u * 12 + month);
 
             textBoxAdr2.Text = textBoxAdr2.Text.Replace(" ", "");
 
-            command.CommandText = sqlExpressions[4] + "('" + textBoxAdr.Text + "'," + adr[0] + "," + adr[1] + ",'" + textBoxFam.Text + "','" + textBoxCtr.Text +
+            try
+            {
+                command.CommandText = sqlExpressions[4] + "('" + textBoxAdr.Text + "'," + adr[0] + "," + adr[1] + ",'" + textBoxFam.Text + "','" + textBoxCtr.Text +
                                 "','" + textBoxPay.Text + "_" + textBoxDate.Text + "','" + debt.ToString() + "','" + richTextBoxNote.Text + "',0)";
-            command.ExecuteNonQuery();
+                command.ExecuteNonQuery();
 
-            command.CommandText = "INSERT INTO ContractInf VALUES ('" + textBoxCtr.Text + "','" + textBoxDate.Text + "','" +
-                richTextBoxFIO.Text + "','" + textBoxPt.Text + "','" + textBoxPt_Date.Text + "','" + richTextBoxPtWho.Text + "','" +
-                textBoxPhn.Text + "','" + textBoxBrDt.Text + "','" + richTextBoxBrPl.Text + "','')";
-            command.ExecuteNonQuery();
+                command.CommandText = "INSERT INTO ContractInf VALUES ('" + textBoxCtr.Text + "','" + textBoxDate.Text + "','" +
+                    richTextBoxFIO.Text + "','" + textBoxPt.Text + "','" + textBoxPt_Date.Text + "','" + richTextBoxPtWho.Text + "','" +
+                    textBoxPhn.Text + "','" + textBoxBrDt.Text + "','" + richTextBoxBrPl.Text + "','')";
+                command.ExecuteNonQuery();
 
-            command.CommandText = "INSERT INTO Payments VALUES ('" + textBoxCtr.Text + "','')";
-            command.ExecuteNonQuery();
+                if (d != 0)
+                {
+                    command.CommandText = "INSERT INTO Payments VALUES ('" + textBoxCtr.Text + "','" + textBoxDate.Text +
+                                "_" + (d * (-1)) + "')";
+                    command.ExecuteNonQuery();
+                }
+                else
+                {
+                    command.CommandText = "INSERT INTO Payments VALUES ('" + textBoxCtr.Text + "','')";
+                    command.ExecuteNonQuery();
+                }
 
-            command.CommandText = "INSERT INTO ToExcel VALUES ('" + textBoxFam.Text + "','" + textBoxAdr.Text + ", " + adr[1] +
-                                                "','" + textBoxCtr.Text + "','" + textBoxDebt.Text + "')";
-            command.ExecuteNonQuery();
+                command.CommandText = "INSERT INTO ToExcel VALUES ('" + textBoxFam.Text + "','" + textBoxAdr.Text + ", " + adr[1] +
+                                                    "','" + textBoxCtr.Text + "','" + textBoxDebt.Text + "')";
+                command.ExecuteNonQuery();
+            }
+            catch
+            {
+                command.CommandText = "DELETE FROM Main WHERE Contract_num = '" + textBoxCtr + "';";
+                command.CommandText = "DELETE FROM ContractInf WHERE Contract_num = '" + textBoxCtr + "';";
+                command.CommandText = "DELETE FROM Payments WHERE Contract_num = '" + textBoxCtr + "';";
+                command.CommandText = "DELETE FROM ToExcel WHERE Contract_num = '" + textBoxCtr + "'";
+
+                MessageBox.Show("Ошибка! Абонент не был добавлен");
+            }
 
             Empty();
 

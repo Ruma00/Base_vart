@@ -106,28 +106,28 @@ namespace DB_Vart_Main
             switch (dataGridViewInf.CurrentCell.RowIndex)
             {
                 case 1:
-                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    if (!Program.CheckInputDate(cell.Value.ToString()) && dataGridViewInf.CurrentCell.Value.ToString() != "")
                     {
                         MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
                         dataGridViewInf.CurrentCell.Value = backup;
                         return;
                     } break;
                 case 4:
-                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    if (!Program.CheckInputDate(cell.Value.ToString()) && dataGridViewInf.CurrentCell.Value.ToString() != "")
                     {
                         MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
                         dataGridViewInf.CurrentCell.Value = backup;
                         return;
                     } break;
                 case 7:
-                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    if (!Program.CheckInputDate(cell.Value.ToString()) && dataGridViewInf.CurrentCell.Value.ToString() != "")
                     {
                         MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
                         dataGridViewInf.CurrentCell.Value = backup;
                         return;
                     } break;
                 case 9:
-                    if (!Program.CheckInputDate(cell.Value.ToString()))
+                    if (!Program.CheckInputDate(cell.Value.ToString()) && dataGridViewInf.CurrentCell.Value.ToString() != "")
                     {
                         MessageBox.Show("Неверный формат даты, восстановлено предыдущее значение");
                         dataGridViewInf.CurrentCell.Value = backup;
@@ -136,9 +136,11 @@ namespace DB_Vart_Main
 
                 case 3:
                     string pattern = @"\d{4}\s\d{6}";
+                    if (dataGridViewInf.CurrentCell.Value.ToString() == "")
+                        break;
                     if (!Regex.IsMatch(dataGridViewInf.CurrentCell.Value.ToString(), pattern))
                     {
-                        MessageBox.Show("Неверные паспортные данные, восстановлено предыдущее значение");
+                        MessageBox.Show("Неверный формат паспортных данных, восстановлено предыдущее значение");
                         dataGridViewInf.CurrentCell.Value = backup;
                         return;
                     } break;

@@ -25,12 +25,12 @@ namespace DB_Vart_Main
         public static bool CheckInputDate(string date)
         {
             List<string> pattern = new List<string>();
-            pattern.Add(@"\d{2}\.\d{2}\.d{4}");
-            pattern.Add(@"\d{2}\.\d{2}\.d{2}");
-            pattern.Add(@"\d{2}/d{2}/d{4}");
-            pattern.Add(@"\d{2}/d{2}/d{2}");
-            pattern.Add(@"\d{2}[-]d{2}[-]d{4}");
-            pattern.Add(@"\d{2}[-]d{2}[-]d{2}");
+            pattern.Add(@"\d{2}\.\d{2}\.\d{4}");
+            pattern.Add(@"\d{2}\.\d{2}\.\d{2}");
+            pattern.Add(@"\d{2}\/\d{2}\/\d{4}");
+            pattern.Add(@"\d{2}\/\d{2}\/\d{2}");
+            pattern.Add(@"\d{2}[-]\d{2}[-]\d{4}");
+            pattern.Add(@"\d{2}[-]\d{2}[-]\d{2}");
 
             foreach (string s in pattern)
                 if (Regex.IsMatch(date, s))

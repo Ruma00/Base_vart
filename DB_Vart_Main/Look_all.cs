@@ -161,7 +161,7 @@ namespace DB_Vart_Main
             switch (item.Text)
             {
                 case "Адрес":
-                    Clipboard.SetText(view.SelectedItems[0].SubItems[0].Text + ";" + view.Items[0].SubItems[2].Text);
+                    Clipboard.SetText(view.SelectedItems[0].SubItems[0].Text + ";" + view.SelectedItems[0].SubItems[2].Text);
                     break;
                 case "Фамилия":
                     Clipboard.SetText(view.SelectedItems[0].SubItems[3].Text);
