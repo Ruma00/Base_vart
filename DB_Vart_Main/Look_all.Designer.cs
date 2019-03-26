@@ -162,15 +162,18 @@
             this.buttonPrev.TabIndex = 8;
             this.buttonPrev.Text = "Пред. стр.";
             this.buttonPrev.UseVisualStyleBackColor = true;
+            this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
             // buttonNext
             // 
+            this.buttonNext.Enabled = false;
             this.buttonNext.Location = new System.Drawing.Point(685, 23);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(122, 23);
             this.buttonNext.TabIndex = 7;
             this.buttonNext.Text = "След. стр.";
             this.buttonNext.UseVisualStyleBackColor = true;
+            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // Look_all
             // 

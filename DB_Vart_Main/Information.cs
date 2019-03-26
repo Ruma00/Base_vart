@@ -18,18 +18,26 @@ namespace DB_Vart_Main
         SqlCommand command;
         bool[] flag = { false, false };
         object backup;
-        public Information(string contract, SqlConnection connection)
+
+        String contract;
+        //SqlConnection connection;
+        ListView view;
+
+        public Information(string contract, SqlConnection connection, ref ListView listViewS)
         {
             InitializeComponent();
 
             dataGridViewInf.RowTemplate.Height = 43;
             dataGridViewInf.AllowUserToAddRows = false;
+            view = listViewS;
+
+            this.contract = contract;
 
             Program.form.setButtonCtrInf(false);
 
             command = new SqlCommand();
             command.Connection = connection;
-            command.CommandText = "SELECT * FROM ContractInf WHERE Contract_num = " + contract;
+            command.CommandText = "SELECT * FROM ContractInf WHERE Contract_num = '" + contract + "'";
             
             SqlDataReader reader = command.ExecuteReader();
 
@@ -83,6 +91,14 @@ namespace DB_Vart_Main
             dataGridViewInf.Rows.Add("Адрес", reader.GetString(0) + "!" + reader.GetString(1) + "!" + reader.GetInt32(2));
             reader.Close();
 
+            command.CommandText = "SELECT Old_Debt FROM Main WHERE Contract_num = '" + contract + "'";
+            reader = command.ExecuteReader();
+            reader.Read();
+            int old_debt = reader.GetInt32(0);
+            reader.Close();
+
+            dataGridViewInf.Rows.Add("Старый долг:", old_debt);
+
             this.FormClosing += new FormClosingEventHandler(Information_FormClosing);
             dataGridViewInf.CellEndEdit += new DataGridViewCellEventHandler(dataGridViewInf_CellEndEdit);
             richTextBox1.LostFocus += new EventHandler(richTextBox1_LostFocus);
@@ -96,7 +112,7 @@ namespace DB_Vart_Main
 
         public void dataGridViewInf_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridViewInf.CurrentCell.RowIndex == vs.Length)
+            if (dataGridViewInf.CurrentCell.RowIndex == vs.Length + 1 || dataGridViewInf.CurrentCell.RowIndex == vs.Length)
                 return;
             flag[0] = true;
             if (dataGridViewInf.CurrentCell.Value == null)
@@ -173,11 +189,38 @@ namespace DB_Vart_Main
                 command.ExecuteNonQuery();
             }
 
-            int i = dataGridViewInf.Rows.Count - 1;
+            int i = dataGridViewInf.Rows.Count - 2;
             string[] str = dataGridViewInf.Rows[i].Cells[1].Value.ToString().Split('!');
+
+            string ctr = dataGridViewInf.Rows[0].Cells[1].Value.ToString();
+
             command.CommandText = "UPDATE Main SET Adress = '" + str[0] + "', Section = '" + str[1] + "', Apartment = '" + str[2] +
-                                            "' WHERE Contract_num = '" + dataGridViewInf.Rows[0].Cells[1].Value.ToString() + "'";
+                                            "' WHERE Contract_num = '" + ctr + "'";
             command.ExecuteNonQuery();
+
+            command.CommandText = "UPDATE Main SET Contract_num = '" + ctr +
+                            "' WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
+
+            command.CommandText = "UPDATE ContractInf SET Contract_num = '" + ctr +
+                            "' WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
+
+            command.CommandText = "UPDATE ToExcel SET Contract_num = '" + ctr +
+                "' WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
+
+            command.CommandText = "UPDATE Payments SET Contract_num = '" + ctr +
+                "' WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
+            view.Items[0].SubItems[4].Text = ctr;
+
+            i = Convert.ToInt32(dataGridViewInf.Rows[dataGridViewInf.Rows.Count - 1].Cells[1].Value);
+            command.CommandText = "UPDATE Main SET Old_Debt = " + i + " WHERE Contract_num = '" + contract + "'";
+            command.ExecuteNonQuery();
+
+            Act act = new Act(contract, command.Connection);
+            Program.form.setButtonAct(true);
 
             Program.form.setButtonCtrInf(true);
         }

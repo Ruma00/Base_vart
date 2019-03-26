@@ -64,7 +64,7 @@ namespace DB_Vart_Main
                     return;
                 }
 
-                Act act = new Act(s, "", "", connection);
+                Act act = new Act(s, connection);
 
                 if (arr.Year != 1900 && Convert.ToDateTime(textBoxDate.Text) > arr)
                 {

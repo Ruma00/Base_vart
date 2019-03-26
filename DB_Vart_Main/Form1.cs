@@ -22,7 +22,7 @@ namespace DB_Vart_Main
 
         public Main_form()
         {
-            try
+            /*try
             {
                 StreamReader reader = new StreamReader("dat.txt");
                 string line = reader.ReadLine();
@@ -44,7 +44,7 @@ namespace DB_Vart_Main
                 byte[] array = Encoding.Default.GetBytes(DateTime.Today.Month.ToString());
                 file.Write(array, 0, array.Length);
                 file.Close();
-            }
+            }*/
 
             InitializeComponent();
             sqlConnection.ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Base;Integrated Security=true";
@@ -73,9 +73,6 @@ namespace DB_Vart_Main
             menu.ItemClicked += MenuItemClick0;
             //listViewS.ContextMenuStrip.Enabled = true;
             //
-            if (rez != 0)
-                SetDebt(rez);
-
             comboBoxRc.SelectedIndex = 0;
 
             listViewS.Click += new EventHandler(listS_ItemClick);
@@ -117,11 +114,57 @@ namespace DB_Vart_Main
             dataGridViewAddP.Rows[0].Cells[3].Value = "";
 
             dataGridViewAddP.ClearSelection();*/
+
+            this.Load += Form_Load;
         }
 
-        public void SetDebt(int rez)
+        public void Form_Load(object sender, EventArgs e)
         {
-            SqlCommand command = new SqlCommand("SELECT Monthly_fee, Contract_num FROM Main", sqlConnection);
+            SetDebt();
+        }
+
+        public void SetDebt()
+        {
+            SqlCommand command = new SqlCommand("SELECT * FROM Dt", sqlConnection);
+            SqlDataReader reader = command.ExecuteReader();
+
+            reader.Read();
+
+            DateTime date = reader.GetDateTime(0);
+            reader.Close();
+
+            if (date.Month == DateTime.Today.Month)
+            {
+                return;
+            }
+            else
+            {
+                command.CommandText = "UPDATE Dt SET Dat = '" + DateTime.Today.ToShortDateString() + "'";
+                command.ExecuteNonQuery();
+                //MessageBox.Show("changed");
+            }
+
+            command.CommandText = "SELECT Contract_num FROM Main";
+            reader = command.ExecuteReader();
+
+            List<String> list = new List<string>();
+
+            while(reader.Read())
+            {
+                list.Add(reader.GetString(0));
+                /*Act act = new Act(reader.GetString(0), sqlConnection);
+                act.Dispose();*/
+            }
+
+            reader.Close();
+
+            foreach (String s in list)
+            {
+                //list.Add(reader.GetString(0));
+                Act act = new Act(s, sqlConnection);
+                act.Dispose();
+            }
+            /*SqlCommand command = new SqlCommand("SELECT Monthly_fee, Contract_num FROM Main", sqlConnection);
             SqlDataReader sqlReader = command.ExecuteReader();
 
             Dictionary<String, int> keys = new Dictionary<String, int>();
@@ -147,7 +190,7 @@ namespace DB_Vart_Main
                 keys.Remove(t.Key);
                 Console.WriteLine("removed");
             }
-            Console.WriteLine("end");
+            Console.WriteLine("end");*/
         }
 
         string[] sqlExpressions = new string[] { "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM ", "Main ", "Payments ",
@@ -653,6 +696,8 @@ namespace DB_Vart_Main
             /*if (!CheckAdd(adr))
                 return;*/
 
+            String ctr = textBoxCtr.Text;
+
             List<string> list = new List<string>();
 
             SqlCommand command = new SqlCommand();
@@ -735,7 +780,8 @@ namespace DB_Vart_Main
                     return;
             }
 
-            DateTime date = Convert.ToDateTime(textBoxDate.Text);
+            //DateTime date = Convert.ToDateTime(textBoxDate.Text);
+            DateTime date = new DateTime(2019, 2, 1);
             DateTime today = DateTime.Today;
 
             int u, month;
@@ -757,7 +803,7 @@ namespace DB_Vart_Main
                     month = 12 - date.Month + today.Month;
             }
 
-            int d = debt;
+            int d = 0;//=debt;
 
             debt += pay * (u * 12 + month);
 
@@ -766,7 +812,7 @@ namespace DB_Vart_Main
             try
             {
                 command.CommandText = sqlExpressions[4] + "('" + textBoxAdr.Text + "'," + adr[0] + "," + adr[1] + ",'" + textBoxFam.Text + "','" + textBoxCtr.Text +
-                                "','" + textBoxPay.Text + "_" + textBoxDate.Text + "','" + debt.ToString() + "','" + richTextBoxNote.Text + "',0)";
+                                "','" + textBoxPay.Text + "_" + textBoxDate.Text + "'," + textBoxDebt.Text + ",'" + richTextBoxNote.Text + "',0," + textBoxDebt.Text + ")";
                 command.ExecuteNonQuery();
 
                 command.CommandText = "INSERT INTO ContractInf VALUES ('" + textBoxCtr.Text + "','" + textBoxDate.Text + "','" +
@@ -789,20 +835,29 @@ namespace DB_Vart_Main
                 command.CommandText = "INSERT INTO ToExcel VALUES ('" + textBoxFam.Text + "','" + textBoxAdr.Text + ", " + adr[1] +
                                                     "','" + textBoxCtr.Text + "','" + textBoxDebt.Text + "')";
                 command.ExecuteNonQuery();
+
+                Empty();
+
+                MessageBox.Show("Новый абонент добавлен");
             }
-            catch
+            catch (Exception ex)
             {
-                command.CommandText = "DELETE FROM Main WHERE Contract_num = '" + textBoxCtr + "';";
-                command.CommandText = "DELETE FROM ContractInf WHERE Contract_num = '" + textBoxCtr + "';";
-                command.CommandText = "DELETE FROM Payments WHERE Contract_num = '" + textBoxCtr + "';";
-                command.CommandText = "DELETE FROM ToExcel WHERE Contract_num = '" + textBoxCtr + "'";
+                command.CommandText = "DELETE FROM Main WHERE Contract_num = '" + textBoxCtr.Text + "';";
+                command.CommandText += "DELETE FROM ContractInf WHERE Contract_num = '" + textBoxCtr.Text + "';";
+                command.CommandText += "DELETE FROM Payments WHERE Contract_num = '" + textBoxCtr.Text + "';";
+                command.CommandText += "DELETE FROM ToExcel WHERE Contract_num = '" + textBoxCtr.Text + "'";
+
+                command.ExecuteNonQuery();
 
                 MessageBox.Show("Ошибка! Абонент не был добавлен");
+                MessageBox.Show(ex.Message);
             }
 
-            Empty();
+            /*
+             Empty();
 
             MessageBox.Show("Новый абонент добавлен");
+             */
         }
 
         void Empty()
@@ -1164,7 +1219,7 @@ namespace DB_Vart_Main
         private void buttonCtrInf_Click(object sender, EventArgs e)
         {
             string contract = listViewS.Items[0].SubItems[4].Text;
-            Information information = new Information(contract, sqlConnection);
+            Information information = new Information(contract, sqlConnection, ref listViewS);
             information.Show();
         }
 
@@ -1189,7 +1244,7 @@ namespace DB_Vart_Main
             string contract = listViewS.Items[0].SubItems[4].Text;
             string name = listViewS.Items[0].SubItems[3].Text;
             string adress = listViewS.Items[0].SubItems[0].Text + " кв. " + listViewS.Items[0].SubItems[2].Text;
-            Act act = new Act(contract, name, adress, sqlConnection);
+            Act act = new Act(contract, name, adress, sqlConnection, ref listViewS);
             act.Show();
         }
 

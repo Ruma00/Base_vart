@@ -45,6 +45,11 @@ namespace DB_Vart_Main
 
         public void See(SqlDataReader reader)
         {
+            if (reader.HasRows == false)
+            {
+                MessageBox.Show("Ошибка - Абонент добавлен неправильно.");
+                return;
+            }
             while (reader.Read())
             {
                 String s = reader.GetString(0);
@@ -145,7 +150,7 @@ namespace DB_Vart_Main
             SqlDataReader reader = command.ExecuteReader();
             Program.form.SqlReadDate(reader);
 
-            Act act = new Act(contract, "", "", connection);
+            Act act = new Act(contract, connection);
             //act.Calc(connection, contract);
             act.Dispose();
             Program.form.setButtonAct(true);

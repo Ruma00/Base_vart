@@ -52,6 +52,7 @@ namespace DB_Vart_Main
         {
             if (str == "")
                 str = "SELECT Adress, Section, Apartment, Surname, Contract_num, Debt, Monthly_fee, Notice FROM Main";
+            str += " ORDER BY Adress, Apartment";
             SqlCommand command = new SqlCommand(str, connection);
             SqlDataReader reader = command.ExecuteReader();
 
@@ -80,7 +81,13 @@ namespace DB_Vart_Main
             reader.Close();
 
             int i;
-            for (i = 0; i < 20; i++)
+            for (i = 0; i < list.Count; i++)
+            {
+                ListViewItem item = new ListViewItem(new string[] { list[i].Adress, list[i].Section, list[i].Apartment, list[i].Surname,
+                        list[i].Contract, list[i].Debt, list[i].Monthly_fee, list[i].Notice });
+                listViewLook.Items.Add(item);
+            }
+            /*for (i = 0; i < 20; i++)
             {
                 if (i >= list.Count)
                 {
@@ -91,8 +98,8 @@ namespace DB_Vart_Main
                 ListViewItem item = new ListViewItem(new string[] { list[i].Adress, list[i].Section, list[i].Apartment, list[i].Surname,
                         list[i].Contract, list[i].Debt, list[i].Monthly_fee, list[i].Notice });
                 listViewLook.Items.Add(item);
-            }
-            count = i + 1;
+            }*/
+            //count = i + 1;
         }
 
         private void Write()
@@ -116,8 +123,11 @@ namespace DB_Vart_Main
         private void buttonPrev_Click(object sender, EventArgs e)
         {
             count -= 50;
-            if (count == 0)
+            if (count <= 0)
+            {
                 buttonPrev.Enabled = false;
+                count = 0;
+            }
             Write();
         }
 

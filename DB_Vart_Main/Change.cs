@@ -47,6 +47,11 @@ namespace DB_Vart_Main
 
         public void See(SqlDataReader reader)
         {
+            if (reader.HasRows == false)
+            {
+                MessageBox.Show("Ошибка - Абонент добавлен неправильно.");
+                return;
+            }
             while (reader.Read())
             {
                 String s = reader.GetString(0);
@@ -163,8 +168,9 @@ namespace DB_Vart_Main
             int i = dataGridViewInf.CurrentCell.RowIndex;
             DataGridViewCell cell = dataGridViewInf.CurrentCell;
 
-            if (i == 0)
-                dataGridViewInf.CancelEdit();
+            /*if (i == 0)
+                dataGridViewInf.CancelEdit();*/
+
             if (i == sorted.Count)
                 sorted.Add(new Dat());
 
@@ -180,7 +186,11 @@ namespace DB_Vart_Main
                     if (cell.Value != null && cell.Value.ToString() != "")
                         sorted[i].Fee = Convert.ToInt32(cell.Value);
                     else
-                        sorted[i].Fee = 0; dataGridViewInf.CurrentCell.Value = "0"; break;
+                    {
+                        sorted[i].Fee = 0;
+                        dataGridViewInf.CurrentCell.Value = "0";
+                    }
+                    break;
                 case 1:
                     if (cell.Value != null && cell.Value.ToString() != "" && !Program.CheckInputDate(cell.Value.ToString()))
                     {
@@ -237,7 +247,7 @@ namespace DB_Vart_Main
             /*double dd = DebtCalc(reader, contract);
             list.Items[0].SubItems[5].Text = dd.ToString();
             list.Items[0].SubItems[6].Text = sorted[sorted.Count - 1].Fee.ToString();*/
-            Act act = new Act(contract, "", "", connection);
+            Act act = new Act(contract, connection);
             //act.Calc(connection, contract);
             act.Dispose();
             Program.form.setButtonAct(true);
